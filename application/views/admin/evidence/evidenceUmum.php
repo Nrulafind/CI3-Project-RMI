@@ -9,8 +9,8 @@
 				<tr>
 					<th scope="col">No</th>
 					<th scope="col">Nama PT</th>
+					<th scope="col">Nama User</th>
 					<th scope="col">Nama Admin</th>
-					<th scope="col">Nama Approval</th>
 					<th scope="col">Status Approval</th>
 					<th scope="col">Dimensi</th>
 					<th scope="col">Sub Dimensi</th>

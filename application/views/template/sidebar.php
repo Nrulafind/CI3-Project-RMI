@@ -140,7 +140,7 @@
 					</nav>
 					<!-- End of Topbar -->
 
-				<?php } elseif ($this->session->userdata('access') == "Approval") { ?>
+				<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
 
 					<div id="wrapper">
 						<!-- Sidebar -->
@@ -258,7 +258,7 @@
 								</nav>
 								<!-- End of Topbar -->
 
-							<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
+							<?php } elseif ($this->session->userdata('access') == "User") { ?>
 
 								<div id="wrapper">
 									<!-- Sidebar -->

@@ -69,7 +69,7 @@
 	</body>
 
 	</html>
-<?php } elseif ($this->session->userdata('access') == "Approval") { ?>
+<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
 	<!-- Footer -->
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
@@ -140,7 +140,7 @@
 	</body>
 
 	</html>
-<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
+<?php } elseif ($this->session->userdata('access') == "User") { ?>
 	<!-- Footer -->
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">

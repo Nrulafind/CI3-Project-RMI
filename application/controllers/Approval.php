@@ -6,7 +6,7 @@ class Approval extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('logged') != true && $this->session->userdata('access') != 'Approval') {
+		if ($this->session->userdata('logged') != true && $this->session->userdata('access') != 'Admin') {
 			$url = base_url('/');
 			redirect($url);
 		}
