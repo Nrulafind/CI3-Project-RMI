@@ -46,13 +46,13 @@ class Auth extends CI_Controller
 						redirect('dashboard');
 					} else if ($x['user_akses'] == '2') { //Approval
 						$name = $x['user_name'];
-						$this->session->set_userdata('access', 'Approval');
+						$this->session->set_userdata('access', 'Admin');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
 						redirect('dashboard_approval');
 					} else if ($x['user_akses'] == '3') { //
 						$name = $x['user_name'];
-						$this->session->set_userdata('access', 'Admin');
+						$this->session->set_userdata('access', 'User');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
 						redirect('dashboard_admin');

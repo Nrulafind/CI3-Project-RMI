@@ -7497,8 +7497,8 @@
 				$rowspan_dimensi = 0;
 				$rowspan_subdimensi = 0;
 
-				foreach ($dimensi_umum as $row) {?
-				>
+				foreach ($dimensi_umum as $row) {
+
 					$dimensi_id = $row['dimensi_id'];
 					$subdimensi_id = $row['subdimensi_id'];
 

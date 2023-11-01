@@ -32,78 +32,34 @@
 						<span>Dashboard</span></a>
 				</li>
 
-				<!-- Divider -->
-				<hr class="sidebar-divider" />
-
-				<!-- Heading -->
-				<div class="sidebar-heading">SAMRI Calculator</div>
-
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item">
-					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+					<a class="nav-link collapsed" href="<?= base_url("cluster_umum") ?>">
 						<i class="fas fa-fw fa-solid fa-calculator"></i>
-						<span>RMI Calculator</span>
+						<span>RMI Assessment</span>
 					</a>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Cluster</h6>
-							<a class="collapse-item" href="#">Cluster Asuransi</a>
-							<a class="collapse-item" href="#">Cluster Bank</a>
-							<a class="collapse-item" href="<?= base_url("cluster_umum") ?>">Cluster Umum</a>
-						</div>
-					</div>
 				</li>
 
 				<!-- Nav Item - Utilities Collapse Menu -->
 				<li class="nav-item">
-					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+					<a class="nav-link collapsed" href="<?= base_url("evidence_umum") ?>">
 						<i class="fas fa-fw fa-file-archive"></i>
-						<span>Evidence</span>
+						<span>Asessment Evaluation </span>
 					</a>
-					<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Evidence Cluster:</h6>
-							<a class="collapse-item" href="#">Evidence Cluster Asuransi</a>
-							<a class="collapse-item" href="#">Evidence Cluster Bank</a>
-							<a class="collapse-item" href="<?= base_url("evidence_umum") ?>">Evidence Cluster Umum</a>
-						</div>
-					</div>
-				</li>
-
-
-
-				<li class="nav-item">
-					<a class="nav-link" href="<?= base_url("approval") ?>" data-target="#" aria-expanded="true" aria-controls="collapseUtilities">
-						<i class="fas fa-fw fa-user-check"></i>
-						<span>Approval</span>
-					</a>
-
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParams" aria-expanded="true" aria-controls="collapseUtilities">
+					<a class="nav-link collapsed" href="<?= base_url("params_umum") ?>">
 						<i class="fas fa-fw fa-solid fa-question-circle"></i>
 						<span>Parameter Questions</span>
 					</a>
-					<div id="collapseParams" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Cluster:</h6>
-							<a class="collapse-item" href="#">Params Cluster Asuransi</a>
-							<a class="collapse-item" href="#">Params Cluster Bank</a>
-							<a class="collapse-item" href="<?= base_url("params_umum") ?>">Params Cluster Umum</a>
-						</div>
-					</div>
 				</li>
-
-				<!-- Divider -->
-				<hr class="sidebar-divider" />
-
-				<!-- Nav Item - Charts -->
 				<li class="nav-item">
 					<a class="nav-link" href="<?= base_url("user_control") ?>">
 						<i class="fas fa-fw fa-group"></i>
 						<span>User Control</span></a>
 				</li>
+
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block" />
 
@@ -207,38 +163,14 @@
 									<span>Dashboard</span></a>
 							</li>
 
-							<!-- Divider -->
-							<hr class="sidebar-divider" />
-
-							<!-- Heading -->
-							<div class="sidebar-heading">SAMRI Calculator</div>
-
 							<!-- Nav Item - Pages Collapse Menu -->
 
 							<!-- Nav Item - Utilities Collapse Menu -->
 							<li class="nav-item">
-								<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-									<i class="fas fa-fw fa-file-archive"></i>
-									<span>Evidence</span>
+								<a class="nav-link collapsed" href="<?= base_url("evidence_umumApproval") ?>">
+									<i class=" fas fa-fw fa-file-archive"></i>
+									<span>Asessment Evaluation</span>
 								</a>
-								<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-									<div class="bg-white py-2 collapse-inner rounded">
-										<h6 class="collapse-header">Evidence Cluster:</h6>
-										<a class="collapse-item" href="#">Evidence Cluster Asuransi</a>
-										<a class="collapse-item" href="#">Evidence Cluster Bank</a>
-										<a class="collapse-item" href="<?= base_url("evidence_umumApproval") ?>">Evidence Cluster Umum</a>
-									</div>
-								</div>
-							</li>
-
-
-
-							<li class="nav-item">
-								<a class="nav-link" href="<?= base_url('approval_'); ?>" data-target="#" aria-expanded="true" aria-controls="collapseUtilities">
-									<i class="fas fa-fw fa-user-check"></i>
-									<span>Approval</span>
-								</a>
-
 							</li>
 
 
@@ -349,47 +281,13 @@
 												<span>Dashboard</span></a>
 										</li>
 
-										<!-- Divider -->
-										<hr class="sidebar-divider" />
-
-										<!-- Heading -->
-										<div class="sidebar-heading">SAMRI Calculator</div>
-
 										<!-- Nav Item - Pages Collapse Menu -->
 										<li class="nav-item">
-											<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+											<a class="nav-link collapsed" href="<?= base_url("cluster_umum_") ?>">
 												<i class="fas fa-fw fa-solid fa-calculator"></i>
-												<span>RMI Calculator</span>
+												<span>RMI Assessment</span>
 											</a>
-											<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-												<div class="bg-white py-2 collapse-inner rounded">
-													<h6 class="collapse-header">Cluster</h6>
-													<a class="collapse-item" href="#">Cluster Asuransi</a>
-													<a class="collapse-item" href="#">Cluster Bank</a>
-													<a class="collapse-item" href="<?= base_url("cluster_umum_") ?>">Cluster Umum</a>
-												</div>
-											</div>
 										</li>
-
-										<!-- Nav Item - Utilities Collapse Menu -->
-										<li class="nav-item">
-											<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-												<i class="fas fa-fw fa-file-archive"></i>
-												<span>Evidence</span>
-											</a>
-											<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-												<div class="bg-white py-2 collapse-inner rounded">
-													<h6 class="collapse-header">Evidence Cluster:</h6>
-													<a class="collapse-item" href="#">Evidence Cluster Asuransi</a>
-													<a class="collapse-item" href="#">Evidence Cluster Bank</a>
-													<a class="collapse-item" href="<?= base_url("evidence_umumAdmin") ?>">Evidence Cluster Umum</a>
-												</div>
-											</div>
-										</li>
-
-
-										<!-- Divider -->
-										<hr class="sidebar-divider" />
 
 										<!-- Divider -->
 										<hr class="sidebar-divider d-none d-md-block" />
