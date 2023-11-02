@@ -10,7 +10,7 @@
 		<meta name="author" content="" />
 		<link rel="icon" href="<?= base_url('assets/img/1b0c0a19ffaa8d2b63f1df011a1cf536_400x400.png');  ?>">
 
-		<title>SAMRI - App</title>
+		<title>ARMI - App</title>
 
 		<!-- Custom fonts for this template-->
 		<link href="<?= base_url('assets/adminsb2/vendor/fontawesome-free/css/all.min.css');  ?>" rel=" stylesheet" type="text/css" />
@@ -35,7 +35,7 @@
 		<meta name="author" content="" />
 		<link rel="icon" href="<?= base_url('assets/img/1b0c0a19ffaa8d2b63f1df011a1cf536_400x400.png');  ?>">
 
-		<title>SAMRI - App</title>
+		<title>ARMI - App</title>
 
 		<!-- Custom fonts for this template-->
 		<link href="<?= base_url('assets/adminsb2/vendor/fontawesome-free/css/all.min.css');  ?>" rel=" stylesheet" type="text/css" />
@@ -60,7 +60,7 @@
 		<meta name="author" content="" />
 		<link rel="icon" href="<?= base_url('assets/img/1b0c0a19ffaa8d2b63f1df011a1cf536_400x400.png');  ?>">
 
-		<title>SAMRI - App</title>
+		<title>ARMI - App</title>
 
 		<!-- Custom fonts for this template-->
 		<link href="<?= base_url('assets/adminsb2/vendor/fontawesome-free/css/all.min.css');  ?>" rel=" stylesheet" type="text/css" />
@@ -85,7 +85,7 @@
 		<meta name="author" content="" />
 		<link rel="icon" href="<?= base_url('assets/img/1b0c0a19ffaa8d2b63f1df011a1cf536_400x400.png');  ?>">
 
-		<title>SAMRI - App</title>
+		<title>ARMI - App</title>
 
 		<!-- Custom fonts for this template-->
 		<link href="<?= base_url('assets/adminsb2/vendor/fontawesome-free/css/all.min.css');  ?>" rel=" stylesheet" type="text/css" />

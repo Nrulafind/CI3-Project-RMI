@@ -53,12 +53,14 @@ $route['default_controller'] = 'Auth';
 $route['404_override'] = 'Welcome';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['about'] = 'Auth/about';
+
 
 //login process
 $route['actLogin'] = 'Auth/actLogin';
 $route['logout'] = 'Auth/logout';
 
-//Super Admin routes
+//Super Admin / Vice Precident routes
 $route['dashboard'] = 'Admin/index'; //untuk dashboard nya
 $route['cluster_umum'] = 'Admin/formUmum'; //untuk routing ke form perhitungan cluster umum
 // $route['cluster_asuransi'] = 'Admin/formAsuransi';
@@ -78,7 +80,7 @@ $route['params_umum'] = 'Admin/paramsUmum';
 // $route['params_bank'] = 'Admin/paramsBank';
 
 
-//Approval routes
+//Approval/Manager routes
 $route['dashboard_approval'] = 'Approval/index'; //untuk dashboard nya
 //$route['approval_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
 //$route['evidence_umum_'] = 'Approval/evidence'; // routing proses form umum ke db
@@ -87,7 +89,7 @@ $route['evidence_umumApproval'] = 'Approval/evidence';
 $route[''] = '';
 
 
-//Admin routes
+//Admin/Officer/User routes
 $route['dashboard_admin'] = 'User/index'; //untuk dashboard nya
 // $route['umum_'] = 'User/formUmum'; //untuk routing ke form perhitungan cluster umum
 // $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db

@@ -32,9 +32,21 @@ class Mcrud extends CI_Model
 		AND `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id`;");
 		return $dimensi_umum->result_array();
 	}
-	public function dimensi_sub()
+	public function get_user()
 	{
-		$subDimensi = $this->db->query("SELECT 
+		$user = $this->db->query("SELECT * FROM `tbl_user`");
+		return $user->result_array();
+	}
+
+	public function get_all_params()
+	{
+		$category = $this->db->query(
+			"SELECT * FROM `tbl_kategori`"
+		);
+
+		$params = $this->db->query("SELECT * FROM `tbl_kategori`");
+
+		$dimensi = $this->db->query("SELECT DISTINCT 
 		`tbl_kategori`.`category_id`, 
 		`tbl_dimensi`.*, 
 		`tbl_sub_dimensi`.*, 
@@ -56,8 +68,14 @@ class Mcrud extends CI_Model
 	WHERE 
 		`tbl_kategori`.`category_id` = `tbl_dimensi`.`category_id` 
 		AND `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id`;");
-		return $subDimensi->result_array();
+
+
+
+		return $category->result_array();
+		return $params->result_array();
+		return $dimensi->result_array();
 	}
+
 	public function get_all_data()
 	{
 		$result = $this->db->get('tbl_assessment_data');

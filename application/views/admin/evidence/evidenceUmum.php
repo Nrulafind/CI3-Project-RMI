@@ -1,5 +1,5 @@
 <div class="container text-center">
-	<h1>Evidence The SAMRI CLUSTER UMUM</h1>
+	<h1>Evidence The ARMI CLUSTER UMUM</h1>
 </div>
 
 <div class="container">

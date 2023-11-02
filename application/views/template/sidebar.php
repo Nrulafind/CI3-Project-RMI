@@ -9,7 +9,7 @@
 		}
 	</style>
 	<!-- Page Wrapper -->
-	<?php if ($this->session->userdata('access') == "Super Admin") { ?>
+	<?php if ($this->session->userdata('access') == "Vice Precident") { ?>
 
 		<div id="wrapper">
 			<!-- Sidebar -->
@@ -19,7 +19,7 @@
 					<div class="sidebar-brand-icon">
 						<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 					</div>
-					<div class="sidebar-brand-text mx-3">SAMRI - APLOG</div>
+					<div class="sidebar-brand-text mx-3">ARMI - APLOG</div>
 				</a>
 
 				<!-- Divider -->
@@ -140,7 +140,7 @@
 					</nav>
 					<!-- End of Topbar -->
 
-				<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
+				<?php } elseif ($this->session->userdata('access') == "Manager") { ?>
 
 					<div id="wrapper">
 						<!-- Sidebar -->
@@ -150,7 +150,7 @@
 								<div class="sidebar-brand-icon">
 									<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 								</div>
-								<div class="sidebar-brand-text mx-3">SAMRI - APLOG</div>
+								<div class="sidebar-brand-text mx-3">ARMI - APLOG</div>
 							</a>
 
 							<!-- Divider -->
@@ -258,7 +258,7 @@
 								</nav>
 								<!-- End of Topbar -->
 
-							<?php } elseif ($this->session->userdata('access') == "User") { ?>
+							<?php } elseif ($this->session->userdata('access') == "Officer") { ?>
 
 								<div id="wrapper">
 									<!-- Sidebar -->
@@ -268,7 +268,7 @@
 											<div class="sidebar-brand-icon">
 												<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 											</div>
-											<div class="sidebar-brand-text mx-3">SAMRI - APLOG</div>
+											<div class="sidebar-brand-text mx-3">ARMI - APLOG</div>
 										</a>
 
 										<!-- Divider -->

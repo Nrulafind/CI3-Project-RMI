@@ -1,5 +1,5 @@
 <div class="container-fluid text-center">
-	<h1>Welcome to SAMRI <?php $this->session->userdata('name');	?></h1>
+	<h1>Welcome to ARMI <?php $this->session->userdata('name');	?></h1>
 
 	<div class="container text-center">
 		<div>
@@ -7468,11 +7468,11 @@
 </script>
 
 <div class="container text-center">
-	<h1>Evidence The SAMRI CLUSTER UMUM</h1>
+	<h1>Assessment Here on ARMI</h1>
 </div>
 
 <div class="container">
-	<form id="" name="" enctype="multipart/form-data">
+	<form id="" name="" action="" method="" enctype="multipart/form-data">
 		<table class="table table-hover table-responsive">
 			<thead>
 				<tr>
@@ -7494,13 +7494,16 @@
 				<?php
 				$prev_dimensi_id = null;
 				$prev_subdimensi_id = null;
+				$prev_parameter_name = null;
 				$rowspan_dimensi = 0;
 				$rowspan_subdimensi = 0;
+				$rowspan_parameter_name = 0;
+
 
 				foreach ($dimensi_umum as $row) {
-
 					$dimensi_id = $row['dimensi_id'];
 					$subdimensi_id = $row['subdimensi_id'];
+					$parameter_name = $row['parameter_name'];
 
 					if ($dimensi_id !== $prev_dimensi_id) {
 						// Calculate rowspan for Dimensi
@@ -7512,72 +7515,86 @@
 						$rowspan_subdimensi = getRowspan($dimensi_umum, $subdimensi_id, 'subdimensi_id');
 					}
 
+					if ($parameter_name !== $prev_parameter_name) {
+						// Calculate rowspan for Sub Dimensi
+						$rowspan_parameter_name = getRowspan($dimensi_umum, $parameter_name, 'parameter_name');
+					}
+
+
+
 					// Replace periods with underscores in the question_id
 					$question_id = str_replace('.', '_', $row['question_id']);
+					// Output the row 
+				?>
 
-					// Output the row
-					echo '<tr>';
-					if ($dimensi_id !== $prev_dimensi_id) {
-						echo '<td rowspan="' . $rowspan_dimensi . '">' . $dimensi_id . '</td>';
-						echo '<td rowspan="' . $rowspan_dimensi . '">' . $row['dimensi_name'] . '</td>';
-					}
+					<tr>
+						<?php
+						if ($dimensi_id !== $prev_dimensi_id) { ?>
+							<td rowspan="<?= $rowspan_dimensi ?>"><?= $dimensi_id ?></td>
+							<td rowspan="<?= $rowspan_dimensi ?>"><?= $row['dimensi_name'] ?></td>
+						<?php } ?>
 
-					if ($subdimensi_id !== $prev_subdimensi_id) {
-						echo '<td rowspan="' . $rowspan_subdimensi . '">' . $row['subdimensi_name'] . '</td>';
-					}
+						<?php
+						if ($subdimensi_id !== $prev_subdimensi_id) { ?>
+							<td rowspan="<?= $rowspan_subdimensi ?>"><?= $row['subdimensi_name'] ?></td>
+						<?php } ?>
 
-					echo '<td>' . $row['parameter_name'] . '</td>';
+						<?php
+						if ($parameter_name !== $prev_parameter_name) { ?>
+							<td><?= $row['parameter_name'] ?></td>
+						<?php } elseif ($parameter_name === $prev_parameter_name) { ?>
+							<td hidden><?= $row['parameter_name'] ?></td>
+						<?php } ?>
 
+						<td>
 
-					echo '<td>';
-					// Create a button for the modal
-					echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phaseModal_' . $question_id . '">';
-					echo $row['phase_name'] . ' / ' . $row['phase_value'];
-					echo '</button>';
+							<!-- create button -->
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phaseModal_<?= $question_id ?>">
+								<?= $row['phase_name'] . ' / ' . $row['phase_value']; ?>
+							</button>
 
-					// Create the modal
-					echo '<div class="modal fade" id="phaseModal_' . $question_id . '" tabindex="-1" aria-labelledby="phaseModalLabel_' . $question_id . '" aria-hidden="true">';
-					echo '<div class="modal-dialog">';
-					echo '<div class="modal-content">';
-					echo '<div class="modal-header">';
-					echo '<h5 class="modal-title" id="phaseModalLabel_' . $question_id . '">' . $row['phase_name'] . ' / ' . $row['phase_value'] . '</h5>';
-					echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
-					echo '</div>';
-					echo '<div class="modal-body">';
-					echo $row['question']; // Display the question in the modal body
-					echo '</div>';
-					echo '<div class="modal-footer">';
-					echo '<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>';
-					echo '</div>';
-					echo '</div>';
-					echo '</div>';
-					echo '</div>';
-					echo '</td>';
+							<!-- // Create the modal -->
+							<div class="modal fade" id="phaseModal_<?= $question_id ?>" tabindex="-1" aria-labelledby="phaseModalLabel_<?= $question_id ?>" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="phaseModalLabel_<?= $question_id ?>"> <?= $row['phase_name'] . ' / ' . $row['phase_value'] ?></h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<?= $row['question']; ?> <!-- // Display the question in the modal body -->
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td>
 
-					echo '<td>' . '
-            <label class="align-start" for="' . $question_id . '">Pilih INDEX YANG SESUAI *</label>
-            <select class="form-select" name="' . $question_id . '" data-field="' . $question_id . '">
-                <option value="0" selected>None</option>
-                <option value="1"> 1. Fase Awal (Initial Phase)</option>
-                <option value="2"> 2. Fase Berkembang (Emerging State)</option>
-                <option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
-                <option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
-                <option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
-            </select>
-    '
-						. '</td>';
-					echo '<td></td>';
-					echo '<td></td>';
-					echo '<td></td>';
-					echo '<td></td>';
+							<label class="align-start" for="<?= $question_id ?>">Pilih INDEX YANG SESUAI *</label>
+							<select class="form-select" name="<?= $question_id ?>" data-field="<?= $question_id ?>">
+								<option value="0" selected>None</option>
+								<option value="1"> 1. Fase Awal (Initial Phase)</option>
+								<option value="2"> 2. Fase Berkembang (Emerging State)</option>
+								<option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
+								<option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
+								<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
+							</select>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
 
-					echo '<td>' . '
-            <label for="formFile_' . $question_id . '" class="form-label">Evidence</label>
-            <input class="form-control" type="file" name="formFile_' . $question_id . '[]" id="formFile_' . $question_id . '" multiple>' .
-						'</td>';
+							<label for="formFile_<?= $question_id ?>" class="form-label">Evidence</label>
+							<input class="form-control" type="file" name="formFile_<?= $question_id ?>[]" id="formFile_<?= $question_id ?>" multiple>
+						</td>
 
-					echo '</tr>';
-
+					</tr>
+				<?php
 					$prev_dimensi_id = $dimensi_id;
 					$prev_subdimensi_id = $subdimensi_id;
 				}
@@ -7601,7 +7618,7 @@
 				</tr>
 				<tr>
 					<th scope="row">1</th>
-					<td rowspan="3">Dimensi 1 <?= $dimensi_umum['dimensi_name'] ?></td>
+					<td rowspan="3">Dimensi 1</td>
 					<td>Sub dimensi 1</td>
 					<td>Params 1</td>
 					<td>Kriteria Phase (Modal-dialog button)</td>

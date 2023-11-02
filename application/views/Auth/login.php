@@ -23,7 +23,7 @@
 							<div class="col-lg-6">
 								<div class="p-5">
 									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">Welcome Back to SAMRI- APLOG</h1>
+										<h1 class="h4 text-gray-900 mb-4">Welcome Back to ARMI- APLOG</h1>
 									</div>
 									<form class="user" action="<?= base_url("actLogin"); ?>" method="post">
 										<div class="form-group">
@@ -38,9 +38,9 @@
 									</form>
 									<center>
 										<button class="btn btn-outline-dark text-center">
-											<a class="nav-link" href="<?= base_url("about") ?>" data-target="#" aria-expanded="true" aria-controls="collapseUtilities">
+											<a class="nav-link" href="<?= base_url('about') ?>" data-target="#" aria-expanded="true" aria-controls="collapseUtilities">
 												<i class="fas fa-fw fa-info-circle"></i>
-												<span>About SAMRIs</span>
+												<span>About ARMIs</span>
 											</a>
 										</button>
 									</center>

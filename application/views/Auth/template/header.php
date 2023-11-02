@@ -9,7 +9,7 @@
 	<meta name="author" content="" />
 	<link rel="icon" href="<?= base_url('assets/img/1b0c0a19ffaa8d2b63f1df011a1cf536_400x400.png');  ?>">
 
-	<title>SAMRI Login</title>
+	<title>ARMI Login</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 	<!-- Custom fonts for this template-->

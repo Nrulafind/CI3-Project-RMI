@@ -33,11 +33,6 @@ class Admin extends CI_Controller
 	public function formUmum()
 	{
 		$data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
-		$data['subDimensi'] = $this->Mcrud->dimensi_sub();
-
-		//$data['result'] = $this->Mcrud->get_all_data();
-		//	$data = $this->Mcrud->get_all_data('tbl_perhitungan')->result_array();
-
 		//$data = array($result);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -99,6 +94,63 @@ class Admin extends CI_Controller
 
 		echo json_encode($data);
 	}
+
+	public function calculateRisk_02()
+	{
+		// Retrieve POST data for various dimensions and sub-dimensions
+		$ncpSD1 = $_POST['A_1_1'];
+		$ncpSD2 = ($_POST['A_2_2'] + $_POST['A_2_3']) / 2;
+		$ncpSD3 = ($_POST['B_1_4'] + $_POST['B_1_5']) / 2;
+		$ncpSD4 = ($_POST['B_2_6'] + $_POST['B_2_7'] + $_POST['B_2_8'] + $_POST['B_2_9'] + $_POST['B_2_10'] + $_POST['B_2_11'] + $_POST['B_2_12']) / 7;
+		$ncpSD5 = ($_POST['B_3_13'] + $_POST['B_3_14'] + $_POST['B_3_15'] + $_POST['B_3_16'] + $_POST['B_3_17'] + $_POST['B_3_18'] + $_POST['B_3_19']) / 7;
+		$ncpSD6 = ($_POST['C_1_20'] + $_POST['C_1_21'] + $_POST['C_1_22'] + $_POST['C_1_23'] + $_POST['C_1_24'] + $_POST['C_1_25'] + $_POST['C_1_26']) / 7;
+		$ncpSD7 = ($_POST['C_2_27'] + $_POST['C_2_28'] + $_POST['C_2_29'] + $_POST['C_2_30']) / 4;
+		$ncpSD8 = $_POST['C_3_31'];
+		$ncpSD9 = $_POST['C_4_32'];
+		$ncpSD10 = $_POST['C_5_33'];
+		$ncpSD11 = $_POST['D_1_34'];
+		$ncpSD12 = ($_POST['D_2_35'] + $_POST['D_2_36'] + $_POST['D_2_37']) / 3;
+		$ncpSD13 = ($_POST['D_3_38'] + $_POST['D_3_39']) / 2;
+		$ncpSD14 = $_POST['D_4_40'];
+		$ncpSD15 = $_POST['E_1_41'];
+		$ncpSD16 = $_POST['E_2_42'];
+
+		// Calculate dimension values
+		$ncpD1 = ($ncpSD1 + $ncpSD2) / 2;
+		$ncpD2 = ($ncpSD3 + $ncpSD4 + $ncpSD5) / 3;
+		$ncpD3 = ($ncpSD6 + $ncpSD7 + $ncpSD8 + $ncpSD9 + $ncpSD10) / 5;
+		$ncpD4 = ($ncpSD11 + $ncpSD12 + $ncpSD13 + $ncpSD14) / 4;
+		$ncpD5 = ($ncpSD15 + $ncpSD16) / 2;
+
+		// Calculate corporate risk
+		$ncpCorporate = ($ncpD1 + $ncpD2 + $ncpD3 + $ncpD4 + $ncpD5) / 5;
+
+		// Check risk levels for each dimension
+		$lvRiskD1 = $this->getRiskLevel($ncpD1);
+		$lvRiskD2 = $this->getRiskLevel($ncpD2);
+		$lvRiskD3 = $this->getRiskLevel($ncpD3);
+		$lvRiskD4 = $this->getRiskLevel($ncpD4);
+		$lvRiskD5 = $this->getRiskLevel($ncpD5);
+		$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
+
+		$data = array(
+			'ncpD1' => number_format($ncpD1, 2),
+			'ncpD2' => number_format($ncpD2, 2),
+			'ncpD3' => number_format($ncpD3, 2),
+			'ncpD4' => number_format($ncpD4, 2),
+			'ncpD5' => number_format($ncpD5, 2),
+			'ncpCorporate' => number_format($ncpCorporate, 2),
+			'lvRiskD1' => $lvRiskD1,
+			'lvRiskD2' => $lvRiskD2,
+			'lvRiskD3' => $lvRiskD3,
+			'lvRiskD4' => $lvRiskD4,
+			'lvRiskD5' => $lvRiskD5,
+			'lvRiskCorpo' => $lvRiskCorporasi
+		);
+
+		echo json_encode($data);
+	}
+
 
 	public function saveUmum()
 	{
@@ -322,17 +374,24 @@ class Admin extends CI_Controller
 
 	public function userControl()
 	{
+		$data['user'] = $this->Mcrud->get_user();
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/user_control/user_control');
+		$this->load->view('admin/user_control/user_control', $data);
 		$this->load->view('template/footer');
 	}
 
 	public function paramsUmum()
 	{
+		$data['category'] = $this->Mcrud->get_all_params();
+		$data['params'] = $this->Mcrud->get_all_params();
+		$data['dimensi'] = $this->Mcrud->get_all_params();
+
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/params/params');
+		$this->load->view('admin/params/params', $data);
 		$this->load->view('template/footer');
 	}
 

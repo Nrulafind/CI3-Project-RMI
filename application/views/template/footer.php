@@ -3,7 +3,7 @@
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
-				<span>Copyright &copy; SAMRI-APLOG 2023 || Semanis dan Selembut Sutra Halo aku Shani</span>
+				<span>Copyright &copy; ARMI-APLOG 2023 || Semanis dan Selembut Sutra Halo aku Shani</span>
 			</div>
 			<br>
 			<div class="text-center my-auto">
@@ -74,7 +74,7 @@
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
-				<span>Copyright &copy; SAMRI-APLOG 2023 || Semanis dan Selembut Sutra Halo aku Shani</span>
+				<span>Copyright &copy; ARMI-APLOG 2023 || Semanis dan Selembut Sutra Halo aku Shani</span>
 			</div>
 			<br>
 			<div class="text-center my-auto">
@@ -145,7 +145,7 @@
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
-				<span>Copyright &copy; SAMRI-APLOG 2023 || Made With "Bismillah"</span>
+				<span>Copyright &copy; ARMI-APLOG 2023 || Made With "Bismillah"</span>
 			</div>
 			<br>
 			<div class="text-center my-auto">
@@ -216,7 +216,7 @@
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
-				<span>Copyright &copy; SAMRI-APLOG 2023 || Made With "Bismillah"</span>
+				<span>Copyright &copy; ARMI-APLOG 2023 || Made With "Bismillah"</span>
 			</div>
 			<br>
 			<div class="text-center my-auto">

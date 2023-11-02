@@ -9,9 +9,6 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Mauth');
-		if ($this->session->userdata('logged') == true) {
-			$this->load->model('Mauth');
-		}
 	}
 
 	public function index()
@@ -40,19 +37,19 @@ class Auth extends CI_Controller
 					$id = $x['user_id'];
 					if ($x['user_akses'] == '1') { //Super Admin
 						$name = $x['user_name'];
-						$this->session->set_userdata('access', 'Super Admin');
+						$this->session->set_userdata('access', 'Vice Precident');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
 						redirect('dashboard');
 					} else if ($x['user_akses'] == '2') { //Approval
 						$name = $x['user_name'];
-						$this->session->set_userdata('access', 'Admin');
+						$this->session->set_userdata('access', 'Manager');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
 						redirect('dashboard_approval');
 					} else if ($x['user_akses'] == '3') { //
 						$name = $x['user_name'];
-						$this->session->set_userdata('access', 'User');
+						$this->session->set_userdata('access', 'Officer');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
 						redirect('dashboard_admin');
@@ -85,5 +82,11 @@ class Auth extends CI_Controller
 		$this->session->sess_destroy();
 		$url = base_url('/');
 		redirect($url);
+	}
+
+
+	public function about()
+	{
+		$this->load->view('about');
 	}
 }
