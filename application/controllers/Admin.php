@@ -97,6 +97,8 @@ class Admin extends CI_Controller
 
 	public function calculateRisk_02()
 	{
+
+		//$row 
 		// Retrieve POST data for various dimensions and sub-dimensions
 		$ncpSD1 = $_POST['A_1_1'];
 		$ncpSD2 = ($_POST['A_2_2'] + $_POST['A_2_3']) / 2;
@@ -356,24 +358,18 @@ class Admin extends CI_Controller
 
 	public function evidenceUmum()
 	{
-		// $data = array();
+		$data['asessment'] = $this->Mcrud->get_assestment();
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/evidence/evidenceUmum');
+		$this->load->view('admin/evidence/evidenceUmum', $data);
 		$this->load->view('template/footer');
 	}
 
-
-	public function approval()
-	{
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('admin/approval/approval');
-		$this->load->view('template/footer');
-	}
-
+	//user control
 	public function userControl()
 	{
+		$this->load->library('encryption');
 		$data['user'] = $this->Mcrud->get_user();
 
 		$this->load->view('template/header');
@@ -382,11 +378,63 @@ class Admin extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
+	public function add_user()
+	{
+		$name = $_POST['nama'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$akses = $_POST['akses'];
+		$status = $_POST['status'];
+
+		$hashed_password = hash('sha256', $password);
+
+		$data = array(
+			'user_name' => $name,
+			'user_email' => $email,
+			'user_password' => "SHA2('$hashed_password', 224)",
+			'user_akses' => $akses,
+			'user_status' => $status
+		);
+
+		$this->Mcrud->insertUser($data);
+	}
+	public function edit_user()
+	{
+		$id = $_POST['id'];
+		$name = $_POST['nama'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$akses = $_POST['akses'];
+		$status = $_POST['status'];
+
+		$hashed_password = hash('sha256', $password);
+
+		$data = array(
+			'user_name' => $name,
+			'user_email' => $email,
+			'user_password' => "SHA2('$hashed_password', 224)",
+			'user_akses' => $akses,
+			'user_status' => $status
+		);
+
+		$this->Mcrud->updateUser($id, $data);
+	}
+	public function delete_user($id)
+	{
+		$this->Mcrud->deleteUser($id);
+	}
+	//end user control
+
+
 	public function paramsUmum()
 	{
-		$data['category'] = $this->Mcrud->get_all_params();
-		$data['params'] = $this->Mcrud->get_all_params();
-		$data['dimensi'] = $this->Mcrud->get_all_params();
+
+		$data['category'] = $this->Mcrud->get_category();
+		$data['dimensi'] = $this->Mcrud->get_dimensi();
+		$data['sub_dimensi'] = $this->Mcrud->get_sub_dimensi();
+		$data['parameter'] = $this->Mcrud->get_parameter();
+		$data['phase'] = $this->Mcrud->get_phase();
+		$data['question'] = $this->Mcrud->get_question();
 
 
 		$this->load->view('template/header');

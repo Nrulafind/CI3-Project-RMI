@@ -69,3 +69,11 @@ Acknowledgement
 
 The CodeIgniter team would like to thank EllisLab, all the
 contributors to the CodeIgniter project and you, the CodeIgniter user.
+
+
+
+****************************************
+NOTE FOR THE DEVELOPERS ON THIS PROJECT
+****************************************
+
+This Project is build for the pupose internal APLOG Company and there is 3 main role on the website but on the code its represent AS Admin, Approval and User

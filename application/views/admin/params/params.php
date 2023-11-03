@@ -19,7 +19,7 @@
 				</thead>
 				<tbody>
 					<?php
-					foreach ($dimensi as $p) { ?>
+					foreach ($category as $p) { ?>
 						<tr>
 
 							<td><?= $p['category_id'] ?></td>
@@ -58,13 +58,11 @@
 				</thead>
 				<tbody>
 					<?php
-					$no = 1;
-					var_dump($dimensi);
 					foreach ($dimensi as $d) { ?>
 						<tr>
-							<td><?= $no++ ?></td>
 							<td><?= $d['dimensi_id'] ?></td>
 							<td><?= $d['dimensi_name'] ?></td>
+							<td><?= $d['category_id'] ?></td>
 							<td>
 								<div class="btn btn-outline-warning">
 									<a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
@@ -98,13 +96,10 @@
 				</thead>
 				<tbody>
 					<?php
-					$no = 1;
-					var_dump($dimensi);
-					foreach ($dimensi as $d) { ?>
+					foreach ($sub_dimensi as $d) { ?>
 						<tr>
-							<td><?= $no++ ?></td>
-							<td><?= $d['dimensi_id'] ?></td>
-							<td><?= $d['dimensi_name'] ?></td>
+							<td><?= $d['subdimensi_id'] ?></td>
+							<td><?= $d['subdimensi_name'] ?></td>
 							<td>
 								<div class="btn btn-outline-warning">
 									<a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
@@ -140,13 +135,13 @@
 				</thead>
 				<tbody>
 					<?php
-					$no = 1;
-					var_dump($dimensi);
-					foreach ($dimensi as $d) { ?>
+					foreach ($parameter as $d) { ?>
 						<tr>
-							<td><?= $no++ ?></td>
-							<td><?= $d['dimensi_id'] ?></td>
-							<td><?= $d['dimensi_name'] ?></td>
+
+							<td><?= $d['parameter_id'] ?></td>
+							<td><?= $d['parameter_name'] ?></td>
+							<td><?= $d['Weight'] ?></td>
+							<td><?= $d['subdimensi_id'] ?></td>
 							<td>
 								<div class="btn btn-outline-warning">
 									<a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
@@ -181,13 +176,11 @@
 				</thead>
 				<tbody>
 					<?php
-					$no = 1;
-					var_dump($dimensi);
-					foreach ($dimensi as $d) { ?>
+					foreach ($phase as $d) { ?>
 						<tr>
-							<td><?= $no++ ?></td>
-							<td><?= $d['dimensi_id'] ?></td>
-							<td><?= $d['dimensi_name'] ?></td>
+							<td><?= $d['phase_id'] ?></td>
+							<td><?= $d['phase_name'] ?></td>
+							<td><?= $d['phase_value'] ?></td>
 							<td>
 								<div class="btn btn-outline-warning">
 									<a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
@@ -224,13 +217,15 @@
 				</thead>
 				<tbody>
 					<?php
-					$no = 1;
-					var_dump($dimensi);
-					foreach ($dimensi as $d) { ?>
+					foreach ($question as $d) { ?>
 						<tr>
-							<td><?= $no++ ?></td>
-							<td><?= $d['dimensi_id'] ?></td>
-							<td><?= $d['dimensi_name'] ?></td>
+							<td><?= $d['question_id'] ?></td>
+							<td><?= $d['question'] ?></td>
+							<td><?= $d['phase_id'] ?></td>
+							<td><?= $d['subdimensi_id'] ?></td>
+							<td><?= $d['parameter_id'] ?></td>
+
+
 							<td>
 								<div class="btn btn-outline-warning">
 									<a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>

@@ -164,6 +164,13 @@
 							</li>
 
 							<!-- Nav Item - Pages Collapse Menu -->
+							<!-- Nav Item - Pages Collapse Menu -->
+							<li class="nav-item">
+								<a class="nav-link collapsed" href="<?= base_url("cluster_umum_") ?>">
+									<i class="fas fa-fw fa-solid fa-calculator"></i>
+									<span>RMI Assessment</span>
+								</a>
+							</li>
 
 							<!-- Nav Item - Utilities Collapse Menu -->
 							<li class="nav-item">

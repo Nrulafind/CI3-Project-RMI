@@ -84,7 +84,8 @@ $route['params_umum'] = 'Admin/paramsUmum';
 $route['dashboard_approval'] = 'Approval/index'; //untuk dashboard nya
 //$route['approval_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
 //$route['evidence_umum_'] = 'Approval/evidence'; // routing proses form umum ke db
-$route['approval_'] = 'Approval/approval';
+$route['cluster_umum_'] = 'Approval/formUmum';
+// $route['approval_'] = 'Approval/approval';
 $route['evidence_umumApproval'] = 'Approval/evidence';
 $route[''] = '';
 
