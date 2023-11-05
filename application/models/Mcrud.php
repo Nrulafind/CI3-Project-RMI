@@ -91,6 +91,11 @@ class Mcrud extends CI_Model
 		$user = $this->db->query("SELECT * FROM `tbl_user`");
 		return $user->result_array();
 	}
+	public function get_user_by_id()
+	{
+		$user = $this->db->query("SELECT * FROM `tbl_user`");
+		return $user->result_array();
+	}
 	//insert
 	public function insertUser($data)
 	{

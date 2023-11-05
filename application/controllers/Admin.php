@@ -369,7 +369,6 @@ class Admin extends CI_Controller
 	//user control
 	public function userControl()
 	{
-		$this->load->library('encryption');
 		$data['user'] = $this->Mcrud->get_user();
 
 		$this->load->view('template/header');
@@ -377,51 +376,61 @@ class Admin extends CI_Controller
 		$this->load->view('admin/user_control/user_control', $data);
 		$this->load->view('template/footer');
 	}
-
 	public function add_user()
 	{
-		$name = $_POST['nama'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-		$akses = $_POST['akses'];
-		$status = $_POST['status'];
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$name = $this->input->post('nama');
+			$email = $this->input->post('email');
+			$password = $this->input->post('password');
+			$akses = $this->input->post('akses');
+			$status = $this->input->post('status');
 
-		$hashed_password = hash('sha256', $password);
+			// Hash the password using SHA-224
+			$hashed_password = hash('sha224', $password);
 
-		$data = array(
-			'user_name' => $name,
-			'user_email' => $email,
-			'user_password' => "SHA2('$hashed_password', 224)",
-			'user_akses' => $akses,
-			'user_status' => $status
-		);
+			$data = array(
+				'user_name' => $name,
+				'user_email' => $email,
+				'user_password' => $hashed_password, // Store the hashed password
+				'user_akses' => $akses,
+				'user_status' => $status
+			);
 
-		$this->Mcrud->insertUser($data);
+			$this->Mcrud->insertUser($data);
+			redirect('user_control');
+		}
 	}
 	public function edit_user()
 	{
-		$id = $_POST['id'];
-		$name = $_POST['nama'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-		$akses = $_POST['akses'];
-		$status = $_POST['status'];
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $_POST['id'];
+			$name = $_POST['nama'];
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			$akses = $_POST['akses'];
+			$status = $_POST['status'];
 
-		$hashed_password = hash('sha256', $password);
+			$hashed_password = hash('sha256', $password);
 
-		$data = array(
-			'user_name' => $name,
-			'user_email' => $email,
-			'user_password' => "SHA2('$hashed_password', 224)",
-			'user_akses' => $akses,
-			'user_status' => $status
-		);
+			$data = array(
+				'user_name' => $name,
+				'user_email' => $email,
+				'user_password' => "SHA2('$hashed_password', 224)",
+				'user_akses' => $akses,
+				'user_status' => $status
+			);
 
-		$this->Mcrud->updateUser($id, $data);
+			$this->Mcrud->updateUser($id, $data);
+			redirect('user_control');
+		}
 	}
 	public function delete_user($id)
 	{
+
 		$this->Mcrud->deleteUser($id);
+		var_dump($id);
+		echo 'true';
+		redirect('user_control');
 	}
 	//end user control
 
