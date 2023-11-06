@@ -60,36 +60,29 @@ $route['about'] = 'Auth/about';
 $route['actLogin'] = 'Auth/actLogin';
 $route['logout'] = 'Auth/logout';
 
-//Super Admin / Vice Precident routes
+//Super Admin / Vice President routes
 $route['dashboard'] = 'Admin/index'; //untuk dashboard nya
 $route['cluster_umum'] = 'Admin/formUmum'; //untuk routing ke form perhitungan cluster umum
-// $route['cluster_asuransi'] = 'Admin/formAsuransi';
-// $route['cluster_bank'] = 'Admin/formBank';
 $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db
-// $route['prosesAsuransi'] = 'Admin/saveAsuransi';
-// $route['prosesBank'] = 'Admin/saveBank';
 $route['proyeksi'] = 'Admin/calculateRisk'; // routing proses kalulasi tanpa reload
-$route['approval'] = 'Admin/approval';
-$route['evidence_umum'] = 'Admin/evidenceUmum';
-// $route['evidence_asuransi'] = 'Admin/evidenceAsuransi';
-// $route['evidence_bank'] = 'Admin/evidenceBank';
+$route['asesment_eval'] = 'Admin/asesmentEval';
+$route['edit_asessment/(:num)'] = 'Admin/editAsessment/$1';
+$route['delete_assesment/(:num)'] = 'Admin/deleteAsessment/$1';
 $route['user_control'] = 'Admin/userControl';
 $route['save_user'] = 'Admin/add_user';
 $route['edit_user/(:num)'] = 'Admin/edit_user/$1';
 $route['delete_user/(:num)'] = 'Admin/delete_user/$1';
-// $route[''] = '';
 $route['params_umum'] = 'Admin/paramsUmum';
-// $route['params_asuransi'] = 'Admin/paramsAsuransi';
-// $route['params_bank'] = 'Admin/paramsBank';
-
+$route['edit_params/(:num)'] = 'Admin/edit_params/$1';
+$route['delete_params/(:num)'] = 'Admin/delete_params/$1';
 
 //Approval/Manager routes
 $route['dashboard_approval'] = 'Approval/index'; //untuk dashboard nya
 //$route['approval_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
-//$route['evidence_umum_'] = 'Approval/evidence'; // routing proses form umum ke db
+//$route['asesment_eval_'] = 'Approval/asesment'; // routing proses form umum ke db
 $route['cluster_umum_'] = 'Approval/formUmum';
 // $route['approval_'] = 'Approval/approval';
-$route['evidence_umumApproval'] = 'Approval/evidence';
+$route['asesment_evalApproval'] = 'Approval/asesment';
 $route[''] = '';
 
 
@@ -98,7 +91,7 @@ $route['dashboard_admin'] = 'User/index'; //untuk dashboard nya
 // $route['umum_'] = 'User/formUmum'; //untuk routing ke form perhitungan cluster umum
 // $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db
 // $route['proyeksi'] = 'Admin/calculateRisk';// routing proses kalulasi tanpa reload
-$route['evidence_umumAdmin'] = 'User/evidence';
+$route['asesment_evalAdmin'] = 'User/asesment';
 $route['cluster_umum_'] = 'User/formUmum';
 $route[''] = '';
 $route[''] = '';

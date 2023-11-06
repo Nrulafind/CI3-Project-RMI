@@ -199,7 +199,7 @@ class Admin extends CI_Controller
 
 		//upload fun
 		$upload_config = array(
-			'upload_path'   => './uploads/evidenceUmum/',
+			'upload_path'   => './uploads/asesmentEval/',
 			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
 			'max_size'      => 100000,
 			'max_width'     => 10240,
@@ -309,8 +309,9 @@ class Admin extends CI_Controller
 			'lvRiskD3' => $lvRiskD3,
 			'lvRiskD4' => $lvRiskD4,
 			'lvRiskD5' => $lvRiskD5,
-			'lvRiskCorpo' => $lvRiskCorporasi
-
+			'lvRiskCorpo' => $lvRiskCorporasi,
+			'status_approval' => "Waiting for approval",
+			'approval' => $this->session->userdata('name')
 		);
 
 		// Insert assessment data for each file
@@ -318,14 +319,6 @@ class Admin extends CI_Controller
 			$assessmentData['file_id'] = $file_id;
 			$this->Mcrud->insertAssessmentData($assessmentData);
 		}
-
-		$approval = array(
-			'file_id' => $file_id,
-			'assessment_id' => $assessmentData['file_id'],
-			'status_approval' => "Waiting for approval",
-			'approval' => $this->session->userdata('name')
-		);
-		$this->Mcrud->insertApproval($approval);
 	}
 
 	private function getRiskLevel($value)
@@ -355,21 +348,59 @@ class Admin extends CI_Controller
 		}
 	}
 
-
-	public function evidenceUmum()
+	//evaluation assesment function start
+	public function asesmentEval()
 	{
 		$data['asessment'] = $this->Mcrud->get_assestment();
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/evidence/evidenceUmum', $data);
+		$this->load->view('admin/asesment/asesmentEval', $data);
 		$this->load->view('template/footer');
 	}
+	public function editAsessment()
+	{
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('admin/asesment/asesmentEval', $data);
+		$this->load->view('template/footer');
+	}
+	public function deleteAsessment()
+	{
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('admin/asesment/asesmentEval', $data);
+		$this->load->view('template/footer');
+	}
+	//evaluation assesment function end
+
+	//parameter question start
+	public function paramsUmum()
+	{
+
+		$data['category'] = $this->Mcrud->get_category();
+		$data['dimensi'] = $this->Mcrud->get_dimensi();
+		$data['sub_dimensi'] = $this->Mcrud->get_sub_dimensi();
+		$data['parameter'] = $this->Mcrud->get_parameter();
+		$data['phase'] = $this->Mcrud->get_phase();
+		$data['question'] = $this->Mcrud->get_question();
+
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('admin/params/params', $data);
+		$this->load->view('template/footer');
+	}
+
+	//parameter question end
 
 	//user control
 	public function userControl()
 	{
 		$data['user'] = $this->Mcrud->get_user();
+		// $data['result'] = $this->Mcrud->get_user_by_id();
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -410,12 +441,12 @@ class Admin extends CI_Controller
 			$akses = $_POST['akses'];
 			$status = $_POST['status'];
 
-			$hashed_password = hash('sha256', $password);
+			$hashed_password = hash('sha224', $password);
 
 			$data = array(
 				'user_name' => $name,
 				'user_email' => $email,
-				'user_password' => "SHA2('$hashed_password', 224)",
+				'user_password' => $hashed_password,
 				'user_akses' => $akses,
 				'user_status' => $status
 			);
@@ -435,24 +466,6 @@ class Admin extends CI_Controller
 	//end user control
 
 
-	public function paramsUmum()
-	{
-
-		$data['category'] = $this->Mcrud->get_category();
-		$data['dimensi'] = $this->Mcrud->get_dimensi();
-		$data['sub_dimensi'] = $this->Mcrud->get_sub_dimensi();
-		$data['parameter'] = $this->Mcrud->get_parameter();
-		$data['phase'] = $this->Mcrud->get_phase();
-		$data['question'] = $this->Mcrud->get_question();
-
-
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('admin/params/params', $data);
-		$this->load->view('template/footer');
-	}
-
-
 	//Function Cluster Asuransi
 
 	public function forAsuransi()
@@ -466,7 +479,6 @@ class Admin extends CI_Controller
 		$this->load->view('admin/form/clusterAsuransi', $data);
 		$this->load->view('template/footer');
 	}
-
 
 
 	//Function Cluster Bank

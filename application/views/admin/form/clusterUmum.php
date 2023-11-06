@@ -251,7 +251,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileA_1_1" class="form-label">Evidence</label>
+												<label for="formFileA_1_1" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileA_1_1[]" id="formFileA_1_1" multiple>
 											</div>
 										</div>
@@ -427,7 +427,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileA_2_2" class="form-label">Evidence</label>
+												<label for="formFileA_2_2" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileA_2_2[]" id="formFileA_2_2" multiple>
 											</div>
 										</div>
@@ -593,7 +593,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileA_2_3" class="form-label">Evidence</label>
+												<label for="formFileA_2_3" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileA_2_3[]" id="formFileA_2_3" multiple>
 											</div>
 										</div>
@@ -808,7 +808,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileB_1_4" class="form-label">Evidence</label>
+												<label for="formFileB_1_4" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileB_1_4[]" id="formFileB_1_4" multiple>
 											</div>
 										</div>
@@ -971,7 +971,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileB_1_5" class="form-label">Evidence</label>
+												<label for="formFileB_1_5" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileB_1_5[]" id="formFileB_1_5" multiple>
 											</div>
 										</div>
@@ -1149,7 +1149,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileB_2_6" class="form-label">Evidence</label>
+												<label for="formFileB_2_6" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileB_2_6[]" id="formFileB_2_6" multiple>
 											</div>
 										</div>
@@ -1318,7 +1318,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileB_2_7" class="form-label">Evidence</label>
+												<label for="formFileB_2_7" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileB_2_7[]" id="formFileB_2_7" multiple>
 											</div>
 										</div>
@@ -1486,7 +1486,7 @@
 											</select>
 										</div>
 										<div class="col-sm-6">
-											<label for="formFileB_2_8" class="form-label">Evidence</label>
+											<label for="formFileB_2_8" class="form-label">asesment</label>
 											<input class="form-control" type="file" name="formFileB_2_8[]" id="formFileB_2_8" multiple>
 										</div>
 									</div>
@@ -1655,7 +1655,7 @@
 											</select>
 										</div>
 										<div class="col-sm-6">
-											<label for="formFileB_2_9" class="form-label">Evidence</label>
+											<label for="formFileB_2_9" class="form-label">asesment</label>
 											<input class="form-control" type="file" name="formFileB_2_9[]" id="formFileB_2_9" multiple>
 										</div>
 									</div>
@@ -1823,7 +1823,7 @@
 											</select>
 										</div>
 										<div class="col-sm-6">
-											<label for="formFileB_2_10" class="form-label">Evidence</label>
+											<label for="formFileB_2_10" class="form-label">asesment</label>
 											<input class="form-control" type="file" name="formFileB_2_10[]" id="formFileB_2_10" multiple>
 										</div>
 									</div>
@@ -1992,7 +1992,7 @@
 											</select>
 										</div>
 										<div class="col-sm-6">
-											<label for="formFileB_2_11" class="form-label">Evidence</label>
+											<label for="formFileB_2_11" class="form-label">asesment</label>
 											<input class="form-control" type="file" name="formFileB_2_11[]" id="formFileB_2_11" multiple>
 										</div>
 									</div>
@@ -2160,7 +2160,7 @@
 											</select>
 										</div>
 										<div class="col-sm-6">
-											<label for="formFileB_2_12" class="form-label">Evidence</label>
+											<label for="formFileB_2_12" class="form-label">asesment</label>
 											<input class="form-control" type="file" name="formFileB_2_12[]" id="formFileB_2_12" multiple>
 										</div>
 									</div>
@@ -2337,7 +2337,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_13" class="form-label">Evidence</label>
+										<label for="formFileB_3_13" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_13[]" id="formFileB_3_13" multiple>
 									</div>
 								</div>
@@ -2506,7 +2506,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_14" class="form-label">Evidence</label>
+										<label for="formFileB_3_14" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_14[]" id="formFileB_3_14" multiple>
 									</div>
 								</div>
@@ -2674,7 +2674,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_15" class="form-label">Evidence</label>
+										<label for="formFileB_3_15" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_15[]" id="formFileB_3_15" multiple>
 									</div>
 								</div>
@@ -2843,7 +2843,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_16" class="form-label">Evidence</label>
+										<label for="formFileB_3_16" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_16[]" id="formFileB_3_16" multiple>
 									</div>
 								</div>
@@ -3011,7 +3011,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_17" class="form-label">Evidence</label>
+										<label for="formFileB_3_17" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_17[]" id="formFileB_3_17" multiple>
 									</div>
 								</div>
@@ -3180,7 +3180,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_18" class="form-label">Evidence</label>
+										<label for="formFileB_3_18" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_18[]" id="formFileB_3_18" multiple>
 									</div>
 								</div>
@@ -3348,7 +3348,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileB_3_19" class="form-label">Evidence</label>
+										<label for="formFileB_3_19" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileB_3_19[]" id="formFileB_3_19" multiple>
 									</div>
 								</div>
@@ -3575,7 +3575,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_20" class="form-label">Evidence</label>
+												<label for="formFileC_1_20" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_20[]" id="formFileC_1_20" multiple>
 											</div>
 										</div>
@@ -3738,7 +3738,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_21" class="form-label">Evidence</label>
+												<label for="formFileC_1_21" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_21[]" id="formFileC_1_21" multiple>
 											</div>
 										</div>
@@ -3903,7 +3903,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_22" class="form-label">Evidence</label>
+												<label for="formFileC_1_22" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_22[]" id="formFileC_1_22" multiple>
 											</div>
 										</div>
@@ -4066,7 +4066,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_23" class="form-label">Evidence</label>
+												<label for="formFileC_1_23" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_23[]" id="formFileC_1_23" multiple>
 											</div>
 										</div>
@@ -4231,7 +4231,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_24" class="form-label">Evidence</label>
+												<label for="formFileC_1_24" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_24[]" id="formFileC_1_24" multiple>
 											</div>
 										</div>
@@ -4394,7 +4394,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_25" class="form-label">Evidence</label>
+												<label for="formFileC_1_25" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_25[]" id="formFileC_1_25" multiple>
 											</div>
 										</div>
@@ -4559,7 +4559,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_1_26" class="form-label">Evidence</label>
+												<label for="formFileC_1_26" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_1_26[]" id="formFileC_1_26" multiple>
 											</div>
 										</div>
@@ -4737,7 +4737,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_2_27" class="form-label">Evidence</label>
+												<label for="formFileC_2_27" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_2_27[]" id="formFileC_2_27" multiple>
 											</div>
 										</div>
@@ -4906,7 +4906,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_2_28" class="form-label">Evidence</label>
+												<label for="formFileC_2_28" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_2_28[]" id="formFileC_2_28" multiple>
 											</div>
 										</div>
@@ -5074,7 +5074,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_2_29" class="form-label">Evidence</label>
+												<label for="formFileC_2_29" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_2_29[]" id="formFileC_2_29" multiple>
 											</div>
 										</div>
@@ -5243,7 +5243,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileC_2_30" class="form-label">Evidence</label>
+												<label for="formFileC_2_30" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileC_2_30[]" id="formFileC_2_30" multiple>
 											</div>
 										</div>
@@ -5421,7 +5421,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileC_3_31" class="form-label">Evidence</label>
+										<label for="formFileC_3_31" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileC_3_31[]" id="formFileC_3_31" multiple>
 									</div>
 								</div>
@@ -5596,7 +5596,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileC_4_32" class="form-label">Evidence</label>
+										<label for="formFileC_4_32" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileC_4_32[]" id="formFileC_4_32" multiple>
 									</div>
 								</div>
@@ -5771,7 +5771,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<label for="formFileC_5_33" class="form-label">Evidence</label>
+										<label for="formFileC_5_33" class="form-label">asesment</label>
 										<input class="form-control" type="file" name="formFileC_5_33[]" id="formFileC_5_33" multiple>
 									</div>
 								</div>
@@ -5987,7 +5987,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileD_1_34" class="form-label">Evidence</label>
+												<label for="formFileD_1_34" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileD_1_34[]" id="formFileD_1_34" multiple>
 											</div>
 										</div>
@@ -6160,7 +6160,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileD_2_35" class="form-label">Evidence</label>
+													<label for="formFileD_2_35" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileD_2_35[]" id="formFileD_2_35" multiple>
 												</div>
 											</div>
@@ -6329,7 +6329,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileD_2_36" class="form-label">Evidence</label>
+													<label for="formFileD_2_36" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileD_2_36[]" id="formFileD_2_36" multiple>
 												</div>
 											</div>
@@ -6497,7 +6497,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileD_2_37" class="form-label">Evidence</label>
+													<label for="formFileD_2_37" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileD_2_37[]" id="formFileD_2_37" multiple>
 												</div>
 											</div>
@@ -6676,7 +6676,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileD_3_38" class="form-label">Evidence</label>
+													<label for="formFileD_3_38" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileD_3_38[]" id="formFileD_3_38" multiple>
 												</div>
 											</div>
@@ -6842,7 +6842,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileD_3_39" class="form-label">Evidence</label>
+													<label for="formFileD_3_39" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileD_3_39[]" id="formFileD_3_39" multiple>
 												</div>
 											</div>
@@ -7014,7 +7014,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileD_4_40" class="form-label">Evidence</label>
+													<label for="formFileD_4_40" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileD_4_40[]" id="formFileD_4_40" multiple>
 												</div>
 											</div>
@@ -7227,7 +7227,7 @@
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<label for="formFileE_1_41" class="form-label">Evidence</label>
+												<label for="formFileE_1_41" class="form-label">asesment</label>
 												<input class="form-control" type="file" name="formFileE_1_41[]" id="formFileE_1_41" multiple>
 											</div>
 										</div>
@@ -7403,7 +7403,7 @@
 													</select>
 												</div>
 												<div class="col-sm-6">
-													<label for="formFileE_2_42" class="form-label">Evidence</label>
+													<label for="formFileE_2_42" class="form-label">asesment</label>
 													<input class="form-control" type="file" name="formFileE_2_42[]" id="formFileE_2_42" multiple>
 												</div>
 											</div>
@@ -7474,19 +7474,24 @@
 <div class="container">
 	<form id="" name="" action="" method="" enctype="multipart/form-data">
 		<table class="table table-hover table-responsive">
-			<thead>
+			<thead class="align-self-center respo">
 				<tr>
-					<th scope="col">No</th>
-					<th scope="col">Dimensi</th>
-					<th scope="col">Sub Dimensi </th>
-					<th scope="col">Parameter</th>
-					<th scope="col">Kriteria Phase</th>
-					<th scope="col">Phase Indeks</th>
-					<th scope="col">Hasil Capaian Dimensi</th>
-					<th scope="col">Hasil Level Dimensi</th>
-					<th scope="col">Hasil Capaian Corporate</th>
-					<th scope="col">Hasil Level Corporate</th>
-					<th scope="col">File Evidence</th>
+					<th scope="col" rowspan="2" class="align-middle">No</th>
+					<th scope="col" rowspan="2" class="align-middle">Dimensi</th>
+					<th scope="col" rowspan="2" class="align-middle">Sub Dimensi </th>
+					<th scope="col" rowspan="2" class="align-middle">Parameter</th>
+					<th scope="col" rowspan="2" class="align-middle">Kriteria Phase</th>
+					<th scope="col" rowspan="2" class="align-middle">Phase Indeks</th>
+					<th scope="col" colspan="2">Hasil Capaian Dimensi</th>
+					<th scope="col" colspan="2">Hasil Capaian Corporate</th>
+					<th scope="col" rowspan="2" class="align-middle">File asesment</th>
+				</tr>
+				<tr>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -7589,7 +7594,7 @@
 						<td></td>
 						<td>
 
-							<label for="formFile_<?= $question_id ?>" class="form-label">Evidence</label>
+							<label for="formFile_<?= $question_id ?>" class="form-label">asesment</label>
 							<input class="form-control" type="file" name="formFile_<?= $question_id ?>[]" id="formFile_<?= $question_id ?>" multiple>
 						</td>
 

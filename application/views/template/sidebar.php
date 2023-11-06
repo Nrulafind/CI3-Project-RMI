@@ -9,7 +9,7 @@
 		}
 	</style>
 	<!-- Page Wrapper -->
-	<?php if ($this->session->userdata('access') == "Vice Precident") { ?>
+	<?php if ($this->session->userdata('access') == "Vice President") { ?>
 
 		<div id="wrapper">
 			<!-- Sidebar -->
@@ -42,7 +42,7 @@
 
 				<!-- Nav Item - Utilities Collapse Menu -->
 				<li class="nav-item">
-					<a class="nav-link collapsed" href="<?= base_url("evidence_umum") ?>">
+					<a class="nav-link collapsed" href="<?= base_url("asesment_eval") ?>">
 						<i class="fas fa-fw fa-file-archive"></i>
 						<span>Asessment Evaluation </span>
 					</a>
@@ -174,7 +174,7 @@
 
 							<!-- Nav Item - Utilities Collapse Menu -->
 							<li class="nav-item">
-								<a class="nav-link collapsed" href="<?= base_url("evidence_umumApproval") ?>">
+								<a class="nav-link collapsed" href="<?= base_url("asesment_evalApproval") ?>">
 									<i class=" fas fa-fw fa-file-archive"></i>
 									<span>Asessment Evaluation</span>
 								</a>

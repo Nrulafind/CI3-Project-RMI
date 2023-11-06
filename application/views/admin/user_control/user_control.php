@@ -27,7 +27,7 @@
 					<td><?= $u['user_email'] ?></td>
 					<td><?php
 						if ($u['user_akses'] == 1) {
-							echo "Vice Precident";
+							echo "Vice President";
 						} elseif ($u['user_akses'] == 2) {
 							echo "Manager";
 						} elseif ($u['user_akses'] == 3) {
@@ -94,7 +94,7 @@
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="akses" id="akses" value="1">
 							<label class="form-check-label" for="akses">
-								Vice Precident
+								Vice President
 							</label>
 							<br>
 							<input class="form-check-input" type="radio" name="akses" id="akses" value="2">
@@ -135,24 +135,24 @@
 </div>
 
 <script>
-	// $(document).ready(function() {
-	// 	// Handle the Edit button click
-	// 	$('.edit-user').click(function() {
-	// 		var userId = $(this).data('user_id');
-	// 		var userName = $(this).data('user_nama');
-	// 		var userEmail = $(this).data('user_email');
-	// 		var userPassword = $(this).data('user_password');
+	$(document).ready(function() {
+		// Handle the Edit button click
+		$('.edit-user').click(function() {
+			var userId = $(this).data('user_id');
+			var userName = $(this).data('user_nama');
+			var userEmail = $(this).data('user_email');
+			var userPassword = $(this).data('user_password');
 
-	// 		// Populate the modal fields with user data
-	// 		$('#ModalUpdateuser').find('input[name="id"]').val(userId);
-	// 		$('#ModalUpdateuser').find('input[name="nama"]').val(userName);
-	// 		$('#ModalUpdateuser').find('input[name="email"]').val(userEmail);
-	// 		$('#ModalUpdateuser').find('input[name="password"]').val(userPassword);
+			// Populate the modal fields with user data
+			$('#ModalUpdateuser').find('input[name="id"]').val(userId);
+			$('#ModalUpdateuser').find('input[name="nama"]').val(userName);
+			$('#ModalUpdateuser').find('input[name="email"]').val(userEmail);
+			$('#ModalUpdateuser').find('input[name="password"]').val(userPassword);
 
-	// 		// Show the modal
-	// 		$('#ModalUpdateuser').modal('show');
-	// 	});
-	// });
+			// Show the modal
+			$('#ModalUpdateuser').modal('show');
+		});
+	});
 </script>
 
 
@@ -163,18 +163,18 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="ModalUpdateuser">Modal title</h1>
+				<h1 class="modal-title fs-5" id="ModalUpdateuser">Update User</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<form method="post" action="<?= base_url('edit_user') ?>">
 					<div class="col-auto">
 						<label for="name" class="form-label" hidden>Masukan Nama Pengguna</label>
-						<input type="text" name="nama" value="" class="form-control" hidden>
+						<input type="text" name="id" class="form-control" hidden>
 					</div>
 					<div class="col-auto">
 						<label for="name" class="form-label">Masukan Nama Pengguna</label>
-						<input type="text" name="nama" value="" class="form-control">
+						<input type="text" name="nama" class="form-control">
 					</div>
 					<div class="col-auto">
 						<label for="email" class="form-label">Masukan email Pengguna</label>
@@ -190,7 +190,7 @@
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="akses" id="akses" value="1">
 							<label class="form-check-label" for="akses">
-								Vice Precident
+								Vice President
 							</label>
 							<br>
 							<input class="form-check-input" type="radio" name="akses" id="akses" value="2">
@@ -208,12 +208,12 @@
 						<label for="status">Pilih Status Dari User</label>
 						<br>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="status" id="status" value="1">
+							<input class="form-check-input" type="radio" name="status" id="status" value="1" checked>
 							<label class="form-check-label" for="status">
 								Aktif
 							</label>
 							<br>
-							<input class="form-check-input" type="radio" name="status" id="status" value="0" checked>
+							<input class="form-check-input" type="radio" name="status" id="status" value="0">
 							<label class="form-check-label" for="status">
 								Non Aktif
 							</label>
@@ -222,7 +222,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="submit" name="submit" class="btn btn-outline-success"> Save changes</button>
+				<button type="button" name="submit" class="btn btn-outline-success" onclick="updateUser()"> Save changes</button>
 			</div>
 			</form>
 		</div>
@@ -230,46 +230,41 @@
 </div>
 
 <script>
-	// function updateUser() {
-	// 	// Get the values from the modal inputs
-	// 	var userId = $('#ModalUpdateuser input[name="id"]').val();
-	// 	var userName = $('#ModalUpdateuser input[name="nama"]').val();
-	// 	var userEmail = $('#ModalUpdateuser input[name="email"]').val();
-	// 	var userPassword = $('#ModalUpdateuser input[name="password"]').val();
-	// 	var userAkses = $('#ModalUpdateuser input[name="akses"]').val();
-	// 	var userStatus = $('#ModalUpdateuser input[name="status"]').val();
-	// 	// Other values (akses and status) can be obtained in a similar manner.
+	function updateUser() {
+		var userId = $('#ModalUpdateuser input[name="id"]').val();
+		var userName = $('#ModalUpdateuser input[name="nama"]').val();
+		var userEmail = $('#ModalUpdateuser input[name="email"]').val();
+		var userPassword = $('#ModalUpdateuser input[name="password"]').val();
+		var userAkses = $('#ModalUpdateuser input[name="akses"]:checked').val();
+		var userStatus = $('#ModalUpdateuser input[name="status"]:checked').val();
 
-	// 	// Prepare data to send to the server
-	// 	var data = {
-	// 		id: userId,
-	// 		nama: userName,
-	// 		email: userEmail,
-	// 		password: userPassword,
-	// 		akses: userEmail,
-	// 		status: userStatus
-	// 		// Add other data fields here
-	// 	};
+		var data = {
+			id: userId,
+			nama: userName,
+			email: userEmail,
+			password: userPassword,
+			akses: userAkses,
+			status: userStatus
+			// Include other fields as needed
+		};
 
-	// 	// Send the AJAX request to update the user
-	// 	$.ajax({
-	// 		url: '<?= base_url('') ?>', // Replace with the actual URL for your server-side update script
-	// 		method: 'POST', // Adjust the HTTP method as needed
-	// 		data: data,
-	// 		success: function(response) {
-	// 			// Handle the response from the server (e.g., display a success message)
-	// 			alert('User updated successfully');
-	// 			// Close the modal
-	// 			$('#ModalUpdateuser').modal('hide');
-	// 			// You can also update the user data in the table without reloading the page
-	// 			// based on the response from the server.
-	// 		},
-	// 		error: function(xhr, status, error) {
-	// 			// Handle errors here
-	// 			console.error('Error updating user: ' + error);
-	// 		}
-	// 	});
-	// }
+		$.ajax({
+			url: '<?= base_url('edit_user') ?>/' + userId, // Adjust the URL to include the user's ID
+			method: 'POST',
+			data: data,
+			success: function(response) {
+				// Handle the response from the server
+				alert('User updated successfully');
+				$('#ModalUpdateuser').modal('hide');
+				window.location.reload();
+				// You can also update the user data in the table without reloading the page
+				// based on the response from the server.
+			},
+			error: function(xhr, status, error) {
+				console.error('Error updating user: ' + error);
+			}
+		});
+	}
 </script>
 
 

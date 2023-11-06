@@ -37,7 +37,7 @@ class Auth extends CI_Controller
 					$id = $x['user_id'];
 					if ($x['user_akses'] == '1') { //Super Admin
 						$name = $x['user_name'];
-						$this->session->set_userdata('access', 'Vice Precident');
+						$this->session->set_userdata('access', 'Vice President');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
 						redirect('dashboard');

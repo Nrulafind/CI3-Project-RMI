@@ -7,23 +7,34 @@
 		<table class="table table-hover table-responsive">
 			<thead>
 				<tr>
-					<th scope="col">No</th>
-					<th scope="col">Nama PT</th>
-					<th scope="col">Nama Asessor</th>
-					<th scope="col">Status Approval</th>
-					<th scope="col">Capain Dimensi 1</th>
-					<th scope="col">Level Capain Dimensi 1</th>
-					<th scope="col">Capain Dimensi 2</th>
-					<th scope="col">Level Capain Dimensi 2</th>
-					<th scope="col">Capain Dimensi 3</th>
-					<th scope="col">Level Capain Dimensi 3</th>
-					<th scope="col">Capain Dimensi 4</th>
-					<th scope="col">Level Capain Dimensi 4</th>
-					<th scope="col">Capain Dimensi 5</th>
-					<th scope="col">Level Capaian Dimensi 5</th>
-					<th scope="col">Capain Dimensi Korporasi</th>
-					<th scope="col">Level Capain Dimensi Korporasi</th>
-					<th scope="col">File</th>
+					<th scope="col" rowspan="2" class="align-middle">No</th>
+					<th scope="col" rowspan="2" class="align-middle">Nama PT</th>
+					<th scope="col" rowspan="2" class="align-middle">Nama Asessor</th>
+					<th scope="col" rowspan="2" class="align-middle">Status Approval</th>
+					<th scope="col" colspan="2">Capain Dimensi 1</th>
+					<th scope="col" colspan="2">Capain Dimensi 2</th>
+					<th scope="col" colspan="2">Capain Dimensi 3</th>
+					<th scope="col" colspan="2">Capain Dimensi 4</th>
+					<th scope="col" colspan="2">Capain Dimensi 5</th>
+					<th scope="col" colspan="2">Capain Dimensi Korporasi</th>
+					<th scope="col" rowspan="2" class="align-middle">File</th>
+					<th scope="col" colspan="2">Action</th>
+				</tr>
+				<tr>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Skor</th>
+					<th scope="col" rowspan="1">Tingkat</th>
+					<th scope="col" rowspan="1">Edit</th>
+					<th scope="col" rowspan="1">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +65,17 @@
 						<td><?= $hasil['ncpCorporate']; ?></td>
 						<td><?= $hasil['lvRiskCorpo']; ?></td>
 						<td><?= $hasil['file_name']; ?></td>
+						<td>
+							<div class="btn btn-outline-warning">
+								<a class="edit-user" href="<?= base_url('') ?>/" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+							</div>
+						</td>
+						<td>
+
+							<div class="btn btn-outline-danger">
+								<a class="delete-user" href="<?= base_url('') ?>/"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+							</div>
+						</td>
 					</tr>
 				<?php } ?>
 			</tbody>
