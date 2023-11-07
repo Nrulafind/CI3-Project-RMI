@@ -477,6 +477,135 @@ class Admin extends CI_Controller
 		redirect('user_control');
 	}
 
+	public function add_subDimensi()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$category_id = $this->input->post('category_id');
+
+			$data = array(
+				'dimensi_id' => $id,
+				'dimensi_name' => $nama,
+				'category_id' => $category_id
+			);
+
+			//$this->Mcrud->($data);
+			redirect('params_umum');
+		}
+	}
+	public function edit_subDimensi()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$category_id = $this->input->post('category_id');
+
+			$data = array(
+				'dimensi_id' => $id,
+				'dimensi_name' => $nama,
+				'category_id' => $category_id,
+			);
+
+			//$this->Mcrud->($id,$data);
+			redirect('params_umum');
+		}
+	}
+	public function delete_subDimensi($id)
+	{
+
+		//$this->Mcrud->deleteUser($id);
+		var_dump($id);
+		echo 'true';
+		redirect('user_control');
+	}
+
+	public function add_parameter()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$category_id = $this->input->post('category_id');
+
+			$data = array(
+				'dimensi_id' => $id,
+				'dimensi_name' => $nama,
+				'category_id' => $category_id
+			);
+
+			//$this->Mcrud->($data);
+			redirect('params_umum');
+		}
+	}
+	public function edit_parameter()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$category_id = $this->input->post('category_id');
+
+			$data = array(
+				'dimensi_id' => $id,
+				'dimensi_name' => $nama,
+				'category_id' => $category_id,
+			);
+
+			//$this->Mcrud->($id,$data);
+			redirect('params_umum');
+		}
+	}
+	public function delete_parameter($id)
+	{
+
+		//$this->Mcrud->deleteUser($id);
+		var_dump($id);
+		echo 'true';
+		redirect('user_control');
+	}
+
+	public function add_phase()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$phase = $this->input->post('phase');
+
+			$data = array(
+				'phase_id' => $id,
+				'phase_name' => $nama,
+				'phase_value' => $phase
+			);
+
+			//$this->Mcrud->($data);
+			redirect('params_umum');
+		}
+	}
+	public function edit_phase()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$phase = $this->input->post('phase');
+
+			$data = array(
+				'phase_id' => $id,
+				'phase_name' => $nama,
+				'phase_value' => $phase
+			);
+
+			//$this->Mcrud->($id,$data);
+			redirect('params_umum');
+		}
+	}
+	public function delete_phase($id)
+	{
+
+		//$this->Mcrud->deleteUser($id);
+		var_dump($id);
+		echo 'true';
+		redirect('user_control');
+	}
+
 	//parameter question end
 
 	//user control

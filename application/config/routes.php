@@ -82,6 +82,12 @@ $route['delete_dimensi/(:num)'] = 'Admin/delete_dimensi/$1';
 $route['save_subDimensi'] = 'Admin/add_subDimensi';
 $route['edit_subDimensi/(:num)'] = 'Admin/edit_subDimensi/$1';
 $route['delete_subDimensi/(:num)'] = 'Admin/delete_subDimensi/$1';
+$route['save_parameter'] = 'Admin/add_parameter';
+$route['edit_parameter/(:num)'] = 'Admin/edit_parameter/$1';
+$route['delete_parameter/(:num)'] = 'Admin/delete_parameter/$1';
+$route['save_phase'] = 'Admin/add_phase';
+$route['edit_phase/(:num)'] = 'Admin/edit_phase/$1';
+$route['delete_phase/(:num)'] = 'Admin/delete_phase/$1';
 
 
 $route['edit_params/(:num)'] = 'Admin/edit_params/$1';
