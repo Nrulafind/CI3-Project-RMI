@@ -62,6 +62,7 @@
 				<!-- Card Body -->
 				<div class="card-body">
 					<!-- <div class="chart-area"> -->
+					belum dinamis
 					<?php foreach ($result as $cv) { ?>
 						<!-- <canvas id="lolmyChart"></canvas> -->
 						<table class="table-bordered table-responsive table-hover">
@@ -71,15 +72,15 @@
 							</tr>
 							<tr>
 								<th>Tahun</th>
-								<th>2023 {belum dinamis}</th>
+								<th>2023</th>
 							</tr>
 							<tr>
 								<th>No. Laporan</th>
-								<th>01/II/RMI/2023 {Belum Dinamis}</th>
+								<th>01/II/RMI/2023</th>
 							</tr>
 							<tr>
 								<th>Model RMI</th>
-								<th>KBUMN-Umum {Belum dinamis}</th>
+								<th>KBUMN-Umum </th>
 							</tr>
 							<tr>
 								<th>Nilai Total RMI</th>

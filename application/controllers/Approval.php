@@ -38,7 +38,7 @@ class Approval extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
-	public function asesment()
+	public function asessment()
 	{
 		//$data['result'] = $this->Mcrud->get_all_data();
 		//	$data = $this->Mcrud->get_all_data('tbl_perhitungan')->result_array();
@@ -46,7 +46,7 @@ class Approval extends CI_Controller
 		//$data = array($result);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('/approval/asesment/asesment_list');
+		$this->load->view('/approval/asessment/asessment_list');
 		$this->load->view('template/footer');
 	}
 }

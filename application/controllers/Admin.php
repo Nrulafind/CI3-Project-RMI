@@ -199,7 +199,7 @@ class Admin extends CI_Controller
 
 		//upload fun
 		$upload_config = array(
-			'upload_path'   => './uploads/asesmentEval/',
+			'upload_path'   => './uploads/asessmentEval/',
 			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
 			'max_size'      => 100000,
 			'max_width'     => 10240,
@@ -349,13 +349,13 @@ class Admin extends CI_Controller
 	}
 
 	//evaluation assesment function start
-	public function asesmentEval()
+	public function asessmentEval()
 	{
 		$data['asessment'] = $this->Mcrud->get_assestment();
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/asesment/asesmentEval', $data);
+		$this->load->view('admin/asessment/asessmentEval', $data);
 		$this->load->view('template/footer');
 	}
 	public function editAsessment()
@@ -363,7 +363,7 @@ class Admin extends CI_Controller
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/asesment/asesmentEval', $data);
+		$this->load->view('admin/asessment/asessmentEval', $data);
 		$this->load->view('template/footer');
 	}
 	public function deleteAsessment()
@@ -371,7 +371,7 @@ class Admin extends CI_Controller
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('admin/asesment/asesmentEval', $data);
+		$this->load->view('admin/asessment/asessmentEval', $data);
 		$this->load->view('template/footer');
 	}
 	//evaluation assesment function end
@@ -392,6 +392,89 @@ class Admin extends CI_Controller
 		$this->load->view('template/sidebar');
 		$this->load->view('admin/params/params', $data);
 		$this->load->view('template/footer');
+	}
+
+	public function add_category()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+
+			$data = array(
+				'category_id' => $id,
+				'category_name' => $nama,
+			);
+
+			//$this->Mcrud->($data);
+			redirect('params_umum');
+		}
+	}
+	public function edit_category()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+
+			$data = array(
+				'category_id' => $id,
+				'category_name' => $nama,
+			);
+
+			//$this->Mcrud->($id,$data);
+			redirect('params_umum');
+		}
+	}
+	public function delete_category($id)
+	{
+
+		//$this->Mcrud->deleteUser($id);
+		var_dump($id);
+		echo 'true';
+		redirect('user_control');
+	}
+
+
+	public function add_dimensi()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$category_id = $this->input->post('category_id');
+
+			$data = array(
+				'dimensi_id' => $id,
+				'dimensi_name' => $nama,
+				'category_id' => $category_id
+			);
+
+			//$this->Mcrud->($data);
+			redirect('params_umum');
+		}
+	}
+	public function edit_dimensi()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$category_id = $this->input->post('category_id');
+
+			$data = array(
+				'dimensi_id' => $id,
+				'dimensi_name' => $nama,
+				'category_id' => $category_id,
+			);
+
+			//$this->Mcrud->($id,$data);
+			redirect('params_umum');
+		}
+	}
+	public function delete_dimensi($id)
+	{
+
+		//$this->Mcrud->deleteUser($id);
+		var_dump($id);
+		echo 'true';
+		redirect('user_control');
 	}
 
 	//parameter question end

@@ -266,39 +266,3 @@
 		});
 	}
 </script>
-
-
-
-<!-- //delete -->
-<script>
-	// $(document).ready(function() {
-	// 	// Handle the Delete button click
-	// 	$('.delete-user').click(function(e) {
-	// 		e.preventDefault(); // Prevent the default link behavior
-
-	// 		var id = $(this).data('userid');
-
-	// 		// Confirm with the user before proceeding
-	// 		if (confirm('Are you sure you want to delete this user?')) {
-	// 			// Send an AJAX request to the controller
-	// 			$.ajax({
-	// 				url: '<?= base_url('delete_user') ?>' + id, // Update 'your-controller' with the actual URL
-	// 				type: 'POST',
-	// 				success: function(response) {
-	// 					if (response === 'true') {
-	// 						// User deleted successfully
-	// 						// You can remove the table row from the UI if needed
-	// 						// Example: $(this).closest('tr').remove();
-	// 					} else {
-
-	// 						alert('Failed to delete user. <?= var_dump($id); ?>');
-	// 					}
-	// 				},
-	// 				error: function() {
-	// 					alert('An error occurred during the request.');
-	// 				}
-	// 			});
-	// 		}
-	// 	});
-	// });
-</script>

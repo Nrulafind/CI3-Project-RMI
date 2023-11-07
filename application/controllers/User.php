@@ -41,7 +41,7 @@ class User extends CI_Controller
 	}
 
 
-	public function asesment()
+	public function asessment()
 	{
 		//$data['result'] = $this->Mcrud->get_all_data();
 		//	$data = $this->Mcrud->get_all_data('tbl_perhitungan')->result_array();
@@ -49,7 +49,7 @@ class User extends CI_Controller
 		//$data = array($result);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('/user/asesment/asesment_list');
+		$this->load->view('/user/asessment/asessment_list');
 		$this->load->view('template/footer');
 	}
 }

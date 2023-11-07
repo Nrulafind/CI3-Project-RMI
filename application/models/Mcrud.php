@@ -130,7 +130,7 @@ class Mcrud extends CI_Model
 	public function get_dimensi()
 	{
 		$dimensi = $this->db->query(
-			"SELECT * FROM `tbl_dimensi`"
+			"SELECT * FROM `tbl_dimensi`WHERE `category_id` = 3"
 		);
 		return $dimensi->result_array();
 	}

@@ -42,7 +42,7 @@
 
 				<!-- Nav Item - Utilities Collapse Menu -->
 				<li class="nav-item">
-					<a class="nav-link collapsed" href="<?= base_url("asesment_eval") ?>">
+					<a class="nav-link collapsed" href="<?= base_url("asessment_eval") ?>">
 						<i class="fas fa-fw fa-file-archive"></i>
 						<span>Asessment Evaluation </span>
 					</a>
@@ -174,7 +174,7 @@
 
 							<!-- Nav Item - Utilities Collapse Menu -->
 							<li class="nav-item">
-								<a class="nav-link collapsed" href="<?= base_url("asesment_evalApproval") ?>">
+								<a class="nav-link collapsed" href="<?= base_url("asessment_evalApproval") ?>">
 									<i class=" fas fa-fw fa-file-archive"></i>
 									<span>Asessment Evaluation</span>
 								</a>
@@ -283,7 +283,7 @@
 
 										<!-- Nav Item - Dashboard -->
 										<li class="nav-item active">
-											<a class="nav-link" href="<?= base_url("dashboard"); ?>">
+											<a class="nav-link" href="<?= base_url("dashboard_officer"); ?>">
 												<i class="fas fa-fw fa-tachometer-alt"></i>
 												<span>Dashboard</span></a>
 										</li>
