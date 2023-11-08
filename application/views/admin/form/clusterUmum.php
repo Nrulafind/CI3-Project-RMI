@@ -7473,6 +7473,30 @@
 
 <div class="container">
 	<form id="" name="" action="" method="" enctype="multipart/form-data">
+		<div class="">
+			<label for="">Corporate Name</label>
+			<input type="" name="" value="">
+		</div>
+		<div class="">
+			<label for="">User name</label>
+			<input type="" name="" value="">
+		</div>
+		<div class="">
+			<label for=""> Approval </label>
+			<input type="" name="" value="">
+		</div>
+		<div class="">
+			<label for=""> No Laporan</label>
+			<input type="" name="" value="">
+		</div>
+		<div class="">
+			<label for="">Corporate Name</label>
+			<input type="" name="" value="">
+		</div>
+		<div class="">
+			<label for="">Tanggal</label>
+			<input type="" name="" value="">
+		</div>
 		<table class="table table-hover table-responsive">
 			<thead class="align-self-center respo">
 				<tr>

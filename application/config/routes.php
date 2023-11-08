@@ -93,9 +93,6 @@ $route['edit_question/(:num)'] = 'Admin/edit_question/$1';
 $route['delete_question/(:num)'] = 'Admin/delete_question/$1';
 
 
-$route['edit_params/(:num)'] = 'Admin/edit_params/$1';
-$route['delete_params/(:num)'] = 'Admin/delete_params/$1';
-
 //Approval/Manager routes
 $route['dashboard_approval'] = 'Approval/index'; //untuk dashboard nya
 //$route['approval_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
