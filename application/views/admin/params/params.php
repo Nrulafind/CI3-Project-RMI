@@ -244,7 +244,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_category') ?>">
+						<form method="post" action="<?= base_url('edit_dimensi') ?>">
 							<div class="col-auto">
 								<label for="id" class="form-label">Masukan ID Dimensi</label>
 								<input type="text" name="id" class="form-control">
@@ -763,7 +763,7 @@
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_phase') ?>/' + dimensiId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('edit_phase') ?>/' + phaseId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
@@ -810,15 +810,12 @@
 						<td><?= $d['phase_id'] ?></td>
 						<td><?= $d['subdimensi_id'] ?></td>
 						<td><?= $d['parameter_id'] ?></td>
-
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-question" href="<?= base_url('edit_dimensi') ?>/<?= $d['question_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateQuestion" data-dimensi_id="<?= $d['dimensi_id'] ?>" data-dimensi_nama="<?= $d['dimensi_name'] ?>" data-category_id="<?= $d['category_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-question" href="<?= base_url('edit_question') ?>/<?= $d['question_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateQuestion" data-question_id="<?= $d['question_id'] ?>" data-question="<?= $d['question'] ?>" data-phase_id="<?= $d['phase_id'] ?>" data-subdimensi_id="<?= $d['subdimensi_id'] ?>" data-parameter_id="<?= $d['parameter_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
-						</td>
-						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-question" href="<?= base_url('delete_dimensi') ?>/<?= $d['dimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-question" href="<?= base_url('delete_question') ?>/<?= $d['question_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -828,31 +825,39 @@
 
 
 		<!-- Modal add -->
-		<div class="modal fade" id="ModalAddDimensi" tabindex="-1" aria-labelledby="ModalAddDimensi" aria-hidden="true">
+		<div class="modal fade" id="ModalAddQuestion" tabindex="-1" aria-labelledby="ModalAddQuestion" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="ModalAddDimensi">Add Dimensi</h1>
+						<h1 class="modal-title fs-5" id="ModalAddQuestion">Add Question</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('save_dimensi') ?>">
+						<form method="post" action="<?= base_url('save_question') ?>">
 							<div class="col-auto">
-								<label for="id" class="form-label">Masukan ID Dimensi</label>
+								<label for="id" class="form-label">Masukan ID Question</label>
 								<input type="text" name="id" class="form-control">
 							</div>
 							<div class="col-auto">
-								<label for="nama" class="form-label">Masukan Nama Dimensi</label>
-								<input type="text" name="nama" class="form-control">
+								<label for="question" class="form-label">Masukan Question</label>
+								<textarea rows="4" cols="150" name="question" class="form-control"></textarea>
 							</div>
 							<div class="col-auto">
-								<label for="category_id" class="form-label">Masukan ID Category</label>
-								<input type="text" name="category_id" class="form-control" value="3" readonly>
+								<label for="phase_id" class="form-label">Masukan ID Phase</label>
+								<input type="text" name="phase_id" class="form-control" value="3" readonly>
+							</div>
+							<div class="col-auto">
+								<label for="subdimensi_id" class="form-label">Masukan ID Subdimensi</label>
+								<input type="text" name="subdimensi_id" class="form-control">
+							</div>
+							<div class="col-auto">
+								<label for="parameter_id" class="form-label">Masukan ID Parameter</label>
+								<input type="text" name="parameter_id" class="form-control" value="3" readonly>
 							</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="submit" name="submit" class="btn btn-outline-success">Add Dimensi</button>
+						<button type="submit" name="submit" class="btn btn-outline-success">Add Question</button>
 					</div>
 					</form>
 				</div>
@@ -863,46 +868,58 @@
 			$(document).ready(function() {
 				// Handle the Edit button click
 				$('.edit-dimensi').click(function() {
-					var dimensiId = $(this).data('dimensi_id');
-					var dimensiNama = $(this).data('dimensi_nama');
-					var categoryId = $(this).data('category_id');
+					var questionId = $(this).data('question_id');
+					var question = $(this).data('question');
+					var phaseId = $(this).data('phase_id');
+					var subdimensiId = $(this).data('subdimensi_id');
+					var parameterId = $(this).data('parameter_id');
 
 					// Populate the modal fields with user data
-					$('#ModalUpdateDimensi').find('input[name="id"]').val(dimensiId);
-					$('#ModalUpdateDimensi').find('input[name="nama"]').val(dimensiNama);
-					$('#ModalUpdateDimensi').find('input[name="category_id"]').val(categoryId);
+					$('#ModalUpdateQuestion').find('input[name="id"]').val(questionId);
+					$('#ModalUpdateQuestion').find('input[name="question"]').val(question);
+					$('#ModalUpdateQuestion').find('input[name="phase_id"]').val(phaseId);
+					$('#ModalUpdateQuestion').find('input[name="subdimensi_id"]').val(subdimensiId);
+					$('#ModalUpdateQuestion').find('input[name="parameter_id"]').val(parameterId);
 					// Show the modal
-					$('#ModalUpdateDimensi').modal('show');
+					$('#ModalUpdateQuestion').modal('show');
 				});
 			});
 		</script>
 
 		<!-- Update Modal  -->
-		<div class="modal fade" id="ModalUpdateDimensi" tabindex="-1" aria-labelledby="ModalUpdateDimensi" aria-hidden="true">
+		<div class="modal fade" id="ModalUpdateQuestion" tabindex="-1" aria-labelledby="ModalUpdateQuestion" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="ModalUpdateDimensi">Update Dimensi</h1>
+						<h1 class="modal-title fs-5" id="ModalUpdateQuestion">Update Question</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_category') ?>">
+						<form method="post" action="<?= base_url('edit_question') ?>">
 							<div class="col-auto">
-								<label for="id" class="form-label">Masukan ID Dimensi</label>
+								<label for="id" class="form-label">Masukan ID Question</label>
 								<input type="text" name="id" class="form-control">
 							</div>
 							<div class="col-auto">
-								<label for="nama" class="form-label">Masukan Nama Dimensi</label>
-								<input type="text" name="nama" class="form-control">
+								<label for="question" class="form-label">Masukan Question</label>
+								<textarea rows="4" cols="150" name="question" class="form-control"></textarea>
 							</div>
 							<div class="col-auto">
-								<label for="category_id" class="form-label">Masukan ID Category</label>
-								<input type="text" name="category_id" class="form-control" readonly>
+								<label for="phase_id" class="form-label">Masukan ID Phase</label>
+								<input type="text" name="phase_id" class="form-control" value="3" readonly>
+							</div>
+							<div class="col-auto">
+								<label for="subdimensi_id" class="form-label">Masukan ID Subdimensi</label>
+								<input type="text" name="subdimensi_id" class="form-control">
+							</div>
+							<div class="col-auto">
+								<label for="parameter_id" class="form-label">Masukan ID Parameter</label>
+								<input type="text" name="parameter_id" class="form-control" value="3" readonly>
 							</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" name="submit" class="btn btn-outline-success" onclick="updateDimensi()"> Save changes</button>
+						<button type="button" name="submit" class="btn btn-outline-success" onclick="updateQuestion()"> Save changes</button>
 					</div>
 					</form>
 				</div>
@@ -910,32 +927,36 @@
 		</div>
 
 		<script>
-			function updateDimensi() {
-				var dimensiId = $('#ModalUpdateDimensi input[name="id"]').val();
-				var dimensiNama = $('#ModalUpdateDimensi input[name="nama"]').val();
-				var categoryId = $('#ModalUpdateDimensi input[name="category_id"]').val();
+			function updateQuestion() {
+				var questionId = $('#ModalUpdateQuestion input[name="id"]').val();
+				var question = $('#ModalUpdateQuestion input[name="question"]').val();
+				var phaseId = $('#ModalUpdateQuestion input[name="phase_id"]').val();
+				var subdimensiId = $('#ModalUpdateQuestion input[name="subdimensi_id"]').val();
+				var parameterId = $('#ModalUpdateQuestion input[name="parameter_id"]').val();
 
 				var data = {
-					id: dimensiId,
-					nama: dimensiNama,
-					category_id: categoryId,
+					id: questionId,
+					question: question,
+					phase_id: phaseId,
+					subdimensi_id: subdimensiId,
+					parameter_id: parameterId,
 					// Include other fields as needed
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_dimensi') ?>/' + dimensiId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('edit_question') ?>/' + questionId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
 						// Handle the response from the server
-						alert('dimensi updated successfully');
-						$('#ModalUpdateDimensi').modal('hide');
+						alert('question updated successfully');
+						$('#ModalUpdateQuestion').modal('hide');
 						window.location.reload();
 						// You can also update the user data in the table without reloading the page
 						// based on the response from the server.
 					},
 					error: function(xhr, status, error) {
-						console.error('Error updating Dimensi: ' + error);
+						console.error('Error updating question: ' + error);
 					}
 				});
 			}

@@ -166,14 +166,106 @@ class Mcrud extends CI_Model
 		return $question->result_array();
 	}
 	//insert
-	public function insert()
+	public function insertCategory($data)
 	{
+		$this->db->insert('tbl_kategori', $data);
+	}
+
+	public function insertDimensi($data)
+	{
+		$this->db->insert('tbl_dimensi', $data);
+	}
+
+	public function insertSubDimensi($data)
+	{
+		$this->db->insert('tbl_sub_dimensi', $data);
+	}
+
+	public function insertParameter($data)
+	{
+		$this->db->insert('tbl_parameter', $data);
+	}
+
+	public function insertPhase($data)
+	{
+		$this->db->insert('tbl_phase', $data);
+	}
+	public function insertQuestion($data)
+	{
+		$this->db->insert('tbl_question', $data);
 	}
 	//update
+	public function updateCategory($id, $data)
+	{
+		$this->db->where('category_id', $id);
+		$this->db->update('tbl_kategori', $data);
+	}
 
-	//delete
+	public function updateDimensi($id, $data)
+	{
+		$this->db->where('dimensi_id', $id);
+		$this->db->update('tbl_dimensi', $data);
+	}
 
+	public function updateSubDimensi($id, $data)
+	{
+		$this->db->where('subdimensi_id', $id);
+		$this->db->update('tbl_sub_dimensi', $data);
+	}
 
+	public function updateParameter($id, $data)
+	{
+		$this->db->where('parameter_id', $id);
+		$this->db->update('tbl_parameter', $data);
+	}
+
+	public function updatePhase($id, $data)
+	{
+		$this->db->where('phase_id', $id);
+		$this->db->update('tbl_phase', $data);
+	}
+
+	public function updateQuestion($id, $data)
+	{
+		$this->db->where('question_id', $id);
+		$this->db->update('tbl_question', $data);
+	}
+	//delete 
+	public function deleteCategory($id)
+	{
+		$this->db->where('category_id', $id);
+		$this->db->delete('tbl_kategori');
+	}
+
+	public function deleteDimensi($id)
+	{
+		$this->db->where('dimensi_id', $id);
+		$this->db->delete('tbl_dimensi');
+	}
+
+	public function deleteSubDimensi($id)
+	{
+		$this->db->where('subdimensi_id', $id);
+		$this->db->delete('tbl_sub_dimensi');
+	}
+
+	public function deleteParameter($id)
+	{
+		$this->db->where('parameter_id', $id);
+		$this->db->delete('tbl_parameter');
+	}
+
+	public function deletePhase($id)
+	{
+		$this->db->where('phase_id', $id);
+		$this->db->delete('tbl_phase');
+	}
+
+	public function deleteQuestion($id)
+	{
+		$this->db->where('question_id', $id);
+		$this->db->delete('tbl_question');
+	}
 	//akhir dari function untuk parameter
 
 

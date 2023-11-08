@@ -405,7 +405,7 @@ class Admin extends CI_Controller
 				'category_name' => $nama,
 			);
 
-			//$this->Mcrud->($data);
+			$this->Mcrud->insertCategory($data);
 			redirect('params_umum');
 		}
 	}
@@ -420,17 +420,17 @@ class Admin extends CI_Controller
 				'category_name' => $nama,
 			);
 
-			//$this->Mcrud->($id,$data);
+			$this->Mcrud->updateCategory($id, $data);
 			redirect('params_umum');
 		}
 	}
 	public function delete_category($id)
 	{
 
-		//$this->Mcrud->deleteUser($id);
+		$this->Mcrud->deleteCategory($id);
 		var_dump($id);
 		echo 'true';
-		redirect('user_control');
+		redirect('params_umum');
 	}
 
 
@@ -447,7 +447,7 @@ class Admin extends CI_Controller
 				'category_id' => $category_id
 			);
 
-			//$this->Mcrud->($data);
+			$this->Mcrud->insertDimensi($data);
 			redirect('params_umum');
 		}
 	}
@@ -464,17 +464,17 @@ class Admin extends CI_Controller
 				'category_id' => $category_id,
 			);
 
-			//$this->Mcrud->($id,$data);
+			$this->Mcrud->updateDimensi($id, $data);
 			redirect('params_umum');
 		}
 	}
 	public function delete_dimensi($id)
 	{
 
-		//$this->Mcrud->deleteUser($id);
+		$this->Mcrud->deleteDimensi($id);
 		var_dump($id);
 		echo 'true';
-		redirect('user_control');
+		redirect('params_umum');
 	}
 
 	public function add_subDimensi()
@@ -482,15 +482,15 @@ class Admin extends CI_Controller
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$id = $this->input->post('id');
 			$nama = $this->input->post('nama');
-			$category_id = $this->input->post('category_id');
+			$dimensi_id = $this->input->post('dimensi_id');
 
 			$data = array(
-				'dimensi_id' => $id,
-				'dimensi_name' => $nama,
-				'category_id' => $category_id
+				'subdimensi_id' => $id,
+				'subdimensi_name' => $nama,
+				'dimensi_id' => $dimensi_id
 			);
 
-			//$this->Mcrud->($data);
+			$this->Mcrud->insertSubDimensi($data);
 			redirect('params_umum');
 		}
 	}
@@ -499,25 +499,24 @@ class Admin extends CI_Controller
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$id = $this->input->post('id');
 			$nama = $this->input->post('nama');
-			$category_id = $this->input->post('category_id');
+			$dimensi_id = $this->input->post('dimensi_id');
 
 			$data = array(
-				'dimensi_id' => $id,
-				'dimensi_name' => $nama,
-				'category_id' => $category_id,
+				'subdimensi_id' => $id,
+				'subdimensi_name' => $nama,
+				'dimensi_id' => $dimensi_id,
 			);
 
-			//$this->Mcrud->($id,$data);
+			$this->Mcrud->updateSubDimensi($id, $data);
 			redirect('params_umum');
 		}
 	}
 	public function delete_subDimensi($id)
 	{
-
-		//$this->Mcrud->deleteUser($id);
+		$this->Mcrud->deleteSubDimensi($id);
 		var_dump($id);
 		echo 'true';
-		redirect('user_control');
+		redirect('params_umum');
 	}
 
 	public function add_parameter()
@@ -525,15 +524,17 @@ class Admin extends CI_Controller
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$id = $this->input->post('id');
 			$nama = $this->input->post('nama');
-			$category_id = $this->input->post('category_id');
+			$weight = $this->input->post('weight');
+			$subdimensi_id = $this->input->post('subdimensi_id');
 
 			$data = array(
-				'dimensi_id' => $id,
-				'dimensi_name' => $nama,
-				'category_id' => $category_id
+				'parameter_id' => $id,
+				'parameter_name' => $nama,
+				'Weight' => $weight,
+				'subdimensi_id' => $subdimensi_id
 			);
 
-			//$this->Mcrud->($data);
+			$this->Mcrud->insertParameter($data);
 			redirect('params_umum');
 		}
 	}
@@ -542,25 +543,27 @@ class Admin extends CI_Controller
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$id = $this->input->post('id');
 			$nama = $this->input->post('nama');
-			$category_id = $this->input->post('category_id');
+			$weight = $this->input->post('weight');
+			$subdimensi_id = $this->input->post('subdimensi_id');
 
 			$data = array(
-				'dimensi_id' => $id,
-				'dimensi_name' => $nama,
-				'category_id' => $category_id,
+				'parameter_id' => $id,
+				'parameter_name' => $nama,
+				'Weight' => $weight,
+				'subdimensi_id' => $subdimensi_id
 			);
 
-			//$this->Mcrud->($id,$data);
+			$this->Mcrud->updateParameter($id, $data);
 			redirect('params_umum');
 		}
 	}
 	public function delete_parameter($id)
 	{
 
-		//$this->Mcrud->deleteUser($id);
+		$this->Mcrud->deleteParameter($id);
 		var_dump($id);
 		echo 'true';
-		redirect('user_control');
+		redirect('params_umum');
 	}
 
 	public function add_phase()
@@ -576,7 +579,7 @@ class Admin extends CI_Controller
 				'phase_value' => $phase
 			);
 
-			//$this->Mcrud->($data);
+			$this->Mcrud->insertPhase($data);
 			redirect('params_umum');
 		}
 	}
@@ -593,18 +596,70 @@ class Admin extends CI_Controller
 				'phase_value' => $phase
 			);
 
-			//$this->Mcrud->($id,$data);
+			$this->Mcrud->updatePhase($id, $data);
 			redirect('params_umum');
 		}
 	}
 	public function delete_phase($id)
 	{
 
-		//$this->Mcrud->deleteUser($id);
+		$this->Mcrud->deletePhase($id);
 		var_dump($id);
 		echo 'true';
-		redirect('user_control');
+		redirect('params_umum');
 	}
+
+	public function add_question()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$question = $this->input->post('question');
+			$phase_id = $this->input->post('phase_id');
+			$subdimensi_id = $this->input->post('subdimensi_id');
+			$parameter_id = $this->input->post('parameter_id');
+
+			$data = array(
+				'question_id' => $id,
+				'question' => $question,
+				'phase_id' => $phase_id,
+				'subdimensi_id' => $subdimensi_id,
+				'parameter_id' => $parameter_id
+			);
+
+			$this->Mcrud->insertQuestion($data);
+			redirect('params_umum');
+		}
+	}
+	public function edit_question()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			$question = $this->input->post('question');
+			$phase_id = $this->input->post('phase_id');
+			$subdimensi_id = $this->input->post('subdimensi_id');
+			$parameter_id = $this->input->post('parameter_id');
+
+			$data = array(
+				'question_id' => $id,
+				'question' => $question,
+				'phase_id' => $phase_id,
+				'subdimensi_id' => $subdimensi_id,
+				'parameter_id' => $parameter_id
+			);
+
+			$this->Mcrud->updateQuestion($id, $data);
+			redirect('params_umum');
+		}
+	}
+	public function delete_question($id)
+	{
+
+		$this->Mcrud->deleteQuestion($id);
+		var_dump($id);
+		echo 'true';
+		redirect('params_umum');
+	}
+
 
 	//parameter question end
 

@@ -88,6 +88,9 @@ $route['delete_parameter/(:num)'] = 'Admin/delete_parameter/$1';
 $route['save_phase'] = 'Admin/add_phase';
 $route['edit_phase/(:num)'] = 'Admin/edit_phase/$1';
 $route['delete_phase/(:num)'] = 'Admin/delete_phase/$1';
+$route['save_question'] = 'Admin/add_question';
+$route['edit_question/(:num)'] = 'Admin/edit_question/$1';
+$route['delete_question/(:num)'] = 'Admin/delete_question/$1';
 
 
 $route['edit_params/(:num)'] = 'Admin/edit_params/$1';
