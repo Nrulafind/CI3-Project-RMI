@@ -50,10 +50,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Auth';
-$route['404_override'] = 'Welcome';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['about'] = 'Auth/about';
+
+$route['myreport'] = 'MyReport/index';
 
 
 //login process
@@ -68,11 +70,15 @@ $route['proyeksi'] = 'Admin/calculateRisk'; // routing proses kalulasi tanpa rel
 $route['asessment_eval'] = 'Admin/asessmentEval';
 $route['edit_asessment/(:num)'] = 'Admin/editAsessment/$1';
 $route['delete_assesment/(:num)'] = 'Admin/deleteAsessment/$1';
+
 $route['user_control'] = 'Admin/userControl';
+
 $route['save_user'] = 'Admin/add_user';
 $route['edit_user/(:num)'] = 'Admin/edit_user/$1';
 $route['delete_user/(:num)'] = 'Admin/delete_user/$1';
+
 $route['params_umum'] = 'Admin/paramsUmum';
+
 $route['save_category'] = 'Admin/add_category';
 $route['edit_category/(:num)'] = 'Admin/edit_category/$1';
 $route['delete_category/(:num)'] = 'Admin/delete_category/$1';

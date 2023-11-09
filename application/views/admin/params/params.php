@@ -260,7 +260,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" name="submit" class="btn btn-outline-success" onclick="updateDimensi()"> Save changes</button>
+						<button type="submit" name="submit" class="btn btn-outline-success" onclick="updateDimensi()"> Save changes</button>
 					</div>
 					</form>
 				</div>
@@ -281,7 +281,7 @@
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_dimensi') ?>/' + dimensiId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('edit_dimensi') ?> / ' + dimensiId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
@@ -320,19 +320,19 @@
 			</thead>
 			<tbody>
 				<?php
-				foreach ($sub_dimensi as $d) { ?>
+				foreach ($sub_dimensi as $sd) { ?>
 					<tr>
-						<td><?= $d['subdimensi_id'] ?></td>
-						<td><?= $d['subdimensi_name'] ?></td>
-						<td><?= $d['dimensi_id'] ?></td>
+						<td><?= $sd['subdimensi_id'] ?></td>
+						<td><?= $sd['subdimensi_name'] ?></td>
+						<td><?= $sd['dimensi_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-subDimensi" href="<?= base_url('edit_subDimensi') ?>/<?= $d['subdimensi_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateSubDimensi" data-subdimensi_id="<?= $d['subdimensi_id'] ?>" data-subdimensi_nama="<?= $d['subdimensi_name'] ?>" data-dimensi_id="<?= $d['dimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-subDimensi" href="<?= base_url('edit_subDimensi') ?>/<?= $sd['subdimensi_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateSubDimensi" data-subdimensi_id="<?= $sd['subdimensi_id'] ?>" data-subdimensi_nama="<?= $sd['subdimensi_name'] ?>" data-dimensi_id="<?= $sd['dimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-subDimensi" href="<?= base_url('delete_subDimensi') ?>/<?= $d['subdimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-subDimensi" href="<?= base_url('delete_subDimensi') ?>/<?= $sd['subdimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -478,21 +478,21 @@
 			</thead>
 			<tbody>
 				<?php
-				foreach ($parameter as $d) { ?>
+				foreach ($parameter as $pr) { ?>
 					<tr>
 
-						<td><?= $d['parameter_id'] ?></td>
-						<td><?= $d['parameter_name'] ?></td>
-						<td><?= $d['Weight'] ?></td>
-						<td><?= $d['subdimensi_id'] ?></td>
+						<td><?= $pr['parameter_id'] ?></td>
+						<td><?= $pr['parameter_name'] ?></td>
+						<td><?= $pr['Weight'] ?></td>
+						<td><?= $pr['subdimensi_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-parameter" href="<?= base_url('edit_parameter') ?>/<?= $d['parameter_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateParameter" data-parameter_id="<?= $d['parameter_id'] ?>" data-parameter_nama="<?= $d['parameter_name'] ?>" data-weight="<?= $d['Weight'] ?>" data-subdimensi_id="<?= $d['subdimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-parameter" href="<?= base_url('edit_parameter') ?>/<?= $pr['parameter_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateParameter" data-parameter_id="<?= $pr['parameter_id'] ?>" data-parameter_nama="<?= $pr['parameter_name'] ?>" data-weight="<?= $pr['Weight'] ?>" data-subdimensi_id="<?= $pr['subdimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-parameter" href="<?= base_url('delete_parameter') ?>/<?= $d['parameter_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-parameter" href="<?= base_url('delete_parameter') ?>/<?= $pr['parameter_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -541,7 +541,7 @@
 				// Handle the Edit button click
 				$('.edit-parameter').click(function() {
 					var parameterId = $(this).data('parameter_id');
-					var parameterNama = $(this).data('prameter_nama');
+					var parameterNama = $(this).data('parameter_nama');
 					var weight = $(this).data('weight');
 					var subdimensiId = $(this).data('subdimensi_id');
 
@@ -646,19 +646,19 @@
 			</thead>
 			<tbody>
 				<?php
-				foreach ($phase as $d) { ?>
+				foreach ($phase as $ps) { ?>
 					<tr>
-						<td><?= $d['phase_id'] ?></td>
-						<td><?= $d['phase_name'] ?></td>
-						<td><?= $d['phase_value'] ?></td>
+						<td><?= $ps['phase_id'] ?></td>
+						<td><?= $ps['phase_name'] ?></td>
+						<td><?= $ps['phase_value'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-phase" href="<?= base_url('edit_phase') ?>/<?= $d['phase_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdatePhase" data-phase_id="<?= $d['phase_id'] ?>" data-phase_nama="<?= $d['phase_name'] ?>" data-phase_value="<?= $d['phase_value'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-phase" href="<?= base_url('edit_phase') ?>/<?= $ps['phase_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdatePhase" data-phase_id="<?= $ps['phase_id'] ?>" data-phase_nama="<?= $ps['phase_name'] ?>" data-phase_value="<?= $ps['phase_value'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-phase" href="<?= base_url('delete_phase') ?>/<?= $d['phase_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-phase" href="<?= base_url('delete_phase') ?>/<?= $ps['phase_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -803,19 +803,19 @@
 			</thead>
 			<tbody>
 				<?php
-				foreach ($question as $d) { ?>
+				foreach ($question as $qs) { ?>
 					<tr>
-						<td><?= $d['question_id'] ?></td>
-						<td><?= $d['question'] ?></td>
-						<td><?= $d['phase_id'] ?></td>
-						<td><?= $d['subdimensi_id'] ?></td>
-						<td><?= $d['parameter_id'] ?></td>
+						<td><?= $qs['question_id'] ?></td>
+						<td><?= $qs['question'] ?></td>
+						<td><?= $qs['phase_id'] ?></td>
+						<td><?= $qs['subdimensi_id'] ?></td>
+						<td><?= $qs['parameter_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-question" href="<?= base_url('edit_question') ?>/<?= $d['question_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateQuestion" data-question_id="<?= $d['question_id'] ?>" data-question="<?= $d['question'] ?>" data-phase_id="<?= $d['phase_id'] ?>" data-subdimensi_id="<?= $d['subdimensi_id'] ?>" data-parameter_id="<?= $d['parameter_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-question" href="<?= base_url('edit_question') ?>/<?= $qs['question_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateQuestion" data-question_id="<?= $qs['question_id'] ?>" data-question="<?= $qs['question'] ?>" data-phase_id="<?= $qs['phase_id'] ?>" data-subdimensi_id="<?= $qs['subdimensi_id'] ?>" data-parameter_id="<?= $qs['parameter_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 							<div class="btn btn-outline-danger">
-								<a class="delete-question" href="<?= base_url('delete_question') ?>/<?= $d['question_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-question" href="<?= base_url('delete_question') ?>/<?= $qs['question_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -867,7 +867,7 @@
 		<script>
 			$(document).ready(function() {
 				// Handle the Edit button click
-				$('.edit-dimensi').click(function() {
+				$('.edit-question').click(function() {
 					var questionId = $(this).data('question_id');
 					var question = $(this).data('question');
 					var phaseId = $(this).data('phase_id');

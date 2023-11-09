@@ -99,23 +99,23 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>A</td>
+									<td>Budaya dan Kapabilitas Risiko</td>
 									<td><?= $t['ncpD1'] ?></td>
 								</tr>
 								<tr>
-									<td>B</td>
+									<td>Organisasi dan Tata Kelola Risiko</td>
 									<td><?= $t['ncpD2'] ?></td>
 								</tr>
 								<tr>
-									<td>C</td>
+									<td>Kerangka Risiko dan Kepatuhan</td>
 									<td><?= $t['ncpD3'] ?></td>
 								</tr>
 								<tr>
-									<td>D</td>
+									<td>Proses dan Kontrol Risiko</td>
 									<td><?= $t['ncpD4'] ?></td>
 								</tr>
 								<tr>
-									<td>E</td>
+									<td>Model, Data, dan Tata Kelola Risiko</td>
 									<td><?= $t['ncpD5'] ?></td>
 								</tr>
 							</tbody>

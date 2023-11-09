@@ -1,4 +1,7 @@
 <?php
+
+use PhpParser\Node\Stmt\TryCatch;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mcrud extends CI_Model
@@ -215,8 +218,15 @@ class Mcrud extends CI_Model
 
 	public function updateParameter($id, $data)
 	{
-		$this->db->where('parameter_id', $id);
-		$this->db->update('tbl_parameter', $data);
+		var_dump($id, $data);
+		try {
+			$this->db->where('parameter_id', $id);
+			$this->db->update('tbl_parameter', $data);
+		} catch (Exception $th) {
+			var_dump($th);
+		}
+		// $this->db->where('parameter_id', $id);
+		// $this->db->update('tbl_parameter', $data);
 	}
 
 	public function updatePhase($id, $data)
@@ -239,8 +249,18 @@ class Mcrud extends CI_Model
 
 	public function deleteDimensi($id)
 	{
-		$this->db->where('dimensi_id', $id);
-		$this->db->delete('tbl_dimensi');
+		//$this->db->query("DELETE FROM `tbl_dimensi` WHERE dimensi_id = $id");
+
+		var_dump($id);
+		try {
+			$this->db->where('dimensi_id', $id);
+			$this->db->delete('tbl_sub_dimensi');
+
+			$this->db->where('dimensi_id', $id);
+			$this->db->delete('tbl_dimensi');
+		} catch (Exception $e) {
+			var_dump($e);
+		}
 	}
 
 	public function deleteSubDimensi($id)

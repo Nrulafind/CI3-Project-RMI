@@ -16,11 +16,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<div class="error mx-auto" data-text="404">404</div>
 				<p class="lead text-gray-800 mb-5">Page Not Found</p>
 				<p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-				<a href="<?php if ($this->session->userdata('access') == 'User') {
+				<a href="<?php if ($this->session->userdata('access') == 'Officer') {
 								echo base_url('dashboard_admin');
-							} elseif ($this->session->userdata('access') == 'Admin') {
+							} elseif ($this->session->userdata('access') == 'Manager') {
 								echo base_url('dashboard_approval');
-							} elseif ($this->session->userdata('access') == 'Super Admin') {
+							} elseif ($this->session->userdata('access') == 'Vice President') {
 								echo base_url('dashboard');
 							} else {
 								echo base_url('/');

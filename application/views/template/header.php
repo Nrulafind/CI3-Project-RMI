@@ -1,4 +1,4 @@
-<?php if ($this->session->userdata('access') == "Super Admin") { ?>
+<?php if ($this->session->userdata('access') == "Vice President") { ?>
 	<!DOCTYPE html>
 	<html lang="en">
 
@@ -23,7 +23,7 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 		<script src="<?= base_url("proyeksi"); ?>"></script>
 	</head>
-<?php } elseif ($this->session->userdata('access') == "Approval") { ?>
+<?php } elseif ($this->session->userdata('access') == "Manager") { ?>
 	<!DOCTYPE html>
 	<html lang="en">
 
@@ -48,7 +48,7 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 		<script src="<?= base_url("proyeksi"); ?>"></script>
 	</head>
-<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
+<?php } elseif ($this->session->userdata('access') == "Officer") { ?>
 	<!DOCTYPE html>
 	<html lang="en">
 

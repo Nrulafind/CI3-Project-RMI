@@ -5,9 +5,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+
+
 	function __construct()
 	{
 		parent::__construct();
+
 		if ($this->session->userdata('logged') != true && $this->session->userdata('access') != 'Super Admin') {
 			$url = base_url('/');
 			redirect($url);
@@ -373,7 +376,7 @@ class Admin extends CI_Controller
 		$this->Mcrud->deleteCategory($id);
 		var_dump($id);
 		echo 'true';
-		redirect('params_umum');
+		redirect(base_url());
 	}
 
 
@@ -394,7 +397,7 @@ class Admin extends CI_Controller
 			redirect('params_umum');
 		}
 	}
-	public function edit_dimensi()
+	public function edit_dimensi($id)
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$id = $this->input->post('id');
@@ -413,11 +416,11 @@ class Admin extends CI_Controller
 	}
 	public function delete_dimensi($id)
 	{
-
 		$this->Mcrud->deleteDimensi($id);
 		var_dump($id);
+		die();
 		echo 'true';
-		redirect('params_umum');
+		redirect(base_url('params_umum'));
 	}
 
 	public function add_subDimensi()
@@ -497,6 +500,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->Mcrud->updateParameter($id, $data);
+			die();
 			redirect('params_umum');
 		}
 	}
@@ -644,12 +648,12 @@ class Admin extends CI_Controller
 	public function edit_user()
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
-			$id = $_POST['id'];
-			$name = $_POST['nama'];
-			$email = $_POST['email'];
-			$password = $_POST['password'];
-			$akses = $_POST['akses'];
-			$status = $_POST['status'];
+			$id = $this->input->post('id');
+			$name = $this->input->post('nama');
+			$email = $this->input->post('email');
+			$password = $this->input->post('password');
+			$akses = $this->input->post('akses');
+			$status = $this->input->post('status');
 
 			$hashed_password = hash('sha224', $password);
 
