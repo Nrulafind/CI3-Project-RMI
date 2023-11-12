@@ -52,38 +52,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'Auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
 $route['about'] = 'Auth/about';
-
 $route['myreport'] = 'MyReport/index';
-
-
 //login process
 $route['actLogin'] = 'Auth/actLogin';
 $route['logout'] = 'Auth/logout';
-
 //Super Admin / Vice President routes
 $route['dashboard'] = 'Admin/index'; //untuk dashboard nya
 $route['cluster_umum'] = 'Admin/formUmum'; //untuk routing ke form perhitungan cluster umum
 $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db
 $route['proyeksi'] = 'Admin/calculateRisk'; // routing proses kalulasi tanpa reload
+
 $route['asessment_eval'] = 'Admin/asessmentEval';
 $route['edit_asessment/(:num)'] = 'Admin/editAsessment/$1';
 $route['delete_assesment/(:num)'] = 'Admin/deleteAsessment/$1';
 
 $route['user_control'] = 'Admin/userControl';
-
 $route['save_user'] = 'Admin/add_user';
-$route['edit_user/(:num)'] = 'Admin/edit_user/$1';
+$route['edit-user/(:num)'] = 'Admin/edit_user/$1';
 $route['delete_user/(:num)'] = 'Admin/delete_user/$1';
 
 $route['params_umum'] = 'Admin/paramsUmum';
-
 $route['save_category'] = 'Admin/add_category';
 $route['edit_category/(:num)'] = 'Admin/edit_category/$1';
 $route['delete_category/(:num)'] = 'Admin/delete_category/$1';
 $route['save_dimensi'] = 'Admin/add_dimensi';
-$route['edit_dimensi/(:num)'] = 'Admin/edit_dimensi/$1';
+$route['edit-dimensi/(:num)'] = 'Admin/edit_dimensi/$1';
 $route['delete_dimensi/(:num)'] = 'Admin/delete_dimensi/$1';
 $route['save_subDimensi'] = 'Admin/add_subDimensi';
 $route['edit_subDimensi/(:num)'] = 'Admin/edit_subDimensi/$1';

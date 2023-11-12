@@ -206,8 +206,15 @@ class Mcrud extends CI_Model
 
 	public function updateDimensi($id, $data)
 	{
-		$this->db->where('dimensi_id', $id);
-		$this->db->update('tbl_dimensi', $data);
+		var_dump($id, $data);
+		try {
+			$this->db->where('dimensi_id', $id);
+			$this->db->update('tbl_dimensi', $data);
+		} catch (Exception $th) {
+			var_dump($th);
+		}
+		// $this->db->where('dimensi_id', $id);
+		// $this->db->update('tbl_dimensi', $data);
 	}
 
 	public function updateSubDimensi($id, $data)
@@ -253,8 +260,8 @@ class Mcrud extends CI_Model
 
 		var_dump($id);
 		try {
-			$this->db->where('dimensi_id', $id);
-			$this->db->delete('tbl_sub_dimensi');
+			// $this->db->where('dimensi_id', $id);
+			// $this->db->delete('tbl_sub_dimensi');
 
 			$this->db->where('dimensi_id', $id);
 			$this->db->delete('tbl_dimensi');

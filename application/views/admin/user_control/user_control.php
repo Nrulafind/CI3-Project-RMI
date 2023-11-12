@@ -249,7 +249,7 @@
 		};
 
 		$.ajax({
-			url: '<?= base_url('edit_user') ?>/' + userId, // Adjust the URL to include the user's ID
+			url: '<?= base_url('edit-user') ?>/' + userId, // Adjust the URL to include the user's ID
 			method: 'POST',
 			data: data,
 			success: function(response) {

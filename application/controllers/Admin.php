@@ -376,7 +376,7 @@ class Admin extends CI_Controller
 		$this->Mcrud->deleteCategory($id);
 		var_dump($id);
 		echo 'true';
-		redirect(base_url());
+		redirect(base_url('params_umum'));
 	}
 
 
@@ -397,7 +397,7 @@ class Admin extends CI_Controller
 			redirect('params_umum');
 		}
 	}
-	public function edit_dimensi($id)
+	public function edit_dimensi()
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$id = $this->input->post('id');
@@ -409,16 +409,17 @@ class Admin extends CI_Controller
 				'dimensi_name' => $nama,
 				'category_id' => $category_id,
 			);
-
 			$this->Mcrud->updateDimensi($id, $data);
+			// var_dump($id, $data);
+			// die();
 			redirect('params_umum');
 		}
 	}
 	public function delete_dimensi($id)
 	{
 		$this->Mcrud->deleteDimensi($id);
-		var_dump($id);
-		die();
+		// var_dump($id);
+		// die();
 		echo 'true';
 		redirect(base_url('params_umum'));
 	}

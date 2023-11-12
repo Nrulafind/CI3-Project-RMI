@@ -25,12 +25,12 @@
 						<td><?= $p['category_name'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-category" href="<?= base_url('edit_category') ?>/<?= $p['category_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateCategory" data-category_id="<?= $p['category_id'] ?>" data-category_nama="<?= $p['category_nama'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-category" href="<?= base_url('Admin/edit_category') ?>/<?= $p['category_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateCategory" data-category_id="<?= $p['category_id'] ?>" data-category_nama="<?= $p['category_nama'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-category" href="<?= base_url('delete_category') ?>/<?= $p['category_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-category" href="<?= base_url('Admin/delete_category') ?>/<?= $p['category_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -92,7 +92,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_category') ?>">
+						<form method="post" action="<?= base_url('Admin/edit_category') ?>">
 							<div class="col-auto">
 								<label for="id" class="form-label" hidden>Masukan ID Category</label>
 								<input type="text" name="id" class="form-control" hidden>
@@ -124,7 +124,7 @@
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_category') ?>/' + categoryId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('Admin/edit_category') ?>/' + categoryId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
@@ -171,12 +171,12 @@
 						<td><?= $d['category_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-dimensi" href="<?= base_url('edit_dimensi') ?>/<?= $d['dimensi_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateDimensi" data-dimensi_id="<?= $d['dimensi_id'] ?>" data-dimensi_nama="<?= $d['dimensi_name'] ?>" data-category_id="<?= $d['category_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-dimensi" href="<?= base_url('Admin/edit_dimensi') ?>/<?= $d['dimensi_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateDimensi" data-dimensi_id="<?= $d['dimensi_id'] ?>" data-dimensi_nama="<?= $d['dimensi_name'] ?>" data-category_id="<?= $d['category_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-dimensi" href="<?= base_url('delete_dimensi') ?>/<?= $d['dimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-dimensi" href="<?= base_url('Admin/delete_dimensi') ?>/<?= $d['dimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -244,7 +244,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_dimensi') ?>">
+						<form method="post" action="<?= base_url('Admin/edit_dimensi') ?>">
 							<div class="col-auto">
 								<label for="id" class="form-label">Masukan ID Dimensi</label>
 								<input type="text" name="id" class="form-control">
@@ -279,16 +279,17 @@
 					category_id: categoryId,
 					// Include other fields as needed
 				};
-
 				$.ajax({
-					url: '<?= base_url('edit_dimensi') ?> / ' + dimensiId, // Adjust the URL to include the user's ID
+					url: '<?php echo base_url('Admin/edit_dimensi') ?>/' + dimensiId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
+
 						// Handle the response from the server
 						alert('dimensi updated successfully');
 						$('#ModalUpdateDimensi').modal('hide');
 						window.location.reload();
+
 						// You can also update the user data in the table without reloading the page
 						// based on the response from the server.
 					},
@@ -327,12 +328,12 @@
 						<td><?= $sd['dimensi_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-subDimensi" href="<?= base_url('edit_subDimensi') ?>/<?= $sd['subdimensi_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateSubDimensi" data-subdimensi_id="<?= $sd['subdimensi_id'] ?>" data-subdimensi_nama="<?= $sd['subdimensi_name'] ?>" data-dimensi_id="<?= $sd['dimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-subDimensi" href="<?= base_url('Admin/edit_subDimensi') ?>/<?= $sd['subdimensi_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateSubDimensi" data-subdimensi_id="<?= $sd['subdimensi_id'] ?>" data-subdimensi_nama="<?= $sd['subdimensi_name'] ?>" data-dimensi_id="<?= $sd['dimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-subDimensi" href="<?= base_url('delete_subDimensi') ?>/<?= $sd['subdimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-subDimensi" href="<?= base_url('Admin/delete_subDimensi') ?>/<?= $sd['subdimensi_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -404,7 +405,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form method="post" action="<?= base_url('edit_subDimensi') ?>">
+					<form method="post" action="<?= base_url('Admin/edit_subDimensi') ?>">
 						<div class="col-auto">
 							<label for="id" class="form-label">Masukan Sub Dimensi ID</label>
 							<input type="text" name="id" class="form-control">
@@ -441,7 +442,7 @@
 			};
 
 			$.ajax({
-				url: '<?= base_url('edit_subDimensi') ?>/' + subDimensiId, // Adjust the URL to include the user's ID
+				url: '<?= base_url('Admin/edit_subDimensi') ?>/' + subDimensiId, // Adjust the URL to include the user's ID
 				method: 'POST',
 				data: data,
 				success: function(response) {
@@ -487,12 +488,12 @@
 						<td><?= $pr['subdimensi_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-parameter" href="<?= base_url('edit_parameter') ?>/<?= $pr['parameter_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateParameter" data-parameter_id="<?= $pr['parameter_id'] ?>" data-parameter_nama="<?= $pr['parameter_name'] ?>" data-weight="<?= $pr['Weight'] ?>" data-subdimensi_id="<?= $pr['subdimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-parameter" href="<?= base_url('Admin/edit_parameter') ?>/<?= $pr['parameter_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateParameter" data-parameter_id="<?= $pr['parameter_id'] ?>" data-parameter_nama="<?= $pr['parameter_name'] ?>" data-weight="<?= $pr['Weight'] ?>" data-subdimensi_id="<?= $pr['subdimensi_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-parameter" href="<?= base_url('delete_parameter') ?>/<?= $pr['parameter_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-parameter" href="<?= base_url('Admin/delete_parameter') ?>/<?= $pr['parameter_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -565,7 +566,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_parameter') ?>">
+						<form method="post" action="<?= base_url('Admin/edit_parameter') ?>">
 							<div class="col-auto">
 								<label for="id" class="form-label">Masukan ID Parameter </label>
 								<input type="text" name="id" class="form-control">
@@ -608,7 +609,7 @@
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_parameter') ?>/' + parameterId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('Admin/edit_parameter') ?>/' + parameterId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
@@ -653,12 +654,12 @@
 						<td><?= $ps['phase_value'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-phase" href="<?= base_url('edit_phase') ?>/<?= $ps['phase_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdatePhase" data-phase_id="<?= $ps['phase_id'] ?>" data-phase_nama="<?= $ps['phase_name'] ?>" data-phase_value="<?= $ps['phase_value'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-phase" href="<?= base_url('Admin/edit_phase') ?>/<?= $ps['phase_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdatePhase" data-phase_id="<?= $ps['phase_id'] ?>" data-phase_nama="<?= $ps['phase_name'] ?>" data-phase_value="<?= $ps['phase_value'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 						</td>
 						<td>
 							<div class="btn btn-outline-danger">
-								<a class="delete-phase" href="<?= base_url('delete_phase') ?>/<?= $ps['phase_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-phase" href="<?= base_url('Admin/delete_phase') ?>/<?= $ps['phase_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -726,7 +727,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_phase') ?>">
+						<form method="post" action="<?= base_url('Admin/edit_phase') ?>">
 							<div class="col-auto">
 								<label for="id" class="form-label">Masukan ID Phase</label>
 								<input type="text" name="id" class="form-control">
@@ -763,7 +764,7 @@
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_phase') ?>/' + phaseId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('Admin/edit_phase') ?>/' + phaseId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {
@@ -812,10 +813,10 @@
 						<td><?= $qs['parameter_id'] ?></td>
 						<td>
 							<div class="btn btn-outline-warning">
-								<a class="edit-question" href="<?= base_url('edit_question') ?>/<?= $qs['question_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateQuestion" data-question_id="<?= $qs['question_id'] ?>" data-question="<?= $qs['question'] ?>" data-phase_id="<?= $qs['phase_id'] ?>" data-subdimensi_id="<?= $qs['subdimensi_id'] ?>" data-parameter_id="<?= $qs['parameter_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+								<a class="edit-question" href="<?= base_url('Admin/edit_question') ?>/<?= $qs['question_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateQuestion" data-question_id="<?= $qs['question_id'] ?>" data-question="<?= $qs['question'] ?>" data-phase_id="<?= $qs['phase_id'] ?>" data-subdimensi_id="<?= $qs['subdimensi_id'] ?>" data-parameter_id="<?= $qs['parameter_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 							</div>
 							<div class="btn btn-outline-danger">
-								<a class="delete-question" href="<?= base_url('delete_question') ?>/<?= $qs['question_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+								<a class="delete-question" href="<?= base_url('Admin/delete_question') ?>/<?= $qs['question_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
 							</div>
 						</td>
 					</tr>
@@ -844,7 +845,7 @@
 							</div>
 							<div class="col-auto">
 								<label for="phase_id" class="form-label">Masukan ID Phase</label>
-								<input type="text" name="phase_id" class="form-control" value="3" readonly>
+								<input type="text" name="phase_id" class="form-control">
 							</div>
 							<div class="col-auto">
 								<label for="subdimensi_id" class="form-label">Masukan ID Subdimensi</label>
@@ -852,7 +853,7 @@
 							</div>
 							<div class="col-auto">
 								<label for="parameter_id" class="form-label">Masukan ID Parameter</label>
-								<input type="text" name="parameter_id" class="form-control" value="3" readonly>
+								<input type="text" name="parameter_id" class="form-control">
 							</div>
 					</div>
 					<div class="modal-footer">
@@ -876,7 +877,7 @@
 
 					// Populate the modal fields with user data
 					$('#ModalUpdateQuestion').find('input[name="id"]').val(questionId);
-					$('#ModalUpdateQuestion').find('input[name="question"]').val(question);
+					$('#ModalUpdateQuestion').find('textarea[name="question"]').val(question);
 					$('#ModalUpdateQuestion').find('input[name="phase_id"]').val(phaseId);
 					$('#ModalUpdateQuestion').find('input[name="subdimensi_id"]').val(subdimensiId);
 					$('#ModalUpdateQuestion').find('input[name="parameter_id"]').val(parameterId);
@@ -895,7 +896,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="post" action="<?= base_url('edit_question') ?>">
+						<form method="post" action="<?= base_url('Admin/edit_question') ?>">
 							<div class="col-auto">
 								<label for="id" class="form-label">Masukan ID Question</label>
 								<input type="text" name="id" class="form-control">
@@ -906,7 +907,7 @@
 							</div>
 							<div class="col-auto">
 								<label for="phase_id" class="form-label">Masukan ID Phase</label>
-								<input type="text" name="phase_id" class="form-control" value="3" readonly>
+								<input type="text" name="phase_id" class="form-control">
 							</div>
 							<div class="col-auto">
 								<label for="subdimensi_id" class="form-label">Masukan ID Subdimensi</label>
@@ -914,7 +915,7 @@
 							</div>
 							<div class="col-auto">
 								<label for="parameter_id" class="form-label">Masukan ID Parameter</label>
-								<input type="text" name="parameter_id" class="form-control" value="3" readonly>
+								<input type="text" name="parameter_id" class="form-control">
 							</div>
 					</div>
 					<div class="modal-footer">
@@ -929,7 +930,7 @@
 		<script>
 			function updateQuestion() {
 				var questionId = $('#ModalUpdateQuestion input[name="id"]').val();
-				var question = $('#ModalUpdateQuestion input[name="question"]').val();
+				var question = $('#ModalUpdateQuestion textarea[name="question"]').val();
 				var phaseId = $('#ModalUpdateQuestion input[name="phase_id"]').val();
 				var subdimensiId = $('#ModalUpdateQuestion input[name="subdimensi_id"]').val();
 				var parameterId = $('#ModalUpdateQuestion input[name="parameter_id"]').val();
@@ -944,7 +945,7 @@
 				};
 
 				$.ajax({
-					url: '<?= base_url('edit_question') ?>/' + questionId, // Adjust the URL to include the user's ID
+					url: '<?= base_url('Admin/edit_question') ?>/' + questionId, // Adjust the URL to include the user's ID
 					method: 'POST',
 					data: data,
 					success: function(response) {

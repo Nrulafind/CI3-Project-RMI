@@ -638,39 +638,39 @@ ALTER TABLE `tbl_user`
 -- Constraints for table `tbl_assessment_data`
 --
 ALTER TABLE `tbl_assessment_data`
-  ADD CONSTRAINT `tbl_assessment_data_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `tbl_files` (`id`);
+  ADD CONSTRAINT `tbl_assessment_data_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `tbl_files` (`id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_dimensi`
 --
 ALTER TABLE `tbl_dimensi`
-  ADD CONSTRAINT `tbl_dimensi_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `tbl_kategori` (`category_id`);
+  ADD CONSTRAINT `tbl_dimensi_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `tbl_kategori` (`category_id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_file_data`
 --
 ALTER TABLE `tbl_file_data`
-  ADD CONSTRAINT `tbl_file_data_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `tbl_files` (`id`);
+  ADD CONSTRAINT `tbl_file_data_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `tbl_files` (`id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_parameter`
 --
 ALTER TABLE `tbl_parameter`
-  ADD CONSTRAINT `tbl_parameter_ibfk_1` FOREIGN KEY (`subdimensi_id`) REFERENCES `tbl_sub_dimensi` (`subdimensi_id`);
+  ADD CONSTRAINT `tbl_parameter_ibfk_1` FOREIGN KEY (`subdimensi_id`) REFERENCES `tbl_sub_dimensi` (`subdimensi_id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_question`
 --
 ALTER TABLE `tbl_question`
-  ADD CONSTRAINT `tbl_question_ibfk_1` FOREIGN KEY (`subdimensi_id`) REFERENCES `tbl_sub_dimensi` (`subdimensi_id`),
-  ADD CONSTRAINT `tbl_question_ibfk_2` FOREIGN KEY (`phase_id`) REFERENCES `tbl_phase` (`phase_id`),
-  ADD CONSTRAINT `tbl_question_ibfk_3` FOREIGN KEY (`parameter_id`) REFERENCES `tbl_parameter` (`parameter_id`);
+  ADD CONSTRAINT `tbl_question_ibfk_1` FOREIGN KEY (`subdimensi_id`) REFERENCES `tbl_sub_dimensi` (`subdimensi_id`)ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_question_ibfk_2` FOREIGN KEY (`phase_id`) REFERENCES `tbl_phase` (`phase_id`)ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_question_ibfk_3` FOREIGN KEY (`parameter_id`) REFERENCES `tbl_parameter` (`parameter_id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_sub_dimensi`
 --
 ALTER TABLE `tbl_sub_dimensi`
-  ADD CONSTRAINT `tbl_sub_dimensi_ibfk_1` FOREIGN KEY (`dimensi_id`) REFERENCES `tbl_dimensi` (`dimensi_id`);
+  ADD CONSTRAINT `tbl_sub_dimensi_ibfk_1` FOREIGN KEY (`dimensi_id`) REFERENCES `tbl_dimensi` (`dimensi_id`)ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
