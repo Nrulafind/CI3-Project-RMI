@@ -100,12 +100,16 @@ class Admin extends CI_Controller
 
 	public function saveUmum()
 	{
+		$data = $this->Mcrud->get_dimensi_umum();
+		foreach ($data as $d) {
+			$ncpSD1 = $this->input->post['A_1_1'] * $d['Weight'];
+		}
 		//post untuk data input biasa
 		$corporateName = $this->input->post('corporateName');
 		$name = $this->input->post('userName');
 
 		// Retrieve POST data for various dimensions and sub-dimensions
-		$ncpSD1 = $_POST['A_1_1'];
+		$ncpSD1 = $this->input->post['A_1_1'];
 		$ncpSD2 = ($_POST['A_2_2'] + $_POST['A_2_3']) / 2;
 		$ncpSD3 = ($_POST['B_1_4'] + $_POST['B_1_5']) / 2;
 		$ncpSD4 = ($_POST['B_2_6'] + $_POST['B_2_7'] + $_POST['B_2_8'] + $_POST['B_2_9'] + $_POST['B_2_10'] + $_POST['B_2_11'] + $_POST['B_2_12']) / 7;
@@ -682,19 +686,6 @@ class Admin extends CI_Controller
 
 
 	//Function Cluster Asuransi
-
-	public function forAsuransi()
-	{
-		$data['result'] = $this->Mcrud->get_all_data();
-		//	$data = $this->Mcrud->get_all_data('tbl_perhitungan')->result_array();
-
-		//$data = array($result);
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('admin/form/clusterAsuransi', $data);
-		$this->load->view('template/footer');
-	}
-
 
 	//Function Cluster Bank
 }

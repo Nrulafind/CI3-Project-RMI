@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Auth';
-$route['404_override'] = '';
+$route['404_override'] = 'Welcome';
 $route['translate_uri_dashes'] = FALSE;
 $route['about'] = 'Auth/about';
 $route['myreport'] = 'MyReport/index';
@@ -95,17 +95,18 @@ $route['delete_question/(:num)'] = 'Admin/delete_question/$1';
 
 //Approval/Manager routes
 $route['dashboard_approval'] = 'Approval/index'; //untuk dashboard nya
-//$route['approval_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
-//$route['asessment_eval_'] = 'Approval/asessment'; // routing proses form umum ke db
-$route['cluster_umum_'] = 'Approval/formUmum';
-// $route['approval_'] = 'Approval/approval';
-$route['asessment_evalApproval'] = 'Approval/asessment';
+$route['cluster_umum_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
+$route['proses_umum_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
+$route['proyeksi_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
+
+$route['asessment_eval_'] = 'Approval/asessment'; // routing proses form umum ke db
+$route['edit_asessment/(:num)'] = 'Approval/editAsessment/$1';
+$route['delete_assesment/(:num)'] = 'Approval/deleteAsessment/$1';
 
 
 //Admin/Officer/User routes
 $route['dashboard_officer'] = 'User/index'; //untuk dashboard nya
-// $route['umum_'] = 'User/formUmum'; //untuk routing ke form perhitungan cluster umum
-// $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db
-// $route['proyeksi'] = 'Admin/calculateRisk';// routing proses kalulasi tanpa reload
-$route['asessment_evalAdmin'] = 'User/asessment';
-$route['cluster_umum_'] = 'User/formUmum';
+$route['cluster_umum__'] = 'User/'; //untuk routing ke form perhitungan cluster umum
+$route['proses_umum__'] = 'User/'; //untuk routing ke form perhitungan cluster umum
+$route['proyeksi__'] = 'User/'; //untuk routing ke form perhitungan cluster umum
+$route['asessment_eval_'] = 'User/'; // routing proses form umum ke db
