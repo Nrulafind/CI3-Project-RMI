@@ -52,7 +52,7 @@ class Auth extends CI_Controller
 						$this->session->set_userdata('access', 'Officer');
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('name', $name);
-						redirect('dashboard_admin');
+						redirect('dashboard_officer');
 					}
 				} else {
 					$url = base_url('/');

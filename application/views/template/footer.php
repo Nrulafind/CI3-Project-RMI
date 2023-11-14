@@ -1,4 +1,4 @@
-<?php if ($this->session->userdata('access') == "Super Admin") { ?>
+<?php if ($this->session->userdata('access') == "Vice President") { ?>
 	<!-- Footer -->
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
@@ -69,7 +69,7 @@
 	</body>
 
 	</html>
-<?php } elseif ($this->session->userdata('access') == "Admin") { ?>
+<?php } elseif ($this->session->userdata('access') == "Manager") { ?>
 	<!-- Footer -->
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
@@ -140,7 +140,7 @@
 	</body>
 
 	</html>
-<?php } elseif ($this->session->userdata('access') == "User") { ?>
+<?php } elseif ($this->session->userdata('access') == "Officer") { ?>
 	<!-- Footer -->
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">

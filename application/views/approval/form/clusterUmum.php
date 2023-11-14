@@ -7645,6 +7645,22 @@
 
 					<td></td>
 				</tr>
+		</table>
+		<table class="table table-hover table-responsive">
+			<thead class="align-self-center respo">
+				<tr>
+					<th scope="col" rowspan="2" class="align-middle">No</th>
+					<th scope="col" rowspan="2" class="align-middle">Dimensi</th>
+					<th scope="col" rowspan="2" class="align-middle">Sub Dimensi </th>
+					<th scope="col" rowspan="2" class="align-middle">Parameter</th>
+					<th scope="col" rowspan="2" class="align-middle">Kriteria Phase</th>
+					<th scope="col" rowspan="2" class="align-middle">Phase Indeks</th>
+					<th scope="col" rowspan="2" class="align-middle">File asessment</th>
+				</tr>
+			</thead>
+			<tbody>
+
+
 				<tr>
 					<th scope="row">1</th>
 					<td rowspan="3">Dimensi 1</td>
@@ -7652,14 +7668,6 @@
 					<td>Params 1</td>
 					<td>Kriteria Phase (Modal-dialog button)</td>
 					<td>Input phase index</td>
-					<td rowspan="3">output nilai</td>
-					<td rowspan="3">output level</td>
-					<td rowspan="42">
-						<center>OLa</center>
-					</td>
-					<td rowspan="42">
-						<center>OLA</center>
-					</td>
 					<td>Input file</td>
 				</tr>
 				<tr>
@@ -7677,6 +7685,12 @@
 					<td>Input phase index</td>
 					<td>Input file</td>
 				</tr>
+
+				<tr>
+					<td colspan="5">Hasil Capaian Dimensi</td>
+					<td>Skor:</td>
+					<td>Level:</td>
+				</tr>
 				<!-- Dimensi 2 -->
 				<tr>
 					<th scope="row">4</th>
@@ -7685,8 +7699,6 @@
 					<td>Params 4</td>
 					<td>Kriteria Phase (Modal-dialog button)</td>
 					<td>Input phase index</td>
-					<td rowspan="16">Output nilai</td>
-					<td rowspan="16">Output Level</td>
 					<td>Input file</td>
 				</tr>
 				<tr>
@@ -7796,6 +7808,12 @@
 					<td>Input phase index</td>
 					<td>Input file</td>
 				</tr>
+
+				<tr>
+					<td colspan="5">Hasil Capaian Dimensi</td>
+					<td>Skor:</td>
+					<td>Level:</td>
+				</tr>
 				<tr>
 					<th scope="row">20</th>
 					<td rowspan="14">Dimensi 3</td>
@@ -7803,8 +7821,6 @@
 					<td>Params 20</td>
 					<td>Kriteria Phase (Modal-dialog button)</td>
 					<td>Input phase index</td>
-					<td rowspan="14">Output nilai</td>
-					<td rowspan="14">Output Level</td>
 					<td>Input file</td>
 				</tr>
 				<tr>
@@ -7903,14 +7919,18 @@
 					<td>Input file</td>
 				</tr>
 				<tr>
+					<td colspan="5">Hasil Capaian Dimensi</td>
+					<td>Skor:</td>
+					<td>Level:</td>
+				</tr>
+
+				<tr>
 					<th scope="row">34</th>
 					<td rowspan="7">Dimensi 4</td>
 					<td>Sub Dimensi 11</td>
 					<td>Params 34</td>
 					<td>Kriteria Phase (Modal-dialog button)</td>
 					<td>Input phase index</td>
-					<td rowspan="7">Capaian Nilai Dimensi</td>
-					<td rowspan="7">Capaian Level Dimensi</td>
 					<td>Input file</td>
 				</tr>
 				<tr>
@@ -7960,14 +7980,18 @@
 					<td>Input file</td>
 				</tr>
 				<tr>
+					<td colspan="5">Hasil Capaian Dimensi</td>
+					<td>Skor:</td>
+					<td>Level:</td>
+				</tr>
+
+				<tr>
 					<th scope="row">41</th>
 					<td rowspan="2">Dimensi 5</td>
 					<td>Sub Dimensi 15</td>
 					<td>Params 41</td>
 					<td>Kriteria Phase (Modal-dialog button)</td>
 					<td>Input phase index</td>
-					<td rowspan="2">Output Nilai Capaian</td>
-					<td rowspan="2">Output Level Capaian</td>
 					<td>Input file</td>
 				</tr>
 				<tr>
@@ -7979,6 +8003,18 @@
 					<td>Input file</td>
 				</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5">Hasil Capaian Dimensi</td>
+					<td>Skor:</td>
+					<td>Level:</td>
+				</tr>
+				<tr>
+					<td colspan="5">Hasil Capaian Corporasi</td>
+					<td>Skor:</td>
+					<td>Level:</td>
+				</tr>
+			</tfoot>
 		</table>
 	</form>
 </div>

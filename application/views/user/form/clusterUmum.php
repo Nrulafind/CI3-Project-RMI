@@ -7472,7 +7472,7 @@
 </div>
 
 <div class="container">
-	<form id="" name="" action="" method="" enctype="multipart/form-data">
+	<form name="asessment" action="<?= base_url('') ?>" method="post" enctype="multipart/form-data">
 		<div class="">
 			<label for="">Corporate Name</label>
 			<input type="" name="" value="">
@@ -7506,33 +7506,36 @@
 					<th scope="col" rowspan="2" class="align-middle">Parameter</th>
 					<th scope="col" rowspan="2" class="align-middle">Kriteria Phase</th>
 					<th scope="col" rowspan="2" class="align-middle">Phase Indeks</th>
-					<th scope="col" colspan="2">Hasil Capaian Dimensi</th>
-					<th scope="col" colspan="2">Hasil Capaian Corporate</th>
 					<th scope="col" rowspan="2" class="align-middle">File asessment</th>
 				</tr>
-				<tr>
-					<th scope="col" rowspan="1">Skor</th>
-					<th scope="col" rowspan="1">Tingkat</th>
-					<th scope="col" rowspan="1">Skor</th>
-					<th scope="col" rowspan="1">Tingkat</th>
-
-				</tr>
 			</thead>
-			<tbody>
 			<tbody>
 				<?php
 				$prev_dimensi_id = null;
 				$prev_subdimensi_id = null;
-				$prev_parameter_name = null;
+				$prev_parameter_id = null;
+				$prev_phase_id = null;
+				$prev_question_id = null;
 				$rowspan_dimensi = 0;
 				$rowspan_subdimensi = 0;
-				$rowspan_parameter_name = 0;
+				$rowspan_parameter_id = 0;
+				$rowspan_phase_id = 0;
+				$rowspan_question_id = 0;
+
+
 
 
 				foreach ($dimensi_umum as $row) {
 					$dimensi_id = $row['dimensi_id'];
 					$subdimensi_id = $row['subdimensi_id'];
-					$parameter_name = $row['parameter_name'];
+					$parameter_id = $row['parameter_id'];
+					$phase_id = $row['phase_id'];
+					// Replace periods with underscores in the question_id
+					$question_id = str_replace('.', '_', $row['question_id']);
+					// Output the row 
+
+					// $subdimensi_id = $row['subdimensi_id'];
+					// $parameter_id = $row['parameter_id'];
 
 					if ($dimensi_id !== $prev_dimensi_id) {
 						// Calculate rowspan for Dimensi
@@ -7544,17 +7547,26 @@
 						$rowspan_subdimensi = getRowspan($dimensi_umum, $subdimensi_id, 'subdimensi_id');
 					}
 
-					if ($parameter_name !== $prev_parameter_name) {
+					if ($parameter_id !== $prev_parameter_id) {
 						// Calculate rowspan for Sub Dimensi
-						$rowspan_parameter_name = getRowspan($dimensi_umum, $parameter_name, 'parameter_name');
+						$rowspan_parameter_id = getRowspan($dimensi_umum, $parameter_id, 'parameter_id');
+					}
+
+					if ($phase_id !== $prev_phase_id) {
+						// Calculate rowspan for Sub Dimensi
+						$rowspan_phase_id = getRowspan($dimensi_umum, $phase_id, 'phase_id');
+					}
+
+					if ($question_id !== $prev_question_id) {
+						// Calculate rowspan for Sub Dimensi
+						$rowspan_question_id = getRowspan($dimensi_umum, $question_id, 'question_id');
 					}
 
 
 
-					// Replace periods with underscores in the question_id
-					$question_id = str_replace('.', '_', $row['question_id']);
-					// Output the row 
+
 				?>
+
 
 					<tr>
 						<?php
@@ -7569,19 +7581,19 @@
 						<?php } ?>
 
 						<?php
-						if ($parameter_name !== $prev_parameter_name) { ?>
-							<td><?= $row['parameter_name'] ?></td>
-						<?php } elseif ($parameter_name === $prev_parameter_name) { ?>
-							<td hidden><?= $row['parameter_name'] ?></td>
+						if ($parameter_id !== $prev_parameter_id) { ?>
+							<td rowspan="<?= $rowspan_parameter_id ?>"><?= $row['parameter_name'] ?></td>
 						<?php } ?>
 
 						<td>
+							<?php
+							if ($parameter_id !== $prev_parameter_id && $phase_id !== $phase_id) { ?>
 
-							<!-- create button -->
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phaseModal_<?= $question_id ?>">
-								<?= $row['phase_name'] . ' / ' . $row['phase_value']; ?>
-							</button>
-
+								<!-- create button -->
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phaseModal_<?= $question_id ?>">
+									<?= $row['phase_name'] . ' / ' . $row['phase_value']; ?>
+								</button>
+							<?php } ?>
 							<!-- // Create the modal -->
 							<div class="modal fade" id="phaseModal_<?= $question_id ?>" tabindex="-1" aria-labelledby="phaseModalLabel_<?= $question_id ?>" aria-hidden="true">
 								<div class="modal-dialog">
@@ -7599,33 +7611,50 @@
 									</div>
 								</div>
 							</div>
-						</td>
-						<td>
 
-							<label class="align-start" for="<?= $question_id ?>">Pilih INDEX YANG SESUAI *</label>
-							<select class="form-select" name="<?= $question_id ?>" data-field="<?= $question_id ?>">
-								<option value="0" selected>None</option>
-								<option value="1"> 1. Fase Awal (Initial Phase)</option>
-								<option value="2"> 2. Fase Berkembang (Emerging State)</option>
-								<option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
-								<option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
-								<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
-							</select>
-						</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
 
-							<label for="formFile_<?= $question_id ?>" class="form-label">asessment</label>
-							<input class="form-control" type="file" name="formFile_<?= $question_id ?>[]" id="formFile_<?= $question_id ?>" multiple>
 						</td>
+						<?php
+						if ($parameter_id !== $prev_parameter_id) { ?>
+							<td rowspan="<?= $rowspan_parameter_id ?>">
+
+								<label class="align-start" for="<?= $parameter_id ?>">Pilih INDEX YANG SESUAI *</label>
+								<select class="form-select" name="<?= $parameter_id ?>" data-field="<?= $parameter_id ?>">
+									<option value="0" selected>None</option>
+									<option value="1"> 1. Fase Awal (Initial Phase)</option>
+									<option value="2"> 2. Fase Berkembang (Emerging State)</option>
+									<option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
+									<option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
+									<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
+								</select>
+							</td>
+						<?php } ?>
+
+
+						<?php
+						if ($parameter_id !== $prev_parameter_id) { ?>
+							<td rowspan="<?= $rowspan_parameter_id ?>">
+
+								<label for="formFile_<?= $parameter_id ?>" class="form-label">asessment</label>
+								<input class="form-control" type="file" name="formFile_<?= $parameter_id ?>[]" id="formFile_<?= $parameter_id ?>" multiple>
+							</td>
+						<?php } ?>
+
+						<?php
+						if ($dimensi_id !== $prev_dimensi_id) { ?>
+							<td>Hasil Capaian Dimensi</td>
+							<td>Skor:</td>
+							<td>Level:</td>
+						<?php } ?>
 
 					</tr>
+
 				<?php
 					$prev_dimensi_id = $dimensi_id;
 					$prev_subdimensi_id = $subdimensi_id;
+					$prev_parameter_id = $parameter_id;
+					$prev_phase_id = $phase_id;
+					$prev_question_id = $question_id;
 				}
 
 				// Function to calculate rowspan for a particular column value
@@ -7640,11 +7669,37 @@
 					return $rowspan;
 				}
 				?>
+				<tr>
+					<td colspan="5">Hasil Capaian Korporasi</td>
+					<td>Skor:<div id="ncpD1" class="card col-2 align-items-center">
+							Hasil Dimensi 1:
+							<span id="ncpD1">
 
+							</span>
+						</div>
+					</td>
+					<td>Level: <div id="lvRiskD1" class="card col-2 align-items-center">
+							Hasil Dimensi 1:
+							<span id="lvRiskD1">
+
+							</span>
+						</div>
+					</td>
+				</tr>
 				<tr>
 
-					<td></td>
+					<td>
+						<div class="card card-footer bg-transparent">
+
+							<div class="col-auto">
+								<input type="submit" class="btn btn-primary" name="Submit">
+								<button type="reset" class="btn btn-danger">Reset</button>
+							</div>
+						</div>
+					</td>
 				</tr>
+			</tbody>
+			<tbody>
 				<tr>
 					<th scope="row">1</th>
 					<td rowspan="3">Dimensi 1</td>

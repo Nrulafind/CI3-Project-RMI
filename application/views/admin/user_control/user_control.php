@@ -48,7 +48,7 @@
 						?></td>
 					<td>
 						<div class="btn btn-outline-warning">
-							<a class="edit-user" href="<?= base_url('edit_user') ?>/<?= $u['user_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateuser" data-user_id="<?= $u['user_id'] ?>" data-user_nama="<?= $u['user_name'] ?>" data-user_email="<?= $u['user_email'] ?>" data-user_password="<?= $u['user_password'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+							<a class="edit-user" href="<?= base_url('edit_user') ?>/<?= $u['user_id'] ?>" data-bs-toggle="modal" data-bs-target="#ModalUpdateuser" data-user_id="<?= $u['user_id'] ?>" data-user_nama="<?= $u['user_name'] ?>" data-user_email="<?= $u['user_email'] ?>" data-user_password="<?= $u['user_password'] ?>" data-user_akses="<?= $u['user_akses'] ?>" data-user_status="<?= $u['user_status'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 						</div>
 					</td>
 					<td>
@@ -102,7 +102,7 @@
 								Manager
 							</label>
 							<br>
-							<input class="form-check-input" type="radio" name="akses" id="akses" value="3" checked>
+							<input class="form-check-input" type="radio" name="akses" id="akses" value="3">
 							<label class="form-check-label" for="akses">
 								Officer
 							</label>
@@ -117,7 +117,7 @@
 								Aktif
 							</label>
 							<br>
-							<input class="form-check-input" type="radio" name="status" id="status" value="0" checked>
+							<input class="form-check-input" type="radio" name="status" id="status" value="0">
 							<label class="form-check-label" for="status">
 								Non Aktif
 							</label>
@@ -142,12 +142,16 @@
 			var userName = $(this).data('user_nama');
 			var userEmail = $(this).data('user_email');
 			var userPassword = $(this).data('user_password');
+			var userAkses = $(this).data('user_akses');
+			var userStatus = $(this).data('user_status');
 
 			// Populate the modal fields with user data
 			$('#ModalUpdateuser').find('input[name="id"]').val(userId);
 			$('#ModalUpdateuser').find('input[name="nama"]').val(userName);
 			$('#ModalUpdateuser').find('input[name="email"]').val(userEmail);
 			$('#ModalUpdateuser').find('input[name="password"]').val(userPassword);
+			$('#ModalUpdateuser').find('input[name="akses"]').val(userAkses);
+			$('#ModalUpdateuser').find('input[name="status"]').val(userStatus);
 
 			// Show the modal
 			$('#ModalUpdateuser').modal('show');
@@ -198,7 +202,7 @@
 								Manager
 							</label>
 							<br>
-							<input class="form-check-input" type="radio" name="akses" id="akses" value="3" checked>
+							<input class="form-check-input" type="radio" name="akses" id="akses" value="3">
 							<label class="form-check-label" for="akses">
 								Officer
 							</label>
@@ -208,7 +212,7 @@
 						<label for="status">Pilih Status Dari User</label>
 						<br>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="status" id="status" value="1" checked>
+							<input class="form-check-input" type="radio" name="status" id="status" value="1">
 							<label class="form-check-label" for="status">
 								Aktif
 							</label>

@@ -35,8 +35,75 @@ class Admin extends CI_Controller
 
 	public function formUmum()
 	{
-		$data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
-		//$data = array($result);
+		$data['nestedArray'] = $this->Mcrud->get_dimensi_umum();
+		$nestedArray = [];
+
+		foreach ($data['nestedArray'] as $row) {
+			$categoryID = $row['category_id'];
+			$dimensionID = $row['dimensi_id'];
+			$subDimensionID = $row['subdimensi_id'];
+			$parameterID = $row['parameter_id'];
+			$questionID = $row['question_id'];
+			$phaseID = $row['phase_id'];
+
+			// Check if the category exists in the nested array
+			if (!isset($nestedArray[$categoryID])) {
+				$nestedArray[$categoryID] = [
+					'category_id' => $categoryID,
+					'category_name' => $row['category_name'] ?? '',
+					'dimensions' => []
+				];
+			}
+
+			// Check if the dimension exists in the nested array
+			if (!isset($nestedArray[$categoryID]['dimensions'][$dimensionID])) {
+				$nestedArray[$categoryID]['dimensions'][$dimensionID] = [
+					'dimensi_id' => $dimensionID,
+					'dimensi_name' => $row['dimensi_name'],
+					'sub_dimensions' => []
+				];
+			}
+
+			// Check if the sub-dimension exists in the nested array
+			if (!isset($nestedArray[$categoryID]['dimensions'][$dimensionID]['sub_dimensions'][$subDimensionID])) {
+				$nestedArray[$categoryID]['dimensions'][$dimensionID]['sub_dimensions'][$subDimensionID] = [
+					'subdimensi_id' => $subDimensionID,
+					'subdimensi_name' => $row['subdimensi_name'],
+					'parameters' => []
+				];
+			}
+
+			// Check if the parameter exists in the nested array
+			if (!isset($nestedArray[$categoryID]['dimensions'][$dimensionID]['sub_dimensions'][$subDimensionID]['parameters'][$parameterID])) {
+				$nestedArray[$categoryID]['dimensions'][$dimensionID]['sub_dimensions'][$subDimensionID]['parameters'][$parameterID] = [
+					'parameter_id' => $parameterID,
+					'parameter_name' => $row['parameter_name'],
+					'Weight' => $row['Weight'],
+					'questions' => []
+				];
+			}
+
+			// Check if the phase exists in the nested array
+			if (!isset($nestedArray[$categoryID]['dimensions'][$dimensionID]['sub_dimensions'][$subDimensionID]['parameters'][$parameterID]['questions'][$phaseID])) {
+				$nestedArray[$categoryID]['dimensions'][$dimensionID]['sub_dimensions'][$subDimensionID]['parameters'][$parameterID]['questions'][$phaseID] = [
+					'question_id' => $questionID,
+					'phase_id' => $phaseID,
+					'phase_name' => $row['phase_name'],
+					'phase_value' => $row['phase_value'],
+					'question' => $row['question'], // Add more fields as needed
+				];
+			}
+		}
+
+		// var_dump($nestedArray);
+		//var_dump($nestedArray);
+		// echo json_encode($nestedArray);
+
+		$data['nestedArray'] = $nestedArray;
+		// echo json_encode($data['nestedArray']);
+
+		// die();
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('admin/form/clusterUmum', $data);

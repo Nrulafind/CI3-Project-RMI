@@ -6,7 +6,7 @@ class User extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('logged') != true && $this->session->userdata('access') != 'User') {
+		if ($this->session->userdata('logged') != true && $this->session->userdata('access') != 'Officer') {
 			$url = base_url('/');
 			redirect($url);
 		}

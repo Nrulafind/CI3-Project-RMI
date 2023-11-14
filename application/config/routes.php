@@ -95,18 +95,18 @@ $route['delete_question/(:num)'] = 'Admin/delete_question/$1';
 
 //Approval/Manager routes
 $route['dashboard_approval'] = 'Approval/index'; //untuk dashboard nya
-$route['cluster_umum_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
-$route['proses_umum_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
-$route['proyeksi_'] = 'Approval/approval'; //untuk routing ke form perhitungan cluster umum
+$route['cluster_umum_'] = 'Approval/formUmum'; //untuk routing ke form perhitungan cluster umum
+$route['proses_umum_'] = 'Approval/saveUmum'; //untuk routing ke form perhitungan cluster umum
+$route['proyeksi_'] = 'Approval/calculateRisk'; //untuk routing ke form perhitungan cluster umum
 
-$route['asessment_eval_'] = 'Approval/asessment'; // routing proses form umum ke db
-$route['edit_asessment/(:num)'] = 'Approval/editAsessment/$1';
-$route['delete_assesment/(:num)'] = 'Approval/deleteAsessment/$1';
+$route['asessment_eval_'] = 'Approval/asessmentEval'; // routing proses form umum ke db
+$route['edit_asessment_/(:num)'] = 'Approval/editAsessment/$1';
+$route['delete_assesment_/(:num)'] = 'Approval/deleteAsessment/$1';
 
 
 //Admin/Officer/User routes
 $route['dashboard_officer'] = 'User/index'; //untuk dashboard nya
-$route['cluster_umum__'] = 'User/'; //untuk routing ke form perhitungan cluster umum
-$route['proses_umum__'] = 'User/'; //untuk routing ke form perhitungan cluster umum
-$route['proyeksi__'] = 'User/'; //untuk routing ke form perhitungan cluster umum
-$route['asessment_eval_'] = 'User/'; // routing proses form umum ke db
+$route['cluster_umum__'] = 'User/formUmum'; //untuk routing ke form perhitungan cluster umum
+$route['proses_umum__'] = 'User/saveUmum'; //untuk routing ke form perhitungan cluster umum
+$route['proyeksi__'] = 'User/calculateRisk'; //untuk routing ke form perhitungan cluster umum
+$route['asessment_eval__'] = 'User/asessmentEval'; // routing proses form umum ke db

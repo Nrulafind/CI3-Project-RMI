@@ -24,7 +24,7 @@ class Mcrud extends CI_Model
 	public function get_dimensi_umum()
 	{
 		$dimensi_umum = $this->db->query("SELECT DISTINCT 
-		`tbl_kategori`.`category_id`, 
+		`tbl_kategori`.*, 
 		`tbl_dimensi`.*, 
 		`tbl_sub_dimensi`.*, 
 		`tbl_question`.*, 

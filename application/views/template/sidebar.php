@@ -7,15 +7,18 @@
 			width: 100%;
 			height: 100%;
 		}
+
+		#accordionSidebar {
+			background-color: lightskyblue !important;
+		}
 	</style>
 	<!-- Page Wrapper -->
 	<?php if ($this->session->userdata('access') == "Vice President") { ?>
-
 		<div id="wrapper">
 			<!-- Sidebar -->
-			<ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style=" background-color: 	lightskyblue !important ;">
+			<ul class=" navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 				<!-- Sidebar - Brand -->
-				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("dashboard"); ?>">
+				<a class=" sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("dashboard"); ?>">
 					<div class="sidebar-brand-icon">
 						<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 					</div>
@@ -130,7 +133,7 @@
 										Profile
 									</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="<?= base_url("logout"); ?>"" data-toggle=" modal" data-target="#logoutModal">
+									<a class="dropdown-item" href="<?= base_url("logout"); ?>" data-toggle=" modal" data-target="#logoutModal">
 										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 										Logout
 									</a>
@@ -146,7 +149,7 @@
 						<!-- Sidebar -->
 						<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 							<!-- Sidebar - Brand -->
-							<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("dashboard"); ?>">
+							<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("dashboard_approval"); ?>">
 								<div class="sidebar-brand-icon">
 									<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 								</div>
@@ -158,7 +161,7 @@
 
 							<!-- Nav Item - Dashboard -->
 							<li class="nav-item active">
-								<a class="nav-link" href="<?= base_url("dashboard"); ?>">
+								<a class="nav-link" href="<?= base_url("dashboard_approval"); ?>">
 									<i class="fas fa-fw fa-tachometer-alt"></i>
 									<span>Dashboard</span></a>
 							</li>
@@ -174,7 +177,7 @@
 
 							<!-- Nav Item - Utilities Collapse Menu -->
 							<li class="nav-item">
-								<a class="nav-link collapsed" href="<?= base_url("asessment_evalApproval") ?>">
+								<a class="nav-link collapsed" href="<?= base_url("asessment_eval_") ?>">
 									<i class=" fas fa-fw fa-file-archive"></i>
 									<span>Asessment Evaluation</span>
 								</a>
@@ -255,7 +258,7 @@
 													Profile
 												</a>
 												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="<?= base_url("logout"); ?>"" data-toggle=" modal" data-target="#logoutModal">
+												<a class="dropdown-item" href="<?= base_url("logout"); ?>" data-toggle=" modal" data-target="#logoutModal">
 													<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 													Logout
 												</a>
@@ -266,12 +269,17 @@
 								<!-- End of Topbar -->
 
 							<?php } elseif ($this->session->userdata('access') == "Officer") { ?>
+								<style>
+									#accordionSidebar {
+										background-color: lightskyblue !important;
+									}
+								</style>
 
 								<div id="wrapper">
 									<!-- Sidebar -->
 									<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 										<!-- Sidebar - Brand -->
-										<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("dashboard"); ?>">
+										<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("dashboard_officer"); ?>">
 											<div class="sidebar-brand-icon">
 												<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 											</div>
@@ -290,7 +298,7 @@
 
 										<!-- Nav Item - Pages Collapse Menu -->
 										<li class="nav-item">
-											<a class="nav-link collapsed" href="<?= base_url("cluster_umum_") ?>">
+											<a class="nav-link collapsed" href="<?= base_url("cluster_umum__") ?>">
 												<i class="fas fa-fw fa-solid fa-calculator"></i>
 												<span>RMI Assessment</span>
 											</a>
