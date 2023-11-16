@@ -35,6 +35,7 @@ class Admin extends CI_Controller
 
 	public function formUmum()
 	{
+		$data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
 		$data['nestedArray'] = $this->Mcrud->get_dimensi_umum();
 		$nestedArray = [];
 
