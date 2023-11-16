@@ -47,6 +47,11 @@ class Mcrud extends CI_Model
 		AND `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id`;");
 		return $dimensi_umum->result_array();
 	}
+	public function get_weight()
+	{
+		$weight_umum = $this->db->query("SELECT DISTINCT `parameter_id`, `Weight` FROM `tbl_parameter`;");
+		return $weight_umum->result_array();
+	}
 
 	//insert
 	public function insertDataUmum($data)

@@ -40,30 +40,60 @@ class Approval extends CI_Controller
 	}
 	public function calculateRisk()
 	{
-		// Retrieve POST data for various dimensions and sub-dimensions
-		$ncpSD1 = $_POST['A_1_1'];
-		$ncpSD2 = ($_POST['A_2_2'] + $_POST['A_2_3']) / 2;
-		$ncpSD3 = ($_POST['B_1_4'] + $_POST['B_1_5']) / 2;
-		$ncpSD4 = ($_POST['B_2_6'] + $_POST['B_2_7'] + $_POST['B_2_8'] + $_POST['B_2_9'] + $_POST['B_2_10'] + $_POST['B_2_11'] + $_POST['B_2_12']) / 7;
-		$ncpSD5 = ($_POST['B_3_13'] + $_POST['B_3_14'] + $_POST['B_3_15'] + $_POST['B_3_16'] + $_POST['B_3_17'] + $_POST['B_3_18'] + $_POST['B_3_19']) / 7;
-		$ncpSD6 = ($_POST['C_1_20'] + $_POST['C_1_21'] + $_POST['C_1_22'] + $_POST['C_1_23'] + $_POST['C_1_24'] + $_POST['C_1_25'] + $_POST['C_1_26']) / 7;
-		$ncpSD7 = ($_POST['C_2_27'] + $_POST['C_2_28'] + $_POST['C_2_29'] + $_POST['C_2_30']) / 4;
-		$ncpSD8 = $_POST['C_3_31'];
-		$ncpSD9 = $_POST['C_4_32'];
-		$ncpSD10 = $_POST['C_5_33'];
-		$ncpSD11 = $_POST['D_1_34'];
-		$ncpSD12 = ($_POST['D_2_35'] + $_POST['D_2_36'] + $_POST['D_2_37']) / 3;
-		$ncpSD13 = ($_POST['D_3_38'] + $_POST['D_3_39']) / 2;
-		$ncpSD14 = $_POST['D_4_40'];
-		$ncpSD15 = $_POST['E_1_41'];
-		$ncpSD16 = $_POST['E_2_42'];
 
+		$data = $this->Mcrud->get_weight();
+		foreach ($data as $dkey) {
+
+			// Retrieve POST data for various dimensions and sub-dimensions
+			$ncp1 = $this->input->post('A_1_1') * 0.33;
+			$ncp2 = $this->input->post('A_2_2') * 0.33;
+			$ncp3 = $this->input->post('A_2_3') * 0.33;
+			$ncp4 = $this->input->post('B_1_4') * 0.06;
+			$ncp5 = $this->input->post('B_1_5') * 0.06;
+			$ncp6 = $this->input->post('B_2_6') * 0.06;
+			$ncp7 = $this->input->post('B_2_7') * 0.06;
+			$ncp8 = $this->input->post('B_2_8') * 0.06;
+			$ncp9 = $this->input->post('B_2_9') * 0.06;
+			$ncp10 = $this->input->post('B_2_10') * 0.06;
+			$ncp11 = $this->input->post('B_2_11') * 0.06;
+			$ncp12 = $this->input->post('B_2_12') * 0.06;
+			$ncp13 = $this->input->post('B_3_13') * 0.06;
+			$ncp14 = $this->input->post('B_3_14') * 0.06;
+			$ncp15 = $this->input->post('B_3_15') * 0.06;
+			$ncp16 = $this->input->post('B_3_16') * 0.06;
+			$ncp17 = $this->input->post('B_3_17') * 0.06;
+			$ncp18 = $this->input->post('B_3_18') * 0.06;
+			$ncp19 = $this->input->post('B_3_19') * 0.06;
+			$ncp20 = $this->input->post('C_1_20') * 0.07;
+			$ncp21 = $this->input->post('C_1_21') * 0.07;
+			$ncp22 = $this->input->post('C_1_22') * 0.07;
+			$ncp23 = $this->input->post('C_1_23') * 0.07;
+			$ncp24 = $this->input->post('C_1_24') * 0.07;
+			$ncp25 = $this->input->post('C_1_25') * 0.07;
+			$ncp26 = $this->input->post('C_1_26') * 0.07;
+			$ncp27 = $this->input->post('C_2_27') * 0.07;
+			$ncp28 = $this->input->post('C_2_28') * 0.07;
+			$ncp29 = $this->input->post('C_2_29') * 0.07;
+			$ncp30 = $this->input->post('C_2_30') * 0.07;
+			$ncp31 = $this->input->post('C_3_31') * 0.07;
+			$ncp32 = $this->input->post('C_4_32') * 0.07;
+			$ncp33 = $this->input->post('C_5_33') * 0.07;
+			$ncp34 = $this->input->post('D_1_34') * 0.14;
+			$ncp35 = $this->input->post('D_2_35') * 0.14;
+			$ncp36 = $this->input->post('D_2_36') * 0.14;
+			$ncp37 = $this->input->post('D_2_37') * 0.14;
+			$ncp38 = $this->input->post('D_3_38') * 0.14;
+			$ncp39 = $this->input->post('D_3_39') * 0.14;
+			$ncp40 = $this->input->post('D_4_40') * 0.14;
+			$ncp41 = $this->input->post('E_1_41') * 0.50;
+			$ncp42 = $this->input->post('E_2_42') * 0.50;
+		}
 		// Calculate dimension values
-		$ncpD1 = ($ncpSD1 + $ncpSD2) / 2;
-		$ncpD2 = ($ncpSD3 + $ncpSD4 + $ncpSD5) / 3;
-		$ncpD3 = ($ncpSD6 + $ncpSD7 + $ncpSD8 + $ncpSD9 + $ncpSD10) / 5;
-		$ncpD4 = ($ncpSD11 + $ncpSD12 + $ncpSD13 + $ncpSD14) / 4;
-		$ncpD5 = ($ncpSD15 + $ncpSD16) / 2;
+		$ncpD1 = $ncp1 + $ncp2 + $ncp3;
+		$ncpD2 = $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19;
+		$ncpD3 = $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33;
+		$ncpD4 = $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40;
+		$ncpD5 = $ncp41 + $ncp42;
 
 		// Calculate corporate risk
 		$ncpCorporate = ($ncpD1 + $ncpD2 + $ncpD3 + $ncpD4 + $ncpD5) / 5;
@@ -96,172 +126,170 @@ class Approval extends CI_Controller
 
 	public function saveUmum()
 	{
-		$data = $this->Mcrud->get_dimensi_umum();
-		foreach ($data as $d) {
-			$ncpSD1 = $this->input->post['A_1_1'] * $d['Weight'];
-		}
-		//post untuk data input biasa
-		$corporateName = $this->input->post('corporateName');
-		$name = $this->input->post('userName');
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			//post untuk data input biasa
 
-		// Retrieve POST data for various dimensions and sub-dimensions
-		$ncpSD1 = $this->input->post['A_1_1'];
-		$ncpSD2 = ($_POST['A_2_2'] + $_POST['A_2_3']) / 2;
-		$ncpSD3 = ($_POST['B_1_4'] + $_POST['B_1_5']) / 2;
-		$ncpSD4 = ($_POST['B_2_6'] + $_POST['B_2_7'] + $_POST['B_2_8'] + $_POST['B_2_9'] + $_POST['B_2_10'] + $_POST['B_2_11'] + $_POST['B_2_12']) / 7;
-		$ncpSD5 = ($_POST['B_3_13'] + $_POST['B_3_14'] + $_POST['B_3_15'] + $_POST['B_3_16'] + $_POST['B_3_17'] + $_POST['B_3_18'] + $_POST['B_3_19']) / 7;
-		$ncpSD6 = ($_POST['C_1_20'] + $_POST['C_1_21'] + $_POST['C_1_22'] + $_POST['C_1_23'] + $_POST['C_1_24'] + $_POST['C_1_25'] + $_POST['C_1_26']) / 7;
-		$ncpSD7 = ($_POST['C_2_27'] + $_POST['C_2_28'] + $_POST['C_2_29'] + $_POST['C_2_30']) / 4;
-		$ncpSD8 = $_POST['C_3_31'];
-		$ncpSD9 = $_POST['C_4_32'];
-		$ncpSD10 = $_POST['C_5_33'];
-		$ncpSD11 = $_POST['D_1_34'];
-		$ncpSD12 = ($_POST['D_2_35'] + $_POST['D_2_36'] + $_POST['D_2_37']) / 3;
-		$ncpSD13 = ($_POST['D_3_38'] + $_POST['D_3_39']) / 2;
-		$ncpSD14 = $_POST['D_4_40'];
-		$ncpSD15 = $_POST['E_1_41'];
-		$ncpSD16 = $_POST['E_2_42'];
-
-		// Calculate dimension values
-		$ncpD1 = ($ncpSD1 + $ncpSD2) / 2;
-		$ncpD2 = ($ncpSD3 + $ncpSD4 + $ncpSD5) / 3;
-		$ncpD3 = ($ncpSD6 + $ncpSD7 + $ncpSD8 + $ncpSD9 + $ncpSD10) / 5;
-		$ncpD4 = ($ncpSD11 + $ncpSD12 + $ncpSD13 + $ncpSD14) / 4;
-		$ncpD5 = ($ncpSD15 + $ncpSD16) / 2;
-
-		// Calculate corporate risk
-		$ncpCorporate = ($ncpD1 + $ncpD2 + $ncpD3 + $ncpD4 + $ncpD5) / 5;
-
-		// Check risk levels for each dimension
-		$lvRiskD1 = $this->getRiskLevel($ncpD1);
-		$lvRiskD2 = $this->getRiskLevel($ncpD2);
-		$lvRiskD3 = $this->getRiskLevel($ncpD3);
-		$lvRiskD4 = $this->getRiskLevel($ncpD4);
-		$lvRiskD5 = $this->getRiskLevel($ncpD5);
-		$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
+			$corporateName = $this->input->post('corporate_name');
+			$name = $this->input->post('user_name');
+			$date = $this->input->post('tanggal');
+			$code_laporan = $this->input->post('laporan');
 
 
-		//upload fun
-		$upload_config = array(
-			'upload_path'   => './uploads/asessmentEval/',
-			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
-			'max_size'      => 100000,
-			'max_width'     => 10240,
-			'max_height'    => 7680,
-			'encrypt_name'  => TRUE
-		);
+			$data = $this->Mcrud->get_dimensi_umum();
+			foreach ($data as $dkey) {
+				// Retrieve POST data for various dimensions and sub-dimensions
+				$ncp1 = $this->input->post('A_1_1') * 0.33;
+				$ncp2 = $this->input->post('A_2_2') * 0.33;
+				$ncp3 = $this->input->post('A_2_3') * 0.33;
+				$ncp4 = $this->input->post('B_1_4') * 0.06;
+				$ncp5 = $this->input->post('B_1_5') * 0.06;
+				$ncp6 = $this->input->post('B_2_6') * 0.06;
+				$ncp7 = $this->input->post('B_2_7') * 0.06;
+				$ncp8 = $this->input->post('B_2_8') * 0.06;
+				$ncp9 = $this->input->post('B_2_9') * 0.06;
+				$ncp10 = $this->input->post('B_2_10') * 0.06;
+				$ncp11 = $this->input->post('B_2_11') * 0.06;
+				$ncp12 = $this->input->post('B_2_12') * 0.06;
+				$ncp13 = $this->input->post('B_3_13') * 0.06;
+				$ncp14 = $this->input->post('B_3_14') * 0.06;
+				$ncp15 = $this->input->post('B_3_15') * 0.06;
+				$ncp16 = $this->input->post('B_3_16') * 0.06;
+				$ncp17 = $this->input->post('B_3_17') * 0.06;
+				$ncp18 = $this->input->post('B_3_18') * 0.06;
+				$ncp19 = $this->input->post('B_3_19') * 0.06;
+				$ncp20 = $this->input->post('C_1_20') * 0.07;
+				$ncp21 = $this->input->post('C_1_21') * 0.07;
+				$ncp22 = $this->input->post('C_1_22') * 0.07;
+				$ncp23 = $this->input->post('C_1_23') * 0.07;
+				$ncp24 = $this->input->post('C_1_24') * 0.07;
+				$ncp25 = $this->input->post('C_1_25') * 0.07;
+				$ncp26 = $this->input->post('C_1_26') * 0.07;
+				$ncp27 = $this->input->post('C_2_27') * 0.07;
+				$ncp28 = $this->input->post('C_2_28') * 0.07;
+				$ncp29 = $this->input->post('C_2_29') * 0.07;
+				$ncp30 = $this->input->post('C_2_30') * 0.07;
+				$ncp31 = $this->input->post('C_3_31') * 0.07;
+				$ncp32 = $this->input->post('C_4_32') * 0.07;
+				$ncp33 = $this->input->post('C_5_33') * 0.07;
+				$ncp34 = $this->input->post('D_1_34') * 0.14;
+				$ncp35 = $this->input->post('D_2_35') * 0.14;
+				$ncp36 = $this->input->post('D_2_36') * 0.14;
+				$ncp37 = $this->input->post('D_2_37') * 0.14;
+				$ncp38 = $this->input->post('D_3_38') * 0.14;
+				$ncp39 = $this->input->post('D_3_39') * 0.14;
+				$ncp40 = $this->input->post('D_4_40') * 0.14;
+				$ncp41 = $this->input->post('E_1_41') * 0.50;
+				$ncp42 = $this->input->post('E_2_42') * 0.50;
+			}
+			// Calculate dimension values
+			$ncpD1 = $ncp1 + $ncp2 + $ncp3;
+			$ncpD2 = $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19;
+			$ncpD3 = $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33;
+			$ncpD4 = $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40;
+			$ncpD5 = $ncp41 + $ncp42;
 
-		$this->load->library('upload', $upload_config);
-		// Array to store file IDs for later association
-		$file_ids = [];
+			// Calculate corporate risk
+			$ncpCorporate = ($ncpD1 + $ncpD2 + $ncpD3 + $ncpD4 + $ncpD5) / 5;
 
-		// Handle each unique file input field individually
-		for ($i = 1; $i <= 200; $i++) {
-			$field_name = "formFileA_1_1[]" . $i; // Replace with the actual field name
-			$field_name = "formFileA_2_2[]" . $i;
-			$field_name = "formFileA_2_3[]" . $i;
-			$field_name = "formFileB_1_4[]" . $i;
-			$field_name = "formFileB_1_5[]" . $i;
-			$field_name = "formFileB_2_6[]" . $i;
-			$field_name = "formFileB_2_7[]" . $i; // Replace with the actual field name
-			$field_name = "formFileB_2_8[]" . $i;
-			$field_name = "formFileB_2_9[]" . $i;
-			$field_name = "formFileB_2_10[]" . $i;
-			$field_name = "formFileB_2_11[]" . $i;
-			$field_name = "formFileB_2_12[]" . $i;
-			$field_name = "formFileB_3_13[]" . $i;
-			$field_name = "formFileB_3_14[]" . $i;
-			$field_name = "formFileB_3_15[]" . $i;
-			$field_name = "formFileB_3_16[]" . $i;
-			$field_name = "formFileB_3_17[]" . $i;
-			$field_name = "formFileB_3_18[]" . $i;
-			$field_name = "formFileB_3_19[]" . $i;
-			$field_name = "formFileC_1_20[]" . $i;
-			$field_name = "formFileC_1_21[]" . $i; // Replace with the actual field name
-			$field_name = "formFileC_1_22[]" . $i;
-			$field_name = "formFileC_1_23[]" . $i;
-			$field_name = "formFileC_1_24[]" . $i;
-			$field_name = "formFileC_1_25[]" . $i;
-			$field_name = "formFileC_1_26[]" . $i;
-			$field_name = "formFileC_2_27[]" . $i;
-			$field_name = "formFileC_2_28[]" . $i;
-			$field_name = "formFileC_2_29[]" . $i;
-			$field_name = "formFileC_2_30[]" . $i;
-			$field_name = "formFileC_3_31[]" . $i; // Replace with the actual field name
-			$field_name = "formFileC_4_32[]" . $i;
-			$field_name = "formFileC_5_33[]" . $i;
-			$field_name = "formFileD_1_34[]" . $i;
-			$field_name = "formFileD_2_35[]" . $i;
-			$field_name = "formFileD_2_37[]" . $i;
-			$field_name = "formFileD_3_38[]" . $i;
-			$field_name = "formFileD_3_39[]" . $i;
-			$field_name = "formFileD_4_40[]" . $i;
-			$field_name = "formFileE_1_41[]" . $i;
-			$field_name = "formFileE_2_42[]" . $i;
+			// Check risk levels for each dimension
+			$lvRiskD1 = $this->getRiskLevel($ncpD1);
+			$lvRiskD2 = $this->getRiskLevel($ncpD2);
+			$lvRiskD3 = $this->getRiskLevel($ncpD3);
+			$lvRiskD4 = $this->getRiskLevel($ncpD4);
+			$lvRiskD5 = $this->getRiskLevel($ncpD5);
+			$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
 
-			// Check if any files were uploaded for this field
-			if (!empty($_FILES[$field_name]['name'])) {
-				// Use a dynamic file array
-				$uploaded_files = $_FILES[$field_name];
 
-				// Loop through the uploaded files for this field
-				for ($j = 0; $j < count($uploaded_files['name']); $j++) {
-					$_FILES['userfile'] = $uploaded_files;
+			//upload fun
+			$upload_config = array(
+				'upload_path'   => APPPATH . '/assets/uploads/evidenceUmum/',
+				'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
+				'max_size'      => 100000,
+				'max_width'     => 10240,
+				'max_height'    => 7680,
+				'encrypt_name'  => TRUE
+			);
 
-					// Perform the upload for each file
-					if ($this->upload->do_upload('userfile')) {
-						$file_data = $this->upload->data();
+			$this->load->library('upload', $upload_config);
+			// Array to store file IDs for later association
+			$file_ids = [];
 
-						$fileInfo = array(
-							'file_name' => $file_data['file_name'],
-							'file_type' => $file_data['file_type']
-						);
+			// Handle each unique file input field individually
+			for ($i = 1; $i <= 200; $i++) {
+				$field_name = $this->input->post('formFileA_1_1[]') . $i; // Replace with the actual field name
 
-						// Insert the file info into the database
-						$file_id = $this->Mcrud->insertFile($fileInfo);
+				// Check if any files were uploaded for this field
+				if (!empty($_FILES[$field_name]['name'])) {
+					// Use a dynamic file array
+					$uploaded_files = $_FILES[$field_name];
 
-						// Insert the file data into 'file_data' table
-						$fileData = array(
-							'file_id'   => $file_id,
-							'file_data' => file_get_contents($file_data['full_path'])
-						);
-						$this->Mcrud->insertFileData($fileData);
+					// Loop through the uploaded files for this field
+					for ($j = 0; $j < count($uploaded_files['name']); $j++) {
+						$_FILES['userfile'] = $uploaded_files;
 
-						$file_ids[] = $file_id;
-					} else {
-						// Handle the error for this file
-						$error = array('error' => $this->upload->display_errors());
-						$this->load->view('umum', $error);
-						return; // Exit if there's an error
+						// Perform the upload for each file
+						if ($this->upload->do_upload('userfile')) {
+							$file_data = $this->upload->data();
+
+							$fileInfo = array(
+								'file_name' => $file_data['file_name'],
+								'file_type' => $file_data['file_type']
+							);
+
+							// Insert the file info into the database
+							$file_id = $this->Mcrud->insertFile($fileInfo);
+
+							// Insert the file data into 'file_data' table
+							$fileData = array(
+								'file_id'   => $file_id,
+								'file_data' => file_get_contents($file_data['full_path'])
+							);
+							$this->Mcrud->insertFileData($fileData);
+
+							$file_ids[] = $file_id;
+						} else {
+							// Handle the error for this file
+							$error = array('error' => $this->upload->display_errors());
+							$this->load->view('/user/form/clusterUmum', $error);
+							return; // Exit if there's an error
+						}
 					}
 				}
 			}
-		}
 
-		// Insert assessment data with the associated file IDs
-		$assessmentData = array(
-			'corporateName' => $corporateName,
-			'userName' => $name,
-			'ncpD1' => number_format($ncpD1, 2),
-			'ncpD2' => number_format($ncpD2, 2),
-			'ncpD3' => number_format($ncpD3, 2),
-			'ncpD4' => number_format($ncpD4, 2),
-			'ncpD5' => number_format($ncpD5, 2),
-			'ncpCorporate' => number_format($ncpCorporate, 2),
-			'lvRiskD1' => $lvRiskD1,
-			'lvRiskD2' => $lvRiskD2,
-			'lvRiskD3' => $lvRiskD3,
-			'lvRiskD4' => $lvRiskD4,
-			'lvRiskD5' => $lvRiskD5,
-			'lvRiskCorpo' => $lvRiskCorporasi,
-			'status_approval' => "Waiting for approval",
-			'approval' => $this->session->userdata('name')
-		);
+			// Insert assessment data with the associated file IDs
+			$assessmentData = array(
+				'corporate_name' => $corporateName,
+				'user_name' => $name,
+				'ncpD1' => number_format($ncpD1, 2),
+				'ncpD2' => number_format($ncpD2, 2),
+				'ncpD3' => number_format($ncpD3, 2),
+				'ncpD4' => number_format($ncpD4, 2),
+				'ncpD5' => number_format($ncpD5, 2),
+				'ncpCorporate' => number_format($ncpCorporate, 2),
+				'lvRiskD1' => $lvRiskD1,
+				'lvRiskD2' => $lvRiskD2,
+				'lvRiskD3' => $lvRiskD3,
+				'lvRiskD4' => $lvRiskD4,
+				'lvRiskD5' => $lvRiskD5,
+				'lvRiskCorpo' => $lvRiskCorporasi,
+				'status_approval' => "Waiting for approval",
+				'approval' => $this->session->userdata('name'),
+				'created_at' => $date,
+				'code_laporan' => $code_laporan,
+			);
 
-		// Insert assessment data for each file
-		foreach ($file_ids as $file_id) {
-			$assessmentData['file_id'] = $file_id;
-			$this->Mcrud->insertAssessmentData($assessmentData);
+			// Insert assessment data for each file
+			foreach ($file_ids as $file_id) {
+				$assessmentData['file_id'] = $file_id;
+				$this->Mcrud->insertAssessmentData($assessmentData);
+			}
+			var_dump($assessmentData);
+			var_dump($file_ids);
+			var_dump($fileData);
+			var_dump($field_name);
+			die();
+			redirect('dashboard_approval');
 		}
 	}
 
@@ -290,6 +318,76 @@ class Approval extends CI_Controller
 		} else {
 			return "Not Valid" . $value;
 		}
+	}
+
+	private function getFieldNames($dkey)
+	{
+		$field_names = [];
+		$dimensions = ['A', 'B', 'C', 'D', 'E'];
+
+		foreach ($dimensions as $dimension) {
+			for ($i = 1; $i <= 42; $i++) {
+				$field_names[] = $this->input->post('formFile{$dimension}_{$i}[]');
+			}
+		}
+
+		return $field_names;
+	}
+
+	private function handleFileUpload($field_name, &$file_ids)
+	{
+		$upload_config = [
+			'upload_path'   => APPPATH . '/assets/uploads/evidenceUmum/',
+			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
+			'max_size'      => 100000,
+			'max_width'     => 10240,
+			'max_height'    => 7680,
+			'encrypt_name'  => TRUE
+		];
+
+		$this->load->library('upload', $upload_config);
+
+		if ($this->upload->do_upload($field_name)) {
+			$file_data = $this->upload->data();
+
+			$fileInfo = [
+				'file_name' => $file_data['file_name'],
+				'file_type' => $file_data['file_type']
+			];
+
+			// Insert the file info into the database
+			$file_id = $this->Mcrud->insertFile($fileInfo);
+
+			// Insert the file data into 'file_data' table
+			$fileData = [
+				'file_id'   => $file_id,
+				'file_data' => file_get_contents($file_data['full_path'])
+			];
+			$this->Mcrud->insertFileData($fileData);
+
+			$file_ids[] = $file_id;
+		} else {
+			// Handle the error for this file
+			$error = ['error' => $this->upload->display_errors()];
+			$this->load->view('/user/form/clusterUmum', $error);
+			exit; // Exit if there's an error
+		}
+	}
+
+	private function calculateDimensionValues($data)
+	{
+		// ... (existing code)
+
+		$dimension_values = [
+			'ncpD1' => $ncpD1,
+			'ncpD2' => $ncpD2,
+			'ncpD3' => $ncpD3,
+			'ncpD4' => $ncpD4,
+			'ncpD5' => $ncpD5,
+			'ncpCorporate' => $ncpCorporate,
+		];
+
+		return $dimension_values;
 	}
 
 	//evaluation assesment function start
