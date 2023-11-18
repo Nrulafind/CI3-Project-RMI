@@ -53,11 +53,7 @@ class Mcrud extends CI_Model
 		return $weight_umum->result_array();
 	}
 
-	//insert
-	public function insertDataUmum($data)
-	{
-		$this->db->insert('tbl_perhitungan', $data);
-	}
+
 	public function insertFile($fileInfo)
 	{
 		$this->db->insert('tbl_files', $fileInfo);

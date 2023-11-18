@@ -90,9 +90,6 @@
 							$rowspan_question_id = getRowspan($dimensi_umum, $question_id, 'question_id');
 						}
 
-
-
-
 					?>
 
 
@@ -180,8 +177,9 @@
 							if ($parameter_id !== $prev_parameter_id) { ?>
 								<td rowspan="<?= $rowspan_parameter_id ?>">
 
-									<label for="formFile_<?= $parameter_id ?>" class="form-label">asessment</label>
-									<input class="form-control" type="file" name="formFile_<?= $parameter_id ?>[]" id="formFile_<?= $parameter_id ?>" multiple>
+									<label class="form-label" for="formFile_<?= $parameter_id ?>">asessment</label>
+									<input class="form-control" type="file" name="formFile_<?php $form_param = str_replace('.', '_', $parameter_id);
+																							echo $form_param ?>[]" id="formFile_<?= $parameter_id ?>" multiple>
 								</td>
 							<?php } ?>
 

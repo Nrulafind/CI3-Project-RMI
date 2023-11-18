@@ -90,11 +90,7 @@
 							$rowspan_question_id = getRowspan($dimensi_umum, $question_id, 'question_id');
 						}
 
-
-
-
 					?>
-
 
 						<?php
 						if ($dimensi_id !== $prev_dimensi_id) { ?>
@@ -112,11 +108,9 @@
 									</div>
 								</td>
 
-
 						<?php }
 						} ?>
 						<tr>
-
 
 							<?php
 							if ($dimensi_id !== $prev_dimensi_id) { ?>
