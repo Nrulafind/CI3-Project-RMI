@@ -49,7 +49,7 @@ class Mcrud extends CI_Model
 	}
 	public function get_weight()
 	{
-		$weight_umum = $this->db->query("SELECT DISTINCT `parameter_id`, `Weight` FROM `tbl_parameter`;");
+		$weight_umum = $this->db->query("SELECT DISTINCT `parameter_id` FROM `tbl_parameter`;");
 		return $weight_umum->result_array();
 	}
 
@@ -59,15 +59,10 @@ class Mcrud extends CI_Model
 		$this->db->insert('tbl_files', $fileInfo);
 		return $this->db->insert_id();
 	}
-
-	public function insertFileData($fileData)
-	{
-		$this->db->insert('tbl_file_data', $fileData);
-	}
-
 	public function insertAssessmentData($assessmentData)
 	{
 		$this->db->insert('tbl_assessment_data', $assessmentData);
+		return $this->db->insert_id();
 	}
 
 
@@ -78,10 +73,9 @@ class Mcrud extends CI_Model
 	//get
 	public function get_assestment()
 	{
-		$asessment = $this->db->query("SELECT `tbl_assessment_data`.*, `tbl_files`.*, `tbl_file_data`.*
-		FROM `tbl_assessment_data` 
-			LEFT JOIN `tbl_files` ON `tbl_assessment_data`.`file_id` = `tbl_files`.`id` 
-			LEFT JOIN `tbl_file_data` ON `tbl_file_data`.`file_id` = `tbl_files`.`id`; 
+		$asessment = $this->db->query("SELECT `tbl_assessment_data`.*, `tbl_files`.* 
+			FROM `tbl_files` 
+			LEFT JOIN `tbl_assessment_data` ON `tbl_assessment_data`.`id` = `tbl_files`.`assessment_id`; 
 		");
 		return $asessment->result_array();
 	}

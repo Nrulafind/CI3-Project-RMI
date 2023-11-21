@@ -196,6 +196,47 @@ class Admin extends CI_Controller
 		echo json_encode($data);
 	}
 
+	private function upload_files($path, $title, $files)
+	{
+		$config = array(
+			'upload_path'   => $path,
+			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
+			'overwrite'     => 1,
+		);
+
+		$this->load->library('upload', $config);
+
+		$uploaded_files = array();
+
+		// Loop through the uploaded files
+		if (isset($files)) {
+			foreach ($files['name'] as $key => $file_name) {
+				$_FILES['userfile']['name']     = $files['name'][$key];
+				$_FILES['userfile']['type']     = $files['type'][$key];
+				$_FILES['userfile']['tmp_name'] = $files['tmp_name'][$key];
+				$_FILES['userfile']['error']    = $files['error'][$key];
+				$_FILES['userfile']['size']     = $files['size'][$key];
+
+				$fileName = $title . '_' . $file_name;
+
+				$config['file_name'] = $fileName;
+
+				$this->upload->initialize($config);
+
+				if ($this->upload->do_upload('userfile')) {
+					$uploaded_files[] = $this->upload->data();
+				} else {
+					return false; // Return false if any file upload fails
+				}
+			}
+		} else {
+			$uploaded_files = [];
+		}
+		return $uploaded_files;
+	}
+
+
+
 	public function saveUmum()
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -205,6 +246,8 @@ class Admin extends CI_Controller
 			$name = $this->input->post('user_name');
 			$date = $this->input->post('tanggal');
 			$code_laporan = $this->input->post('laporan');
+
+
 
 
 			// Retrieve POST data for various dimensions and sub-dimensions
@@ -268,66 +311,7 @@ class Admin extends CI_Controller
 			$lvRiskD4 = $this->getRiskLevel($ncpD4);
 			$lvRiskD5 = $this->getRiskLevel($ncpD5);
 			$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
-
-
 			//upload fun
-			$upload_config = array(
-				'upload_path'   => APPPATH . '/assets/uploads/evidenceUmum/',
-				'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
-				'max_size'      => 100000,
-				'max_width'     => 10240,
-				'max_height'    => 7680,
-				'encrypt_name'  => TRUE
-			);
-
-			$this->load->library('upload', $upload_config);
-			// Array to store file IDs for later association
-			$file_ids = [];
-
-			// Handle each unique file input field individually
-			for ($i = 1; $i <= 200; $i++) {
-				$field_name = $this->input->post('formFileA_1_1[]') . $i; // Replace with the actual field name
-
-				// Check if any files were uploaded for this field
-				if (!empty($_FILES[$field_name]['name'])) {
-					// Use a dynamic file array
-					$uploaded_files = $_FILES[$field_name];
-
-					// Loop through the uploaded files for this field
-					for ($j = 0; $j < count($uploaded_files['name']); $j++) {
-						$_FILES['userfile'] = $uploaded_files;
-
-						// Perform the upload for each file
-						if ($this->upload->do_upload('userfile')) {
-							$file_data = $this->upload->data();
-
-							$fileInfo = array(
-								'file_name' => $file_data['file_name'],
-								'file_type' => $file_data['file_type']
-							);
-
-							// Insert the file info into the database
-							$file_id = $this->Mcrud->insertFile($fileInfo);
-
-							// Insert the file data into 'file_data' table
-							$fileData = array(
-								'file_id'   => $file_id,
-								'file_data' => file_get_contents($file_data["'APPPATH . '/assets/uploads/evidenceUmum/'"])
-							);
-							$this->Mcrud->insertFileData($fileData);
-
-							$file_ids[] = $file_id;
-						} else {
-							// Handle the error for this file
-							$error = array('error' => $this->upload->display_errors());
-							$this->load->view('/user/form/clusterUmum', $error);
-							return; // Exit if there's an error
-						}
-					}
-				}
-			}
-
-			// Insert assessment data with the associated file IDs
 			$assessmentData = array(
 				'corporate_name' => $corporateName,
 				'user_name' => $name,
@@ -343,20 +327,64 @@ class Admin extends CI_Controller
 				'lvRiskD4' => $lvRiskD4,
 				'lvRiskD5' => $lvRiskD5,
 				'lvRiskCorpo' => $lvRiskCorporasi,
-				'status_approval' => "Waiting for approval",
+				'status_approval' => "Pending",
 				'approval' => $this->session->userdata('name'),
 				'created_at' => $date,
 				'code_laporan' => $code_laporan,
 			);
 
+			$assessment_id = 0;
 			// Insert assessment data for each file
-			foreach ($file_ids as $file_id) {
-				$assessmentData['file_id'] = $file_id;
-				$this->Mcrud->insertAssessmentData($assessmentData);
+			// foreach ($file_ids as $file_id) {
+			$assessment_id = $this->Mcrud->insertAssessmentData($assessmentData);
+			//array_push($assessment_id, $assessment_i);
+			// }
+			// Loop through the uploaded files
+			$data = $this->Mcrud->get_weight();
+
+			foreach ($data as $d) {
+				$parameter = str_replace('.', '_', $d['parameter_id']);
+
+				$directoryPath = "D:\\XAMPP\\htdocs\\jobs\\CI3-Project-RMI\\assets\\uploads\\evidenceUmum\\{$parameter}_{$name}";
+
+				mkdir($directoryPath, 0777, true);
+
+				// Call the upload_files function to handle file uploads
+				$upload_path = $directoryPath; // Updated the upload path
+				$title = $this->input->post('formFile_' . $parameter);
+				$files = $_FILES['formFile_' . $parameter];
+
+				$uploaded_files = $this->upload_files($upload_path, $title, $files);
+
+				if ($uploaded_files !== false) {
+					// File upload successful, proceed with the rest of the data processing
+					$file_ids = [];
+
+					// Insert assessment data with the associated file IDs
+
+					foreach ($uploaded_files as $file) {
+						// Insert the file info into the database
+						$fileInfo = array(
+							'assessment_id' => $assessment_id,
+							'file_name' => $file['file_name'],
+							'file_type' => $file['file_type'],
+							'file_link' => $file['full_path'],
+						);
+						$file_id = $this->Mcrud->insertFile($fileInfo);
+						$file_ids[] = $file_id;
+					}
+				} else {
+					// File upload failed, handle the error
+					$error = ['error' => $this->upload->display_errors()];
+					//$this->load->view('/approval/form/clusterUmum', $error);
+					$this->session->set_flashdata('$error', $error);
+				}
 			}
 			redirect('dashboard');
 		}
 	}
+
+
 
 	private function getRiskLevel($value)
 	{
@@ -384,77 +412,6 @@ class Admin extends CI_Controller
 			return "Not Valid" . $value;
 		}
 	}
-
-	private function getFieldNames($dkey)
-	{
-		$field_names = [];
-		$dimensions = ['A', 'B', 'C', 'D', 'E'];
-
-		foreach ($dimensions as $dimension) {
-			for ($i = 1; $i <= 42; $i++) {
-				$field_names[] = $this->input->post('formFile{$dimension}_{$i}[]');
-			}
-		}
-
-		return $field_names;
-	}
-
-	private function handleFileUpload($field_name, &$file_ids)
-	{
-		$upload_config = [
-			'upload_path'   => APPPATH . '/assets/uploads/evidenceUmum/',
-			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
-			'max_size'      => 100000,
-			'max_width'     => 10240,
-			'max_height'    => 7680,
-			'encrypt_name'  => TRUE
-		];
-
-		$this->load->library('upload', $upload_config);
-
-		if ($this->upload->do_upload($field_name)) {
-			$file_data = $this->upload->data();
-
-			$fileInfo = [
-				'file_name' => $file_data['file_name'],
-				'file_type' => $file_data['file_type']
-			];
-
-			// Insert the file info into the database
-			$file_id = $this->Mcrud->insertFile($fileInfo);
-
-			// Insert the file data into 'file_data' table
-			$fileData = [
-				'file_id'   => $file_id,
-				'file_data' => file_get_contents($file_data['full_path'])
-			];
-			$this->Mcrud->insertFileData($fileData);
-
-			$file_ids[] = $file_id;
-		} else {
-			// Handle the error for this file
-			$error = ['error' => $this->upload->display_errors()];
-			$this->load->view('/user/form/clusterUmum', $error);
-			exit; // Exit if there's an error
-		}
-	}
-
-	private function calculateDimensionValues($data)
-	{
-		// ... (existing code)
-
-		$dimension_values = [
-			'ncpD1' => $ncpD1,
-			'ncpD2' => $ncpD2,
-			'ncpD3' => $ncpD3,
-			'ncpD4' => $ncpD4,
-			'ncpD5' => $ncpD5,
-			'ncpCorporate' => $ncpCorporate,
-		];
-
-		return $dimension_values;
-	}
-
 
 	//evaluation assesment function start
 	public function asessmentEval()

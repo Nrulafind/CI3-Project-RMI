@@ -37,9 +37,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($asessment as $hasil) { ?>
+			<?php $no = 1;
+			foreach ($asessment as $hasil) { ?>
 				<tr>
-					<th>1</th>
+					<th><?php echo $no++ ?></th>
 					<td><?= $hasil['corporate_name'] ?></td>
 					<td><?= $hasil['user_name'] ?></td>
 					<?php if ($hasil['status_approval'] == "Approved") { ?>

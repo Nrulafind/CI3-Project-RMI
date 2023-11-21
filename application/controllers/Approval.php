@@ -124,6 +124,47 @@ class Approval extends CI_Controller
 		echo json_encode($data);
 	}
 
+	private function upload_files($path, $title, $files)
+	{
+		$config = array(
+			'upload_path'   => $path,
+			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
+			'overwrite'     => 1,
+		);
+
+		$this->load->library('upload', $config);
+
+		$uploaded_files = array();
+
+		// Loop through the uploaded files
+		if (isset($files)) {
+			foreach ($files['name'] as $key => $file_name) {
+				$_FILES['userfile']['name']     = $files['name'][$key];
+				$_FILES['userfile']['type']     = $files['type'][$key];
+				$_FILES['userfile']['tmp_name'] = $files['tmp_name'][$key];
+				$_FILES['userfile']['error']    = $files['error'][$key];
+				$_FILES['userfile']['size']     = $files['size'][$key];
+
+				$fileName = $title . '_' . $file_name;
+
+				$config['file_name'] = $fileName;
+
+				$this->upload->initialize($config);
+
+				if ($this->upload->do_upload('userfile')) {
+					$uploaded_files[] = $this->upload->data();
+				} else {
+					return false; // Return false if any file upload fails
+				}
+			}
+		} else {
+			$uploaded_files = [];
+		}
+		return $uploaded_files;
+	}
+
+
+
 	public function saveUmum()
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -199,17 +240,45 @@ class Approval extends CI_Controller
 			$lvRiskD5 = $this->getRiskLevel($ncpD5);
 			$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
 			//upload fun
-			$data = $this->Mcrud->get_dimensi_umum();
+			$assessmentData = array(
+				'corporate_name' => $corporateName,
+				'user_name' => $name,
+				'ncpD1' => number_format($ncpD1, 2),
+				'ncpD2' => number_format($ncpD2, 2),
+				'ncpD3' => number_format($ncpD3, 2),
+				'ncpD4' => number_format($ncpD4, 2),
+				'ncpD5' => number_format($ncpD5, 2),
+				'ncpCorporate' => number_format($ncpCorporate, 2),
+				'lvRiskD1' => $lvRiskD1,
+				'lvRiskD2' => $lvRiskD2,
+				'lvRiskD3' => $lvRiskD3,
+				'lvRiskD4' => $lvRiskD4,
+				'lvRiskD5' => $lvRiskD5,
+				'lvRiskCorpo' => $lvRiskCorporasi,
+				'status_approval' => "Pending",
+				'approval' => $this->session->userdata('name'),
+				'created_at' => $date,
+				'code_laporan' => $code_laporan,
+			);
+
+			$assessment_id = 0;
+			// Insert assessment data for each file
+			// foreach ($file_ids as $file_id) {
+			$assessment_id = $this->Mcrud->insertAssessmentData($assessmentData);
+			//array_push($assessment_id, $assessment_i);
+			// }
+			// Loop through the uploaded files
+			$data = $this->Mcrud->get_weight();
 
 			foreach ($data as $d) {
 				$parameter = str_replace('.', '_', $d['parameter_id']);
 
-				$directoryPath = "D:\\XAMPP\\htdocs\\jobs\\CI3-Project-RMI\\assets\\uploads\\evidenceUmum\\{$parameter}";
+				$directoryPath = "D:\\XAMPP\\htdocs\\jobs\\CI3-Project-RMI\\assets\\uploads\\evidenceUmum\\{$parameter}_{$name}";
 
-				$directory = mkdir($directoryPath, 0755, true);
+				mkdir($directoryPath, 0777, true);
 
 				// Call the upload_files function to handle file uploads
-				$upload_path = $directory; // Updated the upload path
+				$upload_path = $directoryPath; // Updated the upload path
 				$title = $this->input->post('formFile_' . $parameter);
 				$files = $_FILES['formFile_' . $parameter];
 
@@ -219,184 +288,87 @@ class Approval extends CI_Controller
 					// File upload successful, proceed with the rest of the data processing
 					$file_ids = [];
 
-					// Loop through the uploaded files
+					// Insert assessment data with the associated file IDs
+
 					foreach ($uploaded_files as $file) {
 						// Insert the file info into the database
 						$fileInfo = array(
+							'assessment_id' => $assessment_id,
 							'file_name' => $file['file_name'],
 							'file_type' => $file['file_type'],
 							'file_link' => $file['full_path'],
 						);
 						$file_id = $this->Mcrud->insertFile($fileInfo);
-
-						// Insert the file data into 'file_data' table
-						$fileData = [
-							'file_id'   => $file_id,
-							'file_data' => file_get_contents($file['full_path'])
-						];
-						$this->Mcrud->insertFileData($fileData);
-
 						$file_ids[] = $file_id;
 					}
-					// Insert assessment data with the associated file IDs
-					$assessmentData = array(
-						'corporate_name' => $corporateName,
-						'user_name' => $name,
-						'ncpD1' => number_format($ncpD1, 2),
-						'ncpD2' => number_format($ncpD2, 2),
-						'ncpD3' => number_format($ncpD3, 2),
-						'ncpD4' => number_format($ncpD4, 2),
-						'ncpD5' => number_format($ncpD5, 2),
-						'ncpCorporate' => number_format($ncpCorporate, 2),
-						'lvRiskD1' => $lvRiskD1,
-						'lvRiskD2' => $lvRiskD2,
-						'lvRiskD3' => $lvRiskD3,
-						'lvRiskD4' => $lvRiskD4,
-						'lvRiskD5' => $lvRiskD5,
-						'lvRiskCorpo' => $lvRiskCorporasi,
-						'status_approval' => "Waiting for approval",
-						'approval' => $this->session->userdata('name'),
-						'created_at' => $date,
-						'code_laporan' => $code_laporan,
-					);
-
-					// Insert assessment data for each file
-					foreach ($file_ids as $file_id) {
-						$assessmentData['file_id'] = $file_id;
-						$this->Mcrud->insertAssessmentData($assessmentData);
-					}
-
-					var_dump($directoryPath);
-?><br>
-					<hr>
-					<?php
-					var_dump($title);
-					?><?php
-
-						var_dump($assessmentData);
-						?><br>
-					<hr>
-					<?php
-					var_dump($files);
-					?><?php
-
-						var_dump($directoryPath);
-						?><br>
-					<hr>
-					<?php
-					var_dump($file_id);
-					?><?php
-
-						var_dump($assessmentData);
-						?><br>
-					<hr>
-					<?php
-					var_dump($file_ids);
-					?><?php
-						die();
-						redirect('dashboard_approval');
-					} else {
-						// File upload failed, handle the error
-						$error = ['error' => $this->upload->display_errors()];
-						$this->load->view('/approval/form/clusterUmum', $error);
-					}
-				}
-			}
-		}
-
-
-		private function upload_files($path, $title, $files)
-		{
-			$config = array(
-				'upload_path'   => $path,
-				'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
-				'overwrite'     => 1,
-			);
-
-			$this->load->library('upload', $config);
-
-			$uploaded_files = array();
-
-			// Loop through the uploaded files
-			foreach ($files['name'] as $key => $file_name) {
-				$_FILES['userfile']['name']     = $files['name'][$key];
-				$_FILES['userfile']['type']     = $files['type'][$key];
-				$_FILES['userfile']['tmp_name'] = $files['tmp_name'][$key];
-				$_FILES['userfile']['error']    = $files['error'][$key];
-				$_FILES['userfile']['size']     = $files['size'][$key];
-
-				$fileName = $title . '_' . $file_name;
-
-				$config['file_name'] = $fileName;
-
-				$this->upload->initialize($config);
-
-				if ($this->upload->do_upload('userfile')) {
-					$uploaded_files[] = $this->upload->data();
 				} else {
-					return false; // Return false if any file upload fails
+					// File upload failed, handle the error
+					$error = ['error' => $this->upload->display_errors()];
+					//$this->load->view('/approval/form/clusterUmum', $error);
+					$this->session->set_flashdata('$error', $error);
 				}
 			}
-
-			return $uploaded_files;
+			redirect('dashboard_approval');
 		}
-
-
-		private function getRiskLevel($value)
-		{
-			if ($value > 4.8 && $value <= 5) {
-				return "Best Practice Phase";
-			} elseif ($value > 4.4 && $value <= 4.8) {
-				return "Strong Practice Phase AA";
-			} elseif ($value > 3.8 && $value <= 4.4) {
-				return "Strong Practice Phase A";
-			} elseif ($value > 3.4 && $value <= 3.8) {
-				return "Good Practice Phase AA";
-			} elseif ($value > 2.8 && $value <= 3.4) {
-				return "Good Practice Phase A";
-			} elseif ($value > 2.4 && $value <= 2.8) {
-				return "Emerging State AA";
-			} elseif ($value > 1.8 && $value <= 2.4) {
-				return "Emerging State A";
-			} elseif ($value > 1.4 && $value <= 1.8) {
-				return "Initial Phase AA";
-			} elseif ($value >= 1 && $value <= 1.4) {
-				return "Initial Phase A";
-			} elseif ($value >= 0 && $value < 1) {
-				return "Non Existent";
-			} else {
-				return "Not Valid" . $value;
-			}
-		}
-
-
-		//evaluation assesment function start
-		public function asessmentEval()
-		{
-			$data['asessment'] = $this->Mcrud->get_assestment();
-
-			$this->load->view('template/header');
-			$this->load->view('template/sidebar');
-			$this->load->view('approval/asessment/asessmentEval', $data);
-			$this->load->view('template/footer');
-		}
-		public function editAsessment($id)
-		{
-			$data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
-			$data['asessment'] = $this->Mcrud->get_assestment();
-
-			$this->load->view('template/header');
-			$this->load->view('template/sidebar');
-			$this->load->view('approval/asessment/edit_asessmentEval', $data, $id);
-			$this->load->view('template/footer');
-		}
-		public function deleteAsessment()
-		{
-
-			$this->load->view('template/header');
-			$this->load->view('template/sidebar');
-			$this->load->view('approval/asessment/asessmentEval', $data);
-			$this->load->view('template/footer');
-		}
-		//evaluation assesment function end
 	}
+
+
+
+	private function getRiskLevel($value)
+	{
+		if ($value > 4.8 && $value <= 5) {
+			return "Best Practice Phase";
+		} elseif ($value > 4.4 && $value <= 4.8) {
+			return "Strong Practice Phase AA";
+		} elseif ($value > 3.8 && $value <= 4.4) {
+			return "Strong Practice Phase A";
+		} elseif ($value > 3.4 && $value <= 3.8) {
+			return "Good Practice Phase AA";
+		} elseif ($value > 2.8 && $value <= 3.4) {
+			return "Good Practice Phase A";
+		} elseif ($value > 2.4 && $value <= 2.8) {
+			return "Emerging State AA";
+		} elseif ($value > 1.8 && $value <= 2.4) {
+			return "Emerging State A";
+		} elseif ($value > 1.4 && $value <= 1.8) {
+			return "Initial Phase AA";
+		} elseif ($value >= 1 && $value <= 1.4) {
+			return "Initial Phase A";
+		} elseif ($value >= 0 && $value < 1) {
+			return "Non Existent";
+		} else {
+			return "Not Valid" . $value;
+		}
+	}
+
+
+	//evaluation assesment function start
+	public function asessmentEval()
+	{
+		$data['asessment'] = $this->Mcrud->get_assestment();
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('approval/asessment/asessmentEval', $data);
+		$this->load->view('template/footer');
+	}
+	public function editAsessment($id)
+	{
+		$data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
+		$data['asessment'] = $this->Mcrud->get_assestment();
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('approval/asessment/edit_asessmentEval', $data, $id);
+		$this->load->view('template/footer');
+	}
+	public function deleteAsessment()
+	{
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('approval/asessment/asessmentEval', $data);
+		$this->load->view('template/footer');
+	}
+	//evaluation assesment function end
+}

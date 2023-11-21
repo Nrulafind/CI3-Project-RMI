@@ -17,19 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `rmi_env`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_assessment_data`
---
 
 CREATE TABLE `tbl_assessment_data` (
   `id` int(11) NOT NULL,
-  `file_id` int(11) DEFAULT NULL,
   `corporate_name` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
   `ncpD1` decimal(5,2) DEFAULT NULL,
@@ -53,10 +43,6 @@ CREATE TABLE `tbl_assessment_data` (
 --
 -- Dumping data for table `tbl_assessment_data`
 --
-
-INSERT INTO `tbl_assessment_data` (`id`, `file_id`, `corporate_name`, `user_name`, `ncpD1`, `ncpD2`, `ncpD3`, `ncpD4`, `ncpD5`, `ncpCorporate`, `lvRiskD1`, `lvRiskD2`, `lvRiskD3`, `lvRiskD4`, `lvRiskD5`, `lvRiskCorpo`, `status_approval`, `approval`, `created_at`, `code_laporan`) VALUES
-(1, 1, 'ACME Corporation', 'John Doe', '1.75', '1.64', '1.35', '2.54', '1.00', '1.65', 'Initial Phase AA', 'Initial Phase AA', 'Initial Phase A', 'Emerging State AA', 'Initial Phase A', 'Initial Phase AA', 'Approved', 'Pak Wid','2023-11-01','01/II/RMI/2023');
-
 -- --------------------------------------------------------
 
 --
@@ -98,6 +84,7 @@ INSERT INTO `tbl_dimensi` (`dimensi_id`, `dimensi_name`, `category_id`) VALUES
 
 CREATE TABLE `tbl_files` (
   `id` int(11) NOT NULL,
+	`assessment_id` int(11) DEFAULT NULL,
   `file_name` varchar(255) DEFAULT NULL,
   `file_type` varchar(50) DEFAULT NULL,
   `file_link` varchar(255) DEFAULT NULL,
@@ -105,33 +92,6 @@ CREATE TABLE `tbl_files` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_files`
---
-
-INSERT INTO `tbl_files` (`id`, `file_name`, `file_type`, `file_link`, `created_at`) VALUES
-(1, 'example.pdf', 'PDF', 'https://example.com/example.pdf', '2023-10-25 03:08:04');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_file_data`
---
-
-CREATE TABLE `tbl_file_data` (
-  `id` int(11) NOT NULL,
-  `file_id` int(11) DEFAULT NULL,
-  `file_data` longblob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_file_data`
---
-
-INSERT INTO `tbl_file_data` (`id`, `file_id`, `file_data`) VALUES
-(1, 1, NULL);
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `tbl_kategori`
 --
@@ -538,8 +498,8 @@ INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_email`, `user_password`, `
 -- Indexes for table `tbl_assessment_data`
 --
 ALTER TABLE `tbl_assessment_data`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `file_id` (`file_id`);
+  ADD PRIMARY KEY (`id`);
+  
 
 --
 -- Indexes for table `tbl_dimensi`
@@ -552,15 +512,10 @@ ALTER TABLE `tbl_dimensi`
 -- Indexes for table `tbl_files`
 --
 ALTER TABLE `tbl_files`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_file_data`
---
-ALTER TABLE `tbl_file_data`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `file_id` (`file_id`);
+	ADD KEY `assessment_id` (`assessment_id`);
 
+--
 --
 -- Indexes for table `tbl_kategori`
 --
@@ -603,10 +558,6 @@ ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
---
-
---
 -- AUTO_INCREMENT for table `tbl_assessment_data`
 --
 ALTER TABLE `tbl_assessment_data`
@@ -621,9 +572,6 @@ ALTER TABLE `tbl_files`
 --
 -- AUTO_INCREMENT for table `tbl_file_data`
 --
-ALTER TABLE `tbl_file_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
@@ -631,26 +579,16 @@ ALTER TABLE `tbl_user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Constraints for dumped tables
---
-
---
 -- Constraints for table `tbl_assessment_data`
 --
-ALTER TABLE `tbl_assessment_data`
-  ADD CONSTRAINT `tbl_assessment_data_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `tbl_files` (`id`)ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tbl_files`
+  ADD CONSTRAINT `fk_files_assessment` FOREIGN KEY (`assessment_id`) REFERENCES `tbl_assessment_data` (`id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_dimensi`
 --
 ALTER TABLE `tbl_dimensi`
   ADD CONSTRAINT `tbl_dimensi_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `tbl_kategori` (`category_id`)ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_file_data`
---
-ALTER TABLE `tbl_file_data`
-  ADD CONSTRAINT `tbl_file_data_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `tbl_files` (`id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_parameter`
