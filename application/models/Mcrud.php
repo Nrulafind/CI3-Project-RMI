@@ -73,11 +73,49 @@ class Mcrud extends CI_Model
 	//get
 	public function get_assestment()
 	{
-		$asessment = $this->db->query("SELECT `tbl_assessment_data`.*, `tbl_files`.* 
-			FROM `tbl_files` 
-			LEFT JOIN `tbl_assessment_data` ON `tbl_assessment_data`.`id` = `tbl_files`.`assessment_id`; 
-		");
+		$asessment = $this->db->query("SELECT 
+		tbl_assessment_data.id AS `assessment_id`,
+		tbl_assessment_data.corporate_name,
+		tbl_assessment_data.user_name,
+		tbl_assessment_data.status_approval,
+		tbl_assessment_data.ncpD1,
+		tbl_assessment_data.lvRiskD1,
+		tbl_assessment_data.ncpD2,
+		tbl_assessment_data.lvRiskD2,
+		tbl_assessment_data.ncpD3,
+		tbl_assessment_data.lvRiskD3,
+		tbl_assessment_data.ncpD4,
+		tbl_assessment_data.lvRiskD4,
+		tbl_assessment_data.ncpD5,
+		tbl_assessment_data.lvRiskD5,
+		tbl_assessment_data.ncpCorporate,
+		tbl_assessment_data.lvRiskCorpo,
+		tbl_assessment_data.created_at,
+		tbl_assessment_data.code_laporan,
+		GROUP_CONCAT(tbl_files.id) AS file_ids,
+		GROUP_CONCAT(tbl_files.file_name) AS file_names,
+		GROUP_CONCAT(tbl_files.file_link) AS file_links
+	 FROM tbl_assessment_data
+	 LEFT JOIN tbl_files ON tbl_assessment_data.id = tbl_files.assessment_id
+	 GROUP BY `assessment_id`
+	 ORDER BY `assessment_id`;");
 		return $asessment->result_array();
+	}
+	public function get_edit_assesment($id)
+	{
+		$edit_assess = $this->db->query();
+		return $edit_assess;
+	}
+
+	public function editAsessment($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('tbl_assessment', $data);
+	}
+	public function deleteAsessment($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('tbl_assessment_data');
 	}
 
 	//akhir untuk model evaluation 

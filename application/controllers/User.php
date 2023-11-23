@@ -255,7 +255,7 @@ class User extends CI_Controller
 				'lvRiskD5' => $lvRiskD5,
 				'lvRiskCorpo' => $lvRiskCorporasi,
 				'status_approval' => "Pending",
-				'approval' => $this->session->userdata('name'),
+				'approval' => "",
 				'created_at' => $date,
 				'code_laporan' => $code_laporan,
 			);
@@ -272,12 +272,13 @@ class User extends CI_Controller
 			foreach ($data as $d) {
 				$parameter = str_replace('.', '_', $d['parameter_id']);
 
-				$directoryPath = "D:\\XAMPP\\htdocs\\jobs\\CI3-Project-RMI\\assets\\uploads\\evidenceUmum\\{$parameter}_{$name}";
+				$directoryPath = "D:\\XAMPP\\htdocs\\jobs\\CI3-Project-RMI\\assets\\uploads\\evidenceUmum/";
+				$directory = $directoryPath . $parameter . "_" . $name;
 
-				mkdir($directoryPath, 0777, true);
+				mkdir($directory, 0777, true);
 
 				// Call the upload_files function to handle file uploads
-				$upload_path = $directoryPath; // Updated the upload path
+				$upload_path = $directory; // Updated the upload path
 				$title = $this->input->post('formFile_' . $parameter);
 				$files = $_FILES['formFile_' . $parameter];
 

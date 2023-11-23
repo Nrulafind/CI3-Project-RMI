@@ -1,5 +1,5 @@
 <div class="container text-center">
-	<h1> Control Parameter ARMI Here</h1>
+	<h1> Control Parameter ARMI By <?= $this->session->userdata('name'); ?></h1>
 </div>
 
 <div class="container">

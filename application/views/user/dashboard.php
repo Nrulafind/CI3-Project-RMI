@@ -9,7 +9,7 @@
 
 	<!-- Content Row -->
 	<div class="row">
-		<!-- Earnings (Monthly) Card Example -->
+		<!-- Risk Corporation Card Example -->
 		<?php foreach ($result as $card) { ?>
 			<div class="col-xl-3 col-md-6 mb-4">
 				<div class="card border-left-primary shadow h-100 py-2">
@@ -18,7 +18,7 @@
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									Earnings (Monthly)
+									Risk Corporation : <?php echo $card['corporate_name']; ?>
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
 
@@ -62,7 +62,6 @@
 				<!-- Card Body -->
 				<div class="card-body">
 					<!-- <div class="chart-area"> -->
-					belum dinamis
 					<?php foreach ($result as $cv) { ?>
 						<!-- <canvas id="lolmyChart"></canvas> -->
 						<table class="table-bordered table-responsive table-hover">
@@ -72,11 +71,11 @@
 							</tr>
 							<tr>
 								<th>Tahun</th>
-								<th>2023</th>
+								<th><?= $cv['created_at'] ?></th>
 							</tr>
 							<tr>
 								<th>No. Laporan</th>
-								<th>01/II/RMI/2023</th>
+								<th><?= $cv['code_laporan'] ?></th>
 							</tr>
 							<tr>
 								<th>Model RMI</th>
@@ -91,7 +90,7 @@
 					<hr>
 					<?php foreach ($result as $t) { ?>
 						<table class="table-bordered table-responsive table-hover">
-							<thead>belum dinamsi
+							<thead>
 								<tr>
 									<th>Dimensi</th>
 									<th>Nilai Dimensi</th>
@@ -149,6 +148,19 @@
 				</div>
 				<!-- Card Body -->
 				<div class="card-body">
+					<!-- Date Filter -->
+					<!-- Date Filter -->
+					<div class="form-group">
+						<label for="filterDate">Filter by Date:</label>
+						<select class="form-control" id="filterDate" name="filterDate">
+							<?php foreach ($distinctDates as $date) : ?>
+								<option value="<?= $date ?>"><?= $date ?></option>
+							<?php endforeach; ?>
+						</select>
+						<button class="btn btn-primary mt-2" onclick="applyDateFilter()">Apply Filter</button>
+					</div>
+
+
 					<div class="chart-pie pt-4 pb-2">
 						<canvas class="pt-4 pb-2" id="myChart"></canvas>
 						<?php
@@ -162,6 +174,31 @@
 							$cap .= "$capaian1" . "," . "$capaian2" . "," . "$capaian3" . "," . "$capaian4" . "," . "$capaian5" . ",";
 						};
 						?>
+						<!-- Add this script at the end of your HTML body or in a separate JavaScript file -->
+						<script>
+							function applyDateFilter() {
+								var selectedDate = document.getElementById('filterDate').value;
+
+								// Trigger an AJAX request to update the charts based on the selected date
+								// You can use JavaScript frameworks like jQuery or fetch API for this purpose
+								// Example using jQuery:
+								$.ajax({
+									url: 'your_backend_endpoint.php',
+									type: 'POST',
+									data: {
+										filterDate: selectedDate
+									},
+									success: function(response) {
+										// Update your charts with the new data
+										// Example: updateChartData(response);
+									},
+									error: function(error) {
+										console.error('Error fetching data:', error);
+									}
+								});
+							}
+						</script>
+
 						<script>
 							var ctx = document.getElementById("myChart");
 							var myChart = new Chart(ctx, {
@@ -212,19 +249,19 @@
 					</div>
 					<div class="mt-4 text-center small">
 						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> D1 (Dimensi 1)
+							<i class="fas fa-circle text-primary"></i> D1 Budaya dan Kapabilitas Risiko
 						</span>
 						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> D2 (Dimensi 2)
+							<i class="fas fa-circle text-primary"></i> D2 Organisasi dan Tata Kelola Risiko
 						</span>
 						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> D3 (Dimensi 3)
+							<i class="fas fa-circle text-primary"></i> D3 Kerangka Risiko dan Kepatuhan
 						</span>
 						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> D4 (Dimensi 4)
+							<i class="fas fa-circle text-primary"></i> D4 Proses dan Kontrol Risiko
 						</span>
 						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> D5 (Dimensi 5)
+							<i class="fas fa-circle text-primary"></i> D5 Model, Data, dan Tata Kelola Risiko
 						</span>
 					</div>
 				</div>
@@ -241,7 +278,7 @@
 			<!-- Project Card Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Result</h6>
 				</div>
 				<div class="card-body">
 					<div class="table table-responsive">
@@ -251,12 +288,12 @@
 									<th scope="col" rowspan="2" class="align-middle">No </th>
 									<th scope="col" rowspan="2" class="align-middle">Nama Perusahaan</th>
 									<th scope="col" rowspan="2" class="align-middle">Nama Asessor</th>
-									<th scope="col" colspan="2">Capain Dimensi 1</th>
-									<th scope="col" colspan="2">Capain Dimensi 2</th>
-									<th scope="col" colspan="2">Capain Dimensi 3</th>
-									<th scope="col" colspan="2">Capain Dimensi 4</th>
-									<th scope="col" colspan="2">Capain Dimensi 5</th>
-									<th scope="col" colspan="2">Capain Dimensi Korporasi</th>
+									<th scope="col" colspan="2">Capaian Dimensi 1</th>
+									<th scope="col" colspan="2">Capaian Dimensi 2</th>
+									<th scope="col" colspan="2">Capaian Dimensi 3</th>
+									<th scope="col" colspan="2">Capaian Dimensi 4</th>
+									<th scope="col" colspan="2">Capaian Dimensi 5</th>
+									<th scope="col" colspan="2">Capaian Dimensi Korporasi</th>
 								</tr>
 								<tr>
 									<th scope="col" rowspan="1">Skor</th>
@@ -275,9 +312,10 @@
 							</thead>
 							<tbody>
 								<?php
+								$no = 1;
 								foreach ($result as $rmi) : ?>
 									<tr>
-										<th><?= $rmi['id'] ?></th>
+										<th><?= $no++ ?></th>
 										<td><?= $rmi['corporate_name'] ?></td>
 										<th><?= $rmi['user_name'] ?></th>
 										<th><?= number_format($rmi['ncpD1'], 2) ?></th>
