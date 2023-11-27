@@ -7,6 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Mcrud extends CI_Model
 {
 
+
 	//Cluster Umum Functions
 
 	//model function untuk Dashboard
@@ -44,7 +45,7 @@ class Mcrud extends CI_Model
 		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
 	WHERE 
 		`tbl_kategori`.`category_id` = `tbl_dimensi`.`category_id` 
-		AND `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id`;");
+		AND `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'A' ;");
 		return $dimensi_umum->result_array();
 	}
 	public function get_weight()
