@@ -101,16 +101,6 @@
 
 					</td>
 					<td>
-						<form name="approval">
-							<label class="align-start" for="<?= $hasil['assessment_id'] ?>">Choose Status</label>
-							<select class="form-select" name="<?= $hasil['assessment_id'] ?>" data-field="<?= $hasil['assessment_id'] ?>">
-								<option value="Pending" selected>Pending</option>
-								<option value="Approve">Approve</option>
-								<option value="Reject">Reject</option>
-							</select>
-						</form>
-					</td>
-					<td>
 						<div class="btn btn-outline-warning">
 							<a class="edit-assessment" href="<?= base_url('edit_asessment_') ?>/<?= $hasil['assessment_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 						</div>

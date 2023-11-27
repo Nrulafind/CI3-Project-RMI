@@ -4,25 +4,23 @@
 	<div class="container align-content-start">
 		<form id="editForm" action="<?= base_url('Admin/editAsessment'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 			<table class="table table-hover table-responsive">
-				<?php foreach ($assesment as $key) { ?>
-					<tr>
-						<td>
-							<label for="form-label" class="form-label">Corporate Name</label>
-							<input type="text" name="corporate_name" class="form-control" value="<?= $key['corporate_name'] ?>">
-						</td>
-						<td><label for="form-label" class="form-label">User name</label>
-							<input type="text" name="user_name" class="form-control" value="<?= $key['user_name'] ?>">
-						</td>
-					</tr>
-					<tr>
-						<td><label for="form-label"> No Laporan</label>
-							<input type="text" name="laporan" class="form-control" value="<?= $key['code_laporan'] ?>">
-						</td>
-						<td><label for="form-label">Tanggal Pengukuran</label>
-							<input type="date" name="tanggal" class="form-control" value="<?= $key['created_at'] ?>">
-						</td>
-					</tr>
-				<?php } ?>
+				<tr>
+					<td>
+						<label for="form-label" class="form-label">Corporate Name</label>
+						<input type="text" name="corporate_name" class="form-control">
+					</td>
+					<td><label for="form-label" class="form-label">User name</label>
+						<input type="text" name="user_name" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td><label for="form-label"> No Laporan</label>
+						<input type="text" name="laporan" class="form-control">
+					</td>
+					<td><label for="form-label">Tanggal Pengukuran</label>
+						<input type="date" name="tanggal" class="form-control">
+					</td>
+				</tr>
 			</table>
 			<table class="table table-hover table-responsive">
 				<thead class="align-self-center">
@@ -227,7 +225,8 @@
 				<tfoot>
 					<tr>
 						<td colspan="9">
-							<button type="submit" class="btn btn-success" name="submit" onclick="save()">Approve</button>
+							<button type="submit" class="btn btn-primary" name="submit" onclick="save()">Save</button>
+							<button type="submit" class="btn btn-success">Approve</button>
 							<button type="reset" class="btn btn-danger">Reject</button>
 						</td>
 					</tr>

@@ -40,6 +40,34 @@ CREATE TABLE `tbl_assessment_data` (
 	`code_laporan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE `tbl_assessment_data_detail` (
+  `id` int(11) NOT NULL,
+	`assessment_id` int(11) NOT NULL,
+`params1` int(11) NOT NULL,
+`params2` int(11) NOT NULL,
+`params3` int(11) NOT NULL,
+`params1` int(11) NOT NULL,
+`params2` int(11) NOT NULL,
+`params3` int(11) NOT NULL,
+`ncpD1` decimal(5,2) DEFAULT NULL,
+  `ncpD2` decimal(5,2) DEFAULT NULL,
+  `ncpD3` decimal(5,2) DEFAULT NULL,
+  `ncpD4` decimal(5,2) DEFAULT NULL,
+  `ncpD5` decimal(5,2) DEFAULT NULL,
+  `ncpCorporate` decimal(5,2) DEFAULT NULL,
+  `lvRiskD1` varchar(255) DEFAULT NULL,
+  `lvRiskD2` varchar(255) DEFAULT NULL,
+  `lvRiskD3` varchar(255) DEFAULT NULL,
+  `lvRiskD4` varchar(255) DEFAULT NULL,
+  `lvRiskD5` varchar(255) DEFAULT NULL,
+  `lvRiskCorpo` varchar(255) DEFAULT NULL,
+  `status_approval` varchar(255) DEFAULT NULL,
+  `approval` varchar(255) DEFAULT NULL,
+	`created_at` date DEFAULT NULL,
+	`code_laporan` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Dumping data for table `tbl_assessment_data`
 --

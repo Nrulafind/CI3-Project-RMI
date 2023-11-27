@@ -150,7 +150,7 @@
 				<div class="card-body">
 					<!-- Date Filter -->
 					<!-- Date Filter -->
-					<div class="form-group">
+					<div class="form-group" hidden>
 						<label for="filterDate">Filter by Date:</label>
 						<select class="form-control" id="filterDate" name="filterDate">
 							<?php foreach ($distinctDates as $date) : ?>
