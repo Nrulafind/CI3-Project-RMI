@@ -18,32 +18,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 
-CREATE TABLE `tbl_assessment_data` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `tbl_assessment` (
+  `assessment_id` int(11) NOT NULL,
   `corporate_name` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
-  `ncpD1` decimal(5,2) DEFAULT NULL,
-  `ncpD2` decimal(5,2) DEFAULT NULL,
-  `ncpD3` decimal(5,2) DEFAULT NULL,
-  `ncpD4` decimal(5,2) DEFAULT NULL,
-  `ncpD5` decimal(5,2) DEFAULT NULL,
-  `ncpCorporate` decimal(5,2) DEFAULT NULL,
-  `lvRiskD1` varchar(255) DEFAULT NULL,
-  `lvRiskD2` varchar(255) DEFAULT NULL,
-  `lvRiskD3` varchar(255) DEFAULT NULL,
-  `lvRiskD4` varchar(255) DEFAULT NULL,
-  `lvRiskD5` varchar(255) DEFAULT NULL,
-  `lvRiskCorpo` varchar(255) DEFAULT NULL,
-  `status_approval` varchar(255) DEFAULT NULL,
   `approval` varchar(255) DEFAULT NULL,
-	`created_at` date DEFAULT NULL,
-	`code_laporan` varchar(255) DEFAULT NULL
+	`status_approval` varchar(255) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+	`code_laporan` varchar(255) DEFAULT NULL,
+	`capaian_dimensi` longtext DEFAULT NULL,
+	`level_dimensi` longtext DEFAULT NULL,
+	`params_value` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_assessment_data`
+-- Dumping data for table `tbl_assessment`
 --
 -- --------------------------------------------------------
+--
+-- Table structure for table `tbl_file_assessment`
+--
+
+CREATE TABLE `tbl_file_assessment` (
+  `file_id` int(11) NOT NULL,
+	`assessment_id` int(11) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `file_type` varchar(50) DEFAULT NULL,
+  `file_link` text DEFAULT NULL,
+	`file_size` text DEFAULT NULL,
+  `upload_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `tbl_dimensi`
@@ -77,20 +81,6 @@ INSERT INTO `tbl_dimensi` (`dimensi_id`, `dimensi_name`, `category_id`) VALUES
 ('E.', 'Model, Data, dan Teknologi Risiko', 1);
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `tbl_files`
---
-
-CREATE TABLE `tbl_files` (
-  `id` int(11) NOT NULL,
-	`assessment_id` int(11) DEFAULT NULL,
-  `file_name` varchar(255) DEFAULT NULL,
-  `file_type` varchar(50) DEFAULT NULL,
-  `file_link` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 --
 -- Table structure for table `tbl_kategori`
@@ -495,11 +485,18 @@ INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_email`, `user_password`, `
 --
 
 --
--- Indexes for table `tbl_assessment_data`
+-- Indexes for table `tbl_assessment`
 --
-ALTER TABLE `tbl_assessment_data`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `tbl_assessment`
+  ADD PRIMARY KEY (`assessment_id`);
   
+--
+-- Indexes for table `tbl_file_assessment`
+--
+ALTER TABLE `tbl_file_assessment`
+  ADD PRIMARY KEY (`file_id`),
+	ADD KEY `assessment_id` (`assessment_id`);
+
 
 --
 -- Indexes for table `tbl_dimensi`
@@ -507,13 +504,6 @@ ALTER TABLE `tbl_assessment_data`
 ALTER TABLE `tbl_dimensi`
   ADD PRIMARY KEY (`dimensi_id`),
   ADD KEY `category_id` (`category_id`);
-
---
--- Indexes for table `tbl_files`
---
-ALTER TABLE `tbl_files`
-  ADD PRIMARY KEY (`id`),
-	ADD KEY `assessment_id` (`assessment_id`);
 
 --
 --
@@ -558,16 +548,16 @@ ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for table `tbl_assessment_data`
+-- AUTO_INCREMENT for table `tbl_assessment`
 --
-ALTER TABLE `tbl_assessment_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tbl_assessment`
+  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tbl_files`
+-- AUTO_INCREMENT for table `tbl_file_assessment`
 --
-ALTER TABLE `tbl_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tbl_file_assessment`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_file_data`
@@ -579,10 +569,10 @@ ALTER TABLE `tbl_user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Constraints for table `tbl_assessment_data`
+-- Constraints for table `tbl_assessment`
 --
-ALTER TABLE `tbl_files`
-  ADD CONSTRAINT `fk_files_assessment` FOREIGN KEY (`assessment_id`) REFERENCES `tbl_assessment_data` (`id`)ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tbl_file_assessment`
+  ADD CONSTRAINT `fk_files_assessment` FOREIGN KEY (`assessment_id`) REFERENCES `tbl_assessment` (`assessment_id`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_dimensi`

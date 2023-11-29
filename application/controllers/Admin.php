@@ -35,7 +35,14 @@ class Admin extends CI_Controller
 
 	public function formUmum()
 	{
-		$data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
+		$data['dimensi_id'] = $this->Mcrud->dimensi();
+		$data['dimensi_umum_A'] = $this->Mcrud->get_dimensi_A();
+		$data['dimensi_umum_B'] = $this->Mcrud->get_dimensi_B();
+		$data['dimensi_umum_C'] = $this->Mcrud->get_dimensi_C();
+		$data['dimensi_umum_D'] = $this->Mcrud->get_dimensi_D();
+		$data['dimensi_umum_E'] = $this->Mcrud->get_dimensi_E();
+
+
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -44,60 +51,56 @@ class Admin extends CI_Controller
 	}
 	public function calculateRisk()
 	{
+		// Retrieve POST data for various dimensions and sub-dimensions
+		$ncp1 = $this->input->post('A_1_1') * 0.33;
+		$ncp2 = $this->input->post('A_2_2') * 0.33;
+		$ncp3 = $this->input->post('A_2_3') * 0.33;
+		$ncp4 = $this->input->post('B_1_4') * 0.06;
+		$ncp5 = $this->input->post('B_1_5') * 0.06;
+		$ncp6 = $this->input->post('B_2_6') * 0.06;
+		$ncp7 = $this->input->post('B_2_7') * 0.06;
+		$ncp8 = $this->input->post('B_2_8') * 0.06;
+		$ncp9 = $this->input->post('B_2_9') * 0.06;
+		$ncp10 = $this->input->post('B_2_10') * 0.06;
+		$ncp11 = $this->input->post('B_2_11') * 0.06;
+		$ncp12 = $this->input->post('B_2_12') * 0.06;
+		$ncp13 = $this->input->post('B_3_13') * 0.06;
+		$ncp14 = $this->input->post('B_3_14') * 0.06;
+		$ncp15 = $this->input->post('B_3_15') * 0.06;
+		$ncp16 = $this->input->post('B_3_16') * 0.06;
+		$ncp17 = $this->input->post('B_3_17') * 0.06;
+		$ncp18 = $this->input->post('B_3_18') * 0.06;
+		$ncp19 = $this->input->post('B_3_19') * 0.06;
+		$ncp20 = $this->input->post('C_1_20') * 0.07;
+		$ncp21 = $this->input->post('C_1_21') * 0.07;
+		$ncp22 = $this->input->post('C_1_22') * 0.07;
+		$ncp23 = $this->input->post('C_1_23') * 0.07;
+		$ncp24 = $this->input->post('C_1_24') * 0.07;
+		$ncp25 = $this->input->post('C_1_25') * 0.07;
+		$ncp26 = $this->input->post('C_1_26') * 0.07;
+		$ncp27 = $this->input->post('C_2_27') * 0.07;
+		$ncp28 = $this->input->post('C_2_28') * 0.07;
+		$ncp29 = $this->input->post('C_2_29') * 0.07;
+		$ncp30 = $this->input->post('C_2_30') * 0.07;
+		$ncp31 = $this->input->post('C_3_31') * 0.07;
+		$ncp32 = $this->input->post('C_4_32') * 0.07;
+		$ncp33 = $this->input->post('C_5_33') * 0.07;
+		$ncp34 = $this->input->post('D_1_34') * 0.14;
+		$ncp35 = $this->input->post('D_2_35') * 0.14;
+		$ncp36 = $this->input->post('D_2_36') * 0.14;
+		$ncp37 = $this->input->post('D_2_37') * 0.14;
+		$ncp38 = $this->input->post('D_3_38') * 0.14;
+		$ncp39 = $this->input->post('D_3_39') * 0.14;
+		$ncp40 = $this->input->post('D_4_40') * 0.14;
+		$ncp41 = $this->input->post('E_1_41') * 0.50;
+		$ncp42 = $this->input->post('E_2_42') * 0.50;
 
-		$data = $this->Mcrud->get_weight();
-		foreach ($data as $dkey) {
-
-			// Retrieve POST data for various dimensions and sub-dimensions
-			$ncp1 = $this->input->post('A_1_1') * 0.33;
-			$ncp2 = $this->input->post('A_2_2') * 0.33;
-			$ncp3 = $this->input->post('A_2_3') * 0.33;
-			$ncp4 = $this->input->post('B_1_4') * 0.06;
-			$ncp5 = $this->input->post('B_1_5') * 0.06;
-			$ncp6 = $this->input->post('B_2_6') * 0.06;
-			$ncp7 = $this->input->post('B_2_7') * 0.06;
-			$ncp8 = $this->input->post('B_2_8') * 0.06;
-			$ncp9 = $this->input->post('B_2_9') * 0.06;
-			$ncp10 = $this->input->post('B_2_10') * 0.06;
-			$ncp11 = $this->input->post('B_2_11') * 0.06;
-			$ncp12 = $this->input->post('B_2_12') * 0.06;
-			$ncp13 = $this->input->post('B_3_13') * 0.06;
-			$ncp14 = $this->input->post('B_3_14') * 0.06;
-			$ncp15 = $this->input->post('B_3_15') * 0.06;
-			$ncp16 = $this->input->post('B_3_16') * 0.06;
-			$ncp17 = $this->input->post('B_3_17') * 0.06;
-			$ncp18 = $this->input->post('B_3_18') * 0.06;
-			$ncp19 = $this->input->post('B_3_19') * 0.06;
-			$ncp20 = $this->input->post('C_1_20') * 0.07;
-			$ncp21 = $this->input->post('C_1_21') * 0.07;
-			$ncp22 = $this->input->post('C_1_22') * 0.07;
-			$ncp23 = $this->input->post('C_1_23') * 0.07;
-			$ncp24 = $this->input->post('C_1_24') * 0.07;
-			$ncp25 = $this->input->post('C_1_25') * 0.07;
-			$ncp26 = $this->input->post('C_1_26') * 0.07;
-			$ncp27 = $this->input->post('C_2_27') * 0.07;
-			$ncp28 = $this->input->post('C_2_28') * 0.07;
-			$ncp29 = $this->input->post('C_2_29') * 0.07;
-			$ncp30 = $this->input->post('C_2_30') * 0.07;
-			$ncp31 = $this->input->post('C_3_31') * 0.07;
-			$ncp32 = $this->input->post('C_4_32') * 0.07;
-			$ncp33 = $this->input->post('C_5_33') * 0.07;
-			$ncp34 = $this->input->post('D_1_34') * 0.14;
-			$ncp35 = $this->input->post('D_2_35') * 0.14;
-			$ncp36 = $this->input->post('D_2_36') * 0.14;
-			$ncp37 = $this->input->post('D_2_37') * 0.14;
-			$ncp38 = $this->input->post('D_3_38') * 0.14;
-			$ncp39 = $this->input->post('D_3_39') * 0.14;
-			$ncp40 = $this->input->post('D_4_40') * 0.14;
-			$ncp41 = $this->input->post('E_1_41') * 0.50;
-			$ncp42 = $this->input->post('E_2_42') * 0.50;
-		}
 		// Calculate dimension values
-		$ncpD1 = $ncp1 + $ncp2 + $ncp3;
-		$ncpD2 = $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19;
-		$ncpD3 = $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33;
-		$ncpD4 = $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40;
-		$ncpD5 = $ncp41 + $ncp42;
+		$ncpD1 = $ncp1 + $ncp2 + $ncp3 == 0 ? 0 : $ncp1 + $ncp2 + $ncp3;
+		$ncpD2 = $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19  == 0 ? 0 : $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19;
+		$ncpD3 = $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33  == 0 ? 0 : $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33;
+		$ncpD4 = $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40  == 0 ? 0 : $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40;
+		$ncpD5 = $ncp41 + $ncp42  == 0 ? 0 : $ncp41 + $ncp42;
 
 		// Calculate corporate risk
 		$ncpCorporate = ($ncpD1 + $ncpD2 + $ncpD3 + $ncpD4 + $ncpD5) / 5;

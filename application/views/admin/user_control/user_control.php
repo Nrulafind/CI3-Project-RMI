@@ -24,6 +24,7 @@
 				<tr>
 					<td><?= $u['user_id'] ?></td>
 					<td><?= $u['user_name'] ?></td>
+					<td><?= $u['user_password'] ?></td>
 					<td><?= $u['user_email'] ?></td>
 					<td><?php
 						if ($u['user_akses'] == 1) {

@@ -1,19 +1,26 @@
 <?php
 
 use PhpParser\Node\Stmt\TryCatch;
+use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mcrud extends CI_Model
 {
 
+	function __construct()
+	{
+		parent::__construct();
+		$dimensi_id = $this->db->query("SELECT DISTINCT dimensi_id FROM `tbl_dimensi` WHERE category_id = 3;");
+		return $dimensi_id;
+	}
 
 	//Cluster Umum Functions
 
 	//model function untuk Dashboard
 	public function get_all_data()
 	{
-		$result = $this->db->get('tbl_assessment_data');
+		$result = $this->db->get('tbl_assessment');
 		return $result->result_array();
 	}
 
@@ -22,19 +29,22 @@ class Mcrud extends CI_Model
 
 	//model function untuk asessment data
 	//get
+	public function dimensi()
+	{
+		$dimensi_id = $this->db->query("SELECT DISTINCT dimensi_id FROM `tbl_dimensi` WHERE category_id = 3;");
+		return $dimensi_id->result_array();
+	}
+
 	public function get_dimensi_umum()
 	{
 		$dimensi_umum = $this->db->query("SELECT DISTINCT 
-		`tbl_kategori`.*, 
 		`tbl_dimensi`.*, 
 		`tbl_sub_dimensi`.*, 
 		`tbl_question`.*, 
 		`tbl_parameter`.*, 
 		`tbl_phase`.*
 	FROM 
-		`tbl_kategori` 
-	LEFT JOIN 
-		`tbl_dimensi` ON `tbl_dimensi`.`category_id` = `tbl_kategori`.`category_id` 
+		`tbl_dimensi` 
 	LEFT JOIN 
 		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
 	LEFT JOIN 
@@ -43,10 +53,128 @@ class Mcrud extends CI_Model
 		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
 	LEFT JOIN 
 		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
-	WHERE 
-		`tbl_kategori`.`category_id` = `tbl_dimensi`.`category_id` 
-		AND `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'A' ;");
-		return $dimensi_umum->result_array();
+	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id`;")->result_array();
+		return $dimensi_umum;
+	}
+
+	public function get_dimensi_A()
+	{
+
+		$dimensi_umum_A = $this->db->query("SELECT DISTINCT 
+		`tbl_dimensi`.*, 
+		`tbl_sub_dimensi`.*, 
+		`tbl_question`.*, 
+		`tbl_parameter`.*, 
+		`tbl_phase`.*
+	FROM 
+		`tbl_dimensi` 
+	LEFT JOIN 
+		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
+	LEFT JOIN 
+		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
+	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'A';")->result_array();
+
+		return $dimensi_umum_A;
+	}
+
+	public function get_dimensi_B()
+	{
+
+		$dimensi_umum_B = $this->db->query("SELECT DISTINCT 
+		`tbl_dimensi`.*, 
+		`tbl_sub_dimensi`.*, 
+		`tbl_question`.*, 
+		`tbl_parameter`.*, 
+		`tbl_phase`.*
+	FROM 
+		`tbl_dimensi` 
+	LEFT JOIN 
+		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
+	LEFT JOIN 
+		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
+	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'B';")->result_array();
+
+		return $dimensi_umum_B;
+	}
+
+	public function get_dimensi_C()
+	{
+
+		$dimensi_umum_C = $this->db->query("SELECT DISTINCT 
+		`tbl_dimensi`.*, 
+		`tbl_sub_dimensi`.*, 
+		`tbl_question`.*, 
+		`tbl_parameter`.*, 
+		`tbl_phase`.*
+	FROM 
+		`tbl_dimensi` 
+	LEFT JOIN 
+		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
+	LEFT JOIN 
+		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
+	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'C';")->result_array();
+
+		return $dimensi_umum_C;
+	}
+
+	public function get_dimensi_D()
+	{
+
+		$dimensi_umum_D = $this->db->query("SELECT DISTINCT 
+		`tbl_dimensi`.*, 
+		`tbl_sub_dimensi`.*, 
+		`tbl_question`.*, 
+		`tbl_parameter`.*, 
+		`tbl_phase`.*
+	FROM 
+		`tbl_dimensi` 
+	LEFT JOIN 
+		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
+	LEFT JOIN 
+		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
+	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'D';")->result_array();
+
+		return $dimensi_umum_D;
+	}
+
+	public function get_dimensi_E()
+	{
+
+		$dimensi_umum_E = $this->db->query("SELECT DISTINCT 
+		`tbl_dimensi`.*, 
+		`tbl_sub_dimensi`.*, 
+		`tbl_question`.*, 
+		`tbl_parameter`.*, 
+		`tbl_phase`.*
+	FROM 
+		`tbl_dimensi` 
+	LEFT JOIN 
+		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
+	LEFT JOIN 
+		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
+	LEFT JOIN 
+		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
+	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'E';")->result_array();
+
+		return $dimensi_umum_E;
 	}
 	public function get_weight()
 	{
@@ -57,12 +185,12 @@ class Mcrud extends CI_Model
 
 	public function insertFile($fileInfo)
 	{
-		$this->db->insert('tbl_files', $fileInfo);
+		$this->db->insert('tbl_file_assessment', $fileInfo);
 		return $this->db->insert_id();
 	}
 	public function insertAssessmentData($assessmentData)
 	{
-		$this->db->insert('tbl_assessment_data', $assessmentData);
+		$this->db->insert('tbl_assessment', $assessmentData);
 		return $this->db->insert_id();
 	}
 
@@ -75,29 +203,21 @@ class Mcrud extends CI_Model
 	public function get_assestment()
 	{
 		$asessment = $this->db->query("SELECT 
-		tbl_assessment_data.id AS `assessment_id`,
-		tbl_assessment_data.corporate_name,
-		tbl_assessment_data.user_name,
-		tbl_assessment_data.status_approval,
-		tbl_assessment_data.ncpD1,
-		tbl_assessment_data.lvRiskD1,
-		tbl_assessment_data.ncpD2,
-		tbl_assessment_data.lvRiskD2,
-		tbl_assessment_data.ncpD3,
-		tbl_assessment_data.lvRiskD3,
-		tbl_assessment_data.ncpD4,
-		tbl_assessment_data.lvRiskD4,
-		tbl_assessment_data.ncpD5,
-		tbl_assessment_data.lvRiskD5,
-		tbl_assessment_data.ncpCorporate,
-		tbl_assessment_data.lvRiskCorpo,
-		tbl_assessment_data.created_at,
-		tbl_assessment_data.code_laporan,
-		GROUP_CONCAT(tbl_files.id) AS file_ids,
-		GROUP_CONCAT(tbl_files.file_name) AS file_names,
-		GROUP_CONCAT(tbl_files.file_link) AS file_links
-	 FROM tbl_assessment_data
-	 LEFT JOIN tbl_files ON tbl_assessment_data.id = tbl_files.assessment_id
+		tbl_assessment.assessment_id AS `assessment_id`,
+		tbl_assessment.corporate_name,
+		tbl_assessment.user_name,
+		tbl_assessment.approval,
+		tbl_assessment.status_approval,
+		tbl_assessment.created_at,
+		tbl_assessment.code_laporan,
+		tbl_assessment.capaian_dimensi,
+		tbl_assessment.level_dimensi,
+		tbl_assessment.params_value,
+		GROUP_CONCAT(tbl_file_assessment.file_id) AS file_ids,
+		GROUP_CONCAT(tbl_file_assessment.file_name) AS file_names,
+		GROUP_CONCAT(tbl_file_assessment.file_link) AS file_links
+	 FROM tbl_assessment
+	 LEFT JOIN tbl_file_assessment ON tbl_assessment.assessment_id = tbl_file_assessment.assessment_id
 	 GROUP BY `assessment_id`
 	 ORDER BY `assessment_id`;");
 		return $asessment->result_array();
@@ -116,7 +236,7 @@ class Mcrud extends CI_Model
 	public function deleteAsessment($id)
 	{
 		$this->db->where('id', $id);
-		$this->db->delete('tbl_assessment_data');
+		$this->db->delete('tbl_assessment');
 	}
 
 	//akhir untuk model evaluation 
@@ -125,7 +245,7 @@ class Mcrud extends CI_Model
 	//get
 	public function get_user()
 	{
-		$user = $this->db->query("SELECT * FROM `tbl_user`");
+		$user = $this->db->query("SELECT user_id, user_name, user_email, user_password, user_akses, user_status FROM `tbl_user`");
 		return $user->result_array();
 	}
 	public function get_user_by_id($id)
