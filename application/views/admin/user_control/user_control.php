@@ -12,6 +12,7 @@
 				<th scope="col">No</th>
 				<th scope="col">Nama</th>
 				<th scope="col">email</th>
+				<th scope="col">Password</th>
 				<th scope="col">Akses</th>
 				<th scope="col">status</th>
 				<th scope="col" colspan="2">Action</th>
@@ -19,13 +20,14 @@
 		</thead>
 		<tbody>
 			<?php
+			$key = 'Lock APLog';
 			$no = 1;
 			foreach ($user as $u) { ?>
 				<tr>
-					<td><?= $u['user_id'] ?></td>
+					<td><?= $no++; ?></td>
 					<td><?= $u['user_name'] ?></td>
-					<td><?= $u['user_password'] ?></td>
 					<td><?= $u['user_email'] ?></td>
+					<td><?= $this->encryption->decrypt($u['user_password']) ?></td>
 					<td><?php
 						if ($u['user_akses'] == 1) {
 							echo "Vice President";

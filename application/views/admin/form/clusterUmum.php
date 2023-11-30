@@ -2,7 +2,7 @@
 	<h1>Welcome to ARMI <?php echo $this->session->userdata('name');	?></h1>
 
 	<div class="container align-content-start">
-		<form id="" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+		<form id="myForm" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 			<table class="card col table table-hover table-responsive">
 				<thead class="card-header row">
 					<tr class="col-auto">
@@ -119,7 +119,7 @@
 									<td>Hasil Proyeksi Capaian Dimensi</td>
 									<?php if ($i == $I) {
 										$i++; ?>
-										<td>Skor:<div>
+										<td>Skor:<div id="ncpD1">
 												<span id="ncpD1"></span>
 											</div>
 										</td>
@@ -286,12 +286,12 @@
 									<td>Hasil Proyeksi Capaian Dimensi</td>
 									<?php if ($i == $I) {
 										$i++; ?>
-										<td>Skor:<div id="ncpD2<?= $i; ?>">
-												<span id="ncpD<?= $i; ?>"></span>
+										<td>Skor:<div id="ncpD2">
+												<span id="ncpD2"></span>
 											</div>
 										</td>
-										<td>Tingkat:<div id="lvRiskD<?= $i; ?>">
-												<span id="lvRiskD<?= $i; ?>"></span>
+										<td>Tingkat:<div id="lvRiskD2">
+												<span id="lvRiskD2"></span>
 											</div>
 										</td>
 
@@ -448,12 +448,12 @@
 									<td>Hasil Proyeksi Capaian Dimensi</td>
 									<?php if ($i == $I) {
 										$i++; ?>
-										<td>Skor:<div id="ncpD<?= $i; ?>">
-												<span id="ncpD<?= $i; ?>"></span>
+										<td>Skor:<div id="ncpD3">
+												<span id="ncpD3"></span>
 											</div>
 										</td>
-										<td>Tingkat:<div id="lvRiskD<?= $i; ?>">
-												<span id="lvRiskD<?= $i; ?>"></span>
+										<td>Tingkat:<div id="lvRiskD3">
+												<span id="lvRiskD3"></span>
 											</div>
 										</td>
 
@@ -616,12 +616,12 @@
 									<td>Hasil Proyeksi Capaian Dimensi</td>
 									<?php if ($i == $I) {
 										$i++; ?>
-										<td>Skor:<div id="ncpD<?= $i; ?>">
-												<span id="ncpD<?= $i; ?>"></span>
+										<td>Skor:<div id="ncpD4">
+												<span id="ncpD4"></span>
 											</div>
 										</td>
-										<td>Tingkat:<div id="lvRiskD<?= $i; ?>">
-												<span id="lvRiskD<?= $i; ?>"></span>
+										<td>Tingkat:<div id="lvRiskD4">
+												<span id="lvRiskD4"></span>
 											</div>
 										</td>
 
@@ -780,8 +780,8 @@
 									<td>Hasil Proyeksi Capaian Dimensi</td>
 									<?php if ($i == $I) {
 										$i++; ?>
-										<td>Skor:<div id="ncpD<?= $i; ?>">
-												<span id="ncpD<?= $i; ?>"></span>
+										<td>Skor:<div id="ncpD5">
+												<span id="ncpD5"></span>
 											</div>
 										</td>
 										<td>Tingkat:<div id="lvRiskD<?= $i; ?>">
@@ -976,12 +976,11 @@
 			// Send user input to the server via AJAX for calculation
 			$.ajax({
 				type: 'POST',
-				url: '<?php echo base_url('Admin/calculateRisk'); ?>', // Use form action
+				url: '<?= base_url('proyeksi'); ?>', // Use form action
 				data: formData,
 				dataType: 'json',
 				success: function(data) {
 					console.log(data);
-					console.log(formData);
 					// Update the predictions for various fields
 					$.each(data, function(key, value) {
 						$('#' + key + 'span').text(value);

@@ -245,7 +245,7 @@ class Mcrud extends CI_Model
 	//get
 	public function get_user()
 	{
-		$user = $this->db->query("SELECT user_id, user_name, user_email, user_password, user_akses, user_status FROM `tbl_user`");
+		$user = $this->db->query("SELECT * FROM `tbl_user`");
 		return $user->result_array();
 	}
 	public function get_user_by_id($id)

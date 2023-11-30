@@ -10,6 +10,7 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->library('encryption');
 
 		if ($this->session->userdata('logged') != true && $this->session->userdata('access') != 'Super Admin') {
 			$url = base_url('/');
@@ -832,7 +833,7 @@ class Admin extends CI_Controller
 			$status = $this->input->post('status');
 
 			// Hash the password using SHA-224
-			$hashed_password = hash('sha224', $password);
+			$hashed_password = 	$this->encryption->encrypt($password);
 
 			$data = array(
 				'user_name' => $name,
@@ -856,7 +857,7 @@ class Admin extends CI_Controller
 			$akses = $this->input->post('akses');
 			$status = $this->input->post('status');
 
-			$hashed_password = hash('sha224', $password);
+			$hashed_password = 	$this->encryption->encrypt($password);
 
 			$data = array(
 				'user_name' => $name,
