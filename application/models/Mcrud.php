@@ -182,24 +182,28 @@ class Mcrud extends CI_Model
 		return $weight_umum->result_array();
 	}
 
-
-	public function insertFile($fileInfo)
-	{
-		$this->db->insert('tbl_file_assessment', $fileInfo);
-		return $this->db->insert_id();
-	}
 	public function insertAssessmentData($assessmentData)
 	{
 		$this->db->insert('tbl_assessment', $assessmentData);
 		return $this->db->insert_id();
 	}
 
-
+	public function insertFile($fileInfo)
+	{
+		$this->db->insert('tbl_file_assessment', $fileInfo);
+		return $this->db->insert_id();
+	}
 
 	//akhir untuk model assessment data
 
 	//model function untuk evaluations
 	//get
+
+	public function get_id_assess()
+	{
+		$id = $this->db->query("SELECT assessment_id FROM tbl_assessment");
+		return $id;
+	}
 	public function get_assestment()
 	{
 		$asessment = $this->db->query("SELECT 
@@ -224,7 +228,25 @@ class Mcrud extends CI_Model
 	}
 	public function get_edit_assesment($id)
 	{
-		$edit_assess = $this->db->query();
+		$edit_assess = $this->db->query("SELECT 
+		tbl_assessment.assessment_id AS `assessment_id`,
+		tbl_assessment.corporate_name,
+		tbl_assessment.user_name,
+		tbl_assessment.approval,
+		tbl_assessment.status_approval,
+		tbl_assessment.created_at,
+		tbl_assessment.code_laporan,
+		tbl_assessment.capaian_dimensi,
+		tbl_assessment.level_dimensi,
+		tbl_assessment.params_value,
+		GROUP_CONCAT(tbl_file_assessment.file_id) AS file_ids,
+		GROUP_CONCAT(tbl_file_assessment.file_name) AS file_names,
+		GROUP_CONCAT(tbl_file_assessment.file_link) AS file_links
+	 FROM tbl_assessment
+	 LEFT JOIN tbl_file_assessment ON tbl_assessment.assessment_id = tbl_file_assessment.assessment_id
+	 WHERE tbl_file_assessment.assessment_id = $id
+	 GROUP BY `assessment_id`
+	 ORDER BY `assessment_id`;");
 		return $edit_assess;
 	}
 

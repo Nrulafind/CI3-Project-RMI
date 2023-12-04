@@ -61,7 +61,13 @@ $route['logout'] = 'Auth/logout';
 $route['dashboard'] = 'Admin/index'; //untuk dashboard nya
 $route['cluster_umum'] = 'Admin/formUmum'; //untuk routing ke form perhitungan cluster umum
 $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db
-$route['proyeksi'] = 'Admin/calculateRisk'; // routing proses kalulasi tanpa reload
+//$route['proyeksi'] = 'Admin/calculateRisk'; // routing proses kalulasi tanpa reload
+$route['proyeksiA'] = 'Admin/calculateRiskA';
+$route['proyeksiB'] = 'Admin/calculateRiskB';
+$route['proyeksiC'] = 'Admin/calculateRiskC';
+$route['proyeksiD'] = 'Admin/calculateRiskD';
+$route['proyeksiE'] = 'Admin/calculateRiskE';
+
 
 $route['asessment_eval'] = 'Admin/asessmentEval';
 $route['edit_asessment/(:num)'] = 'Admin/editAsessment/$1';

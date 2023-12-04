@@ -21,7 +21,7 @@
 		<script type="text/javascript" src="<?= base_url('assets/Chart.js');  ?>"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-		<script src="<?= base_url("proyeksi"); ?>"></script>
+		<script src="<?= base_url("proyeksiA"); ?>"></script>
 	</head>
 <?php } elseif ($this->session->userdata('access') == "Manager") { ?>
 	<!DOCTYPE html>

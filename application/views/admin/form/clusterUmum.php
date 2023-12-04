@@ -8,7 +8,7 @@
 					<tr class="col-auto">
 						<td>
 							<label for="form-label" class="form-label" hidden>Hidden input</label>
-							<input type="text" name="corporate_name" class="form-control" hidden>
+							<input type="text" name="id" class="form-control" value="<?= $id; ?>" hidden>
 						</td>
 					</tr>
 				</thead>
@@ -66,6 +66,13 @@
 				?>
 					<form id="myFormA" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 
+						<tr class="col-auto">
+							<td>
+								<label for="form-label" class="form-label" hidden>Hidden input</label>
+								<input type="text" name="id" class="form-control" value="<?= "0" ?>" hidden>
+							</td>
+						</tr>
+
 						<h1>Dimensi <?= $dimensi['dimensi_id']; ?></h1>
 						<tbody>
 							<?php
@@ -119,12 +126,13 @@
 									<td>Hasil Proyeksi Capaian Dimensi</td>
 									<?php if ($i == $I) {
 										$i++; ?>
+
 										<td>Skor:<div id="ncpD1">
-												<span id="ncpD1"></span>
+
 											</div>
 										</td>
 										<td>Tingkat:<div id="lvRiskD1">
-												<span id="lvRiskD1"></span>
+
 											</div>
 										</td>
 
@@ -181,8 +189,8 @@
 										<td rowspan="<?= $rowspan_parameter_id ?>">
 
 											<label class="align-start" for="<?= $parameter_id ?>">Pilih INDEX YANG SESUAI *</label>
-											<select class="form-select" name="<?= $parameter_id ?>" data-field="<?= $parameter_id ?>">
-												<option value="0" selected>None</option>
+											<select class="form-select" name="<?= str_replace('.', '_', $parameter_id); ?>" data-field="<?= str_replace('.', '_', $parameter_id); ?>" onchange="updatePredictions('myFormA')">
+												<option value=" 0" selected>None</option>
 												<option value="1"> 1. Fase Awal (Initial Phase)</option>
 												<option value="2"> 2. Fase Berkembang (Emerging State)</option>
 												<option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
@@ -222,7 +230,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="9">
-									<button type="submit" class="btn btn-primary" name="submit" onclick="save()">Submit</button>
+									<button type="button" class="btn btn-primary" name="submit" onclick="save('myFormA')">Submit</button>
 									<button type="reset" class="btn btn-danger">Reset</button>
 								</td>
 							</tr>
@@ -234,6 +242,14 @@
 				?>
 					<form id="myFormB" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 						<h1>Dimensi <?= $dimensi['dimensi_id']; ?></h1>
+
+						<tr class="col-auto">
+							<td>
+								<label for="form-label" class="form-label" hidden>Hidden input</label>
+								<input type="text" name="id" class="form-control" value="<?= "0" ?>" hidden>
+							</td>
+						</tr>
+
 						<tbody>
 							<?php
 							foreach ($dimensi_umum_B as $row) {
@@ -287,11 +303,11 @@
 									<?php if ($i == $I) {
 										$i++; ?>
 										<td>Skor:<div id="ncpD2">
-												<span id="ncpD2"></span>
+
 											</div>
 										</td>
 										<td>Tingkat:<div id="lvRiskD2">
-												<span id="lvRiskD2"></span>
+
 											</div>
 										</td>
 
@@ -346,9 +362,8 @@
 									<?php
 									if ($parameter_id !== $prev_parameter_id) { ?>
 										<td rowspan="<?= $rowspan_parameter_id ?>">
-
 											<label class="align-start" for="<?= $parameter_id ?>">Pilih INDEX YANG SESUAI *</label>
-											<select class="form-select" name="<?= $parameter_id ?>" data-field="<?= $parameter_id ?>">
+											<select class="form-select" name="<?= str_replace('.', '_', $parameter_id); ?>" data-field="<?= str_replace('.', '_', $parameter_id); ?>" onchange="updatePredictions('myFormB')">
 												<option value="0" selected>None</option>
 												<option value="1"> 1. Fase Awal (Initial Phase)</option>
 												<option value="2"> 2. Fase Berkembang (Emerging State)</option>
@@ -385,7 +400,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="9">
-									<button type="submit" class="btn btn-primary" name="submit" onclick="save()">Submit</button>
+									<button type="button" class="btn btn-primary" name="submit" onclick="save('myFormB')">Submit</button>
 									<button type="reset" class="btn btn-danger">Reset</button>
 								</td>
 							</tr>
@@ -394,8 +409,16 @@
 				<?php
 				}
 				if ($dimensi['dimensi_id'] == 'C') { ?>
-					<form id="myForm" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+					<form id="myFormC" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 						<h1>Dimensi <?= $dimensi['dimensi_id']; ?></h1>
+
+						<tr class="col-auto">
+							<td>
+								<label for="form-label" class="form-label" hidden>Hidden input</label>
+								<input type="text" name="id" class="form-control" value="<?= "0" ?>" hidden>
+							</td>
+						</tr>
+
 						<tbody>
 							<?php
 							foreach ($dimensi_umum_C as $row) {
@@ -449,11 +472,11 @@
 									<?php if ($i == $I) {
 										$i++; ?>
 										<td>Skor:<div id="ncpD3">
-												<span id="ncpD3"></span>
+
 											</div>
 										</td>
 										<td>Tingkat:<div id="lvRiskD3">
-												<span id="lvRiskD3"></span>
+
 											</div>
 										</td>
 
@@ -510,7 +533,7 @@
 										<td rowspan="<?= $rowspan_parameter_id ?>">
 
 											<label class="align-start" for="<?= $parameter_id ?>">Pilih INDEX YANG SESUAI *</label>
-											<select class="form-select" name="<?= $parameter_id ?>" data-field="<?= $parameter_id ?>">
+											<select class="form-select" name="<?= str_replace('.', '_', $parameter_id); ?>" data-field="<?= str_replace('.', '_', $parameter_id); ?>" onchange="updatePredictions('myFormC')">
 												<option value="0" selected>None</option>
 												<option value="1"> 1. Fase Awal (Initial Phase)</option>
 												<option value="2"> 2. Fase Berkembang (Emerging State)</option>
@@ -551,7 +574,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="9">
-									<button type="submit" class="btn btn-primary" name="submit" onclick="save()">Submit</button>
+									<button type="button" class="btn btn-primary" name="submit" onclick="save('myFormC')">Submit</button>
 									<button type="reset" class="btn btn-danger">Reset</button>
 								</td>
 							</tr>
@@ -561,9 +584,17 @@
 				}
 				if ($dimensi['dimensi_id'] == 'D') {
 				?>
-					<form id="myForm" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+					<form id="myFormD" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 
 						<h1>Dimensi <?= $dimensi['dimensi_id']; ?></h1>
+
+						<tr class="col-auto">
+							<td>
+								<label for="form-label" class="form-label" hidden>Hidden input</label>
+								<input type="text" name="id" class="form-control" value="<?= "0" ?>" hidden>
+							</td>
+						</tr>
+
 						<tbody>
 							<?php
 							foreach ($dimensi_umum_D as $row) {
@@ -617,11 +648,11 @@
 									<?php if ($i == $I) {
 										$i++; ?>
 										<td>Skor:<div id="ncpD4">
-												<span id="ncpD4"></span>
+
 											</div>
 										</td>
 										<td>Tingkat:<div id="lvRiskD4">
-												<span id="lvRiskD4"></span>
+
 											</div>
 										</td>
 
@@ -678,7 +709,7 @@
 										<td rowspan="<?= $rowspan_parameter_id ?>">
 
 											<label class="align-start" for="<?= $parameter_id ?>">Pilih INDEX YANG SESUAI *</label>
-											<select class="form-select" name="<?= $parameter_id ?>" data-field="<?= $parameter_id ?>">
+											<select class="form-select" name="<?= str_replace('.', '_', $parameter_id); ?>" data-field="<?= str_replace('.', '_', $parameter_id); ?>" onchange="updatePredictions('myFormD')">
 												<option value="0" selected>None</option>
 												<option value="1"> 1. Fase Awal (Initial Phase)</option>
 												<option value="2"> 2. Fase Berkembang (Emerging State)</option>
@@ -715,7 +746,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="9">
-									<button type="submit" class="btn btn-primary" name="submit" onclick="save()">Submit</button>
+									<button type="button" class="btn btn-primary" name="submit" onclick="save('myFormD')">Submit</button>
 									<button type="reset" class="btn btn-danger">Reset</button>
 								</td>
 							</tr>
@@ -725,9 +756,17 @@
 				}
 				if ($dimensi['dimensi_id'] == 'E') {
 				?>
-					<form id="myForm" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+					<form id="myFormE" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 
 						<h1>Dimensi <?= $dimensi['dimensi_id']; ?></h1>
+
+						<tr class="col-auto">
+							<td>
+								<label for="form-label" class="form-label" hidden>Hidden input</label>
+								<input type="text" name="id" class="form-control" value="<?= "0" ?>" hidden>
+							</td>
+						</tr>
+
 						<tbody>
 							<?php
 							foreach ($dimensi_umum_E as $row) {
@@ -781,11 +820,10 @@
 									<?php if ($i == $I) {
 										$i++; ?>
 										<td>Skor:<div id="ncpD5">
-												<span id="ncpD5"></span>
+
 											</div>
 										</td>
-										<td>Tingkat:<div id="lvRiskD<?= $i; ?>">
-												<span id="lvRiskD<?= $i; ?>"></span>
+										<td>Tingkat:<div id="lvRiskD5">
 											</div>
 										</td>
 
@@ -842,7 +880,7 @@
 										<td rowspan="<?= $rowspan_parameter_id ?>">
 
 											<label class="align-start" for="<?= $parameter_id ?>">Pilih INDEX YANG SESUAI *</label>
-											<select class="form-select" name="<?= $parameter_id ?>" data-field="<?= $parameter_id ?>">
+											<select class="form-select" name="<?= str_replace('.', '_', $parameter_id); ?>" data-field="<?= str_replace('.', '_', $parameter_id); ?>" onchange="updatePredictions('myFormE')">
 												<option value="0" selected>None</option>
 												<option value="1"> 1. Fase Awal (Initial Phase)</option>
 												<option value="2"> 2. Fase Berkembang (Emerging State)</option>
@@ -879,7 +917,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="9">
-									<button type="submit" class="btn btn-primary" name="submit" onclick="save()">Submit</button>
+									<button type="button" class="btn btn-primary" name="submit" onclick="save('myFormE')">Submit</button>
 									<button type="reset" class="btn btn-danger">Reset</button>
 								</td>
 							</tr>
@@ -907,11 +945,11 @@
 			<tr>
 				<td colspan="5">Hasil Capaian Korporasi</td>
 				<td>Skor:<div id="ncpCorporate">
-						<span id="ncpCorporate"></span>
+
 					</div>
 				</td>
 				<td>Level: <div id="lvRiskCorpo">
-						<span id="lvRiskCorpo"></span>
+
 					</div>
 				</td>
 			</tr>
@@ -922,74 +960,222 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			$('#myForm').on('change', 'select[data-field]', function() {
-				updatePredictions();
-			});
-			$('#myFormA').on('change', 'select[data-field]', function() {
-				updatePredictions();
-			});
-			$('#myFormB').on('change', 'select[data-field]', function() {
-				updatePredictions();
-			});
-			$('#myFormC').on('change', 'select[data-field]', function() {
-				updatePredictions();
-			});
-			$('#myFormD').on('change', 'select[data-field]', function() {
-				updatePredictions();
-			});
-			$('#myFormE').on('change', 'select[data-field]', function() {
-				updatePredictions();
-			});
-
 
 			$('#myForm').on('reset', function(e) {
 				e.stopPropagation();
-				updatePredictions();
+			});
+			$('#myFormA').on('reset', function(e) {
+				e.stopPropagation();
+				updatePredictionsA('#myFormA');
+			});
+			$('#myFormB').on('reset', function(e) {
+				e.stopPropagation();
+				updatePredictionsB('#myFormB');
+			});
+			$('#myFormC').on('reset', function(e) {
+				e.stopPropagation();
+				updatePredictionsC('#myFormC');
+			});
+			$('#myFormD').on('reset', function(e) {
+				e.stopPropagation();
+				updatePredictions('#myFormD');
+			});
+			$('#myFormE').on('reset', function(e) {
+				e.stopPropagation();
+				updatePredictions('#myFormE');
 			});
 		});
 
-		function save() {
-			var data = $('#myForm').serializeArray();
-
-			console.log(data);
-
-			// Send user input to the server via AJAX for saving to the database
-			$.ajax({
-				type: 'POST',
-				url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
-				data: formData,
-				success: function(formData) {
-					console.log(formData);
-					alert('Data Inserted successfully');
-					// You can handle success response if needed
-				},
-				error: function(xhr, status, error) {
-					console.error("AJAX Error: " + error);
-					console.log(xhr);
+		function save(formId) {
+			var formData = $('#' + formId).serializeArray();
+			if (typeof formData !== undefined) {
+				console.log(formData);
+				if (hiddeninput === '') {
+					// Send user input to the server via AJAX for saving to the database
+					$.ajax({
+						type: 'POST',
+						url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
+						data: formData,
+						success: function(formData) {
+							console.log(formData);
+							alert('Data Inserted successfully');
+							// You can handle success response if needed
+						},
+						error: function(xhr, status, error) {
+							console.error("AJAX Error: " + error);
+							console.log(xhr);
+						}
+					});
 				}
-			});
+				if (hiddeninput !== '') {
+					// Send user input to the server via AJAX for saving to the database
+					$.ajax({
+						type: 'PUT',
+						url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
+						data: formData,
+						success: function(data) {
+							console.log(formData);
+							alert('Data Inserted successfully');
+							// You can handle success response if needed
+						},
+						error: function(xhr, status, error) {
+							console.error("AJAX Error: " + error);
+							console.log(xhr);
+						}
+					});
+				}
+
+			} else {
+				console.log(data);
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					error: function(xhr, status, error) {
+						console.log("Failed");
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			}
+
 		}
 
 		function updatePredictions(formId) {
-			var formData = $('#' + formId).serialize(); // Serialize form data
+			// Serialize form data
+			console.log(formId);
 
-			// Send user input to the server via AJAX for calculation
-			$.ajax({
-				type: 'POST',
-				url: '<?= base_url('proyeksi'); ?>', // Use form action
-				data: formData,
-				dataType: 'json',
-				success: function(data) {
-					console.log(data);
-					// Update the predictions for various fields
-					$.each(data, function(key, value) {
-						$('#' + key + 'span').text(value);
-					});
-				},
-				error: function(xhr, status, error) {
-					console.error("AJAX Error: " + error);
-					console.log(xhr);
-				}
-			});
+			if (formId == 'myFormA') {
+				var data = $('#' + formId).serialize();
+				console.log("jajajaj");
+				console.log(data);
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					type: 'POST',
+					url: '<?= base_url("Admin/calculateRiskA"); ?>', // Adjust the URL to your controller endpoint
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+						// You can handle success response if needed
+						$.each(data, function(key, value) {
+							// console.log(key + value);
+							$('#' + key).text(value);
+						});
+					},
+					error: function(xhr, status, error) {
+						console.log("gagal");
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			}
+			if (formId == 'myFormB') {
+				var data = $('#' + formId).serialize();
+				console.log(data);
+				console.log("jBjBjBj");
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					type: 'POST',
+					url: '<?= base_url("Admin/calculateRiskB"); ?>', // Adjust the URL to your controller endpoint
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+						// You can handle success response if needed
+						$.each(data, function(key, value) {
+							$('#' + key).text(value);
+						});
+					},
+					error: function(xhr, status, error) {
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			}
+			if (formId == 'myFormC') {
+				var data = $('#' + formId).serialize();
+				console.log(data);
+
+				console.log("jCjCjCj");
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					type: 'POST',
+					url: '<?= base_url("Admin/calculateRiskC"); ?>', // Adjust the URL to your controller endpoint
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+						// You can handle success response if needed
+						$.each(data, function(key, value) {
+							$('#' + key).text(value);
+						});
+					},
+					error: function(xhr, status, error) {
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			}
+			if (formId == 'myFormD') {
+				var data = $('#' + formId).serialize();
+				console.log("jDjDjDj");
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					type: 'POST',
+					url: '<?= base_url("Admin/calculateRiskD"); ?>', // Adjust the URL to your controller endpoint
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+						// You can handle success response if needed
+						$.each(data, function(key, value) {
+							$('#' + key).text(value);
+						});
+					},
+					error: function(xhr, status, error) {
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			}
+			if (formId == 'myFormE') {
+				var data = $('#' + formId).serialize();
+				console.log("jEjEjEj");
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					type: 'POST',
+					url: '<?= base_url("Admin/calculateRiskE"); ?>', // Adjust the URL to your controller endpoint
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+						// You can handle success response if needed
+						$.each(data, function(key, value) {
+							$('#' + key).text(value);
+						});
+					},
+					error: function(xhr, status, error) {
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			} else {
+				var data = $('#' + formId).serialize();
+				console.log(data);
+
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					error: function(xhr, status, error) {
+						console.log("Failed");
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			}
 		}
 	</script>

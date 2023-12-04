@@ -42,6 +42,7 @@ class Admin extends CI_Controller
 		$data['dimensi_umum_C'] = $this->Mcrud->get_dimensi_C();
 		$data['dimensi_umum_D'] = $this->Mcrud->get_dimensi_D();
 		$data['dimensi_umum_E'] = $this->Mcrud->get_dimensi_E();
+		$data['id_assess'] = $this->Mcrud->get_id_assess();
 
 
 
@@ -50,12 +51,27 @@ class Admin extends CI_Controller
 		$this->load->view('admin/form/clusterUmum', $data);
 		$this->load->view('template/footer');
 	}
-	public function calculateRisk()
+	public function calculateRiskA()
 	{
-		// Retrieve POST data for various dimensions and sub-dimensions
 		$ncp1 = $this->input->post('A_1_1') * 0.33;
 		$ncp2 = $this->input->post('A_2_2') * 0.33;
 		$ncp3 = $this->input->post('A_2_3') * 0.33;
+
+		$ncpD1 = $ncp1 + $ncp2 + $ncp3;
+		$lvRiskD1 = $this->getRiskLevel($ncpD1);
+
+		$data = array(
+			'ncpD1' => number_format($ncpD1, 2),
+			'lvRiskD1' => $lvRiskD1
+		);
+
+		echo json_encode($data);
+		// print_r(json_encode($data));
+		// var_dump($data);
+	}
+
+	public function calculateRiskB()
+	{
 		$ncp4 = $this->input->post('B_1_4') * 0.06;
 		$ncp5 = $this->input->post('B_1_5') * 0.06;
 		$ncp6 = $this->input->post('B_2_6') * 0.06;
@@ -72,6 +88,20 @@ class Admin extends CI_Controller
 		$ncp17 = $this->input->post('B_3_17') * 0.06;
 		$ncp18 = $this->input->post('B_3_18') * 0.06;
 		$ncp19 = $this->input->post('B_3_19') * 0.06;
+
+		$ncpD2 = $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19  == 0 ? 0 : $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19;
+		$lvRiskD2 = $this->getRiskLevel($ncpD2);
+
+		$data = array(
+			'ncpD2' => number_format($ncpD2, 2),
+			'lvRiskD2' => $lvRiskD2
+		);
+
+		echo json_encode($data);
+	}
+
+	public function calculateRiskC()
+	{
 		$ncp20 = $this->input->post('C_1_20') * 0.07;
 		$ncp21 = $this->input->post('C_1_21') * 0.07;
 		$ncp22 = $this->input->post('C_1_22') * 0.07;
@@ -86,6 +116,20 @@ class Admin extends CI_Controller
 		$ncp31 = $this->input->post('C_3_31') * 0.07;
 		$ncp32 = $this->input->post('C_4_32') * 0.07;
 		$ncp33 = $this->input->post('C_5_33') * 0.07;
+
+		$ncpD3 = $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33  == 0 ? 0 : $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33;
+		$lvRiskD3 = $this->getRiskLevel($ncpD3);
+
+		$data = array(
+			'ncpD3' => number_format($ncpD3, 2),
+			'lvRiskD3' => $lvRiskD3
+		);
+
+		echo json_encode($data);
+	}
+
+	public function calculateRiskD()
+	{
 		$ncp34 = $this->input->post('D_1_34') * 0.14;
 		$ncp35 = $this->input->post('D_2_35') * 0.14;
 		$ncp36 = $this->input->post('D_2_36') * 0.14;
@@ -93,44 +137,55 @@ class Admin extends CI_Controller
 		$ncp38 = $this->input->post('D_3_38') * 0.14;
 		$ncp39 = $this->input->post('D_3_39') * 0.14;
 		$ncp40 = $this->input->post('D_4_40') * 0.14;
-		$ncp41 = $this->input->post('E_1_41') * 0.50;
-		$ncp42 = $this->input->post('E_2_42') * 0.50;
 
-		// Calculate dimension values
-		$ncpD1 = $ncp1 + $ncp2 + $ncp3 == 0 ? 0 : $ncp1 + $ncp2 + $ncp3;
-		$ncpD2 = $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19  == 0 ? 0 : $ncp4 + $ncp5 + $ncp6 + $ncp7 + $ncp8 + $ncp9 + $ncp10 + $ncp11 + $ncp12 + $ncp13 + $ncp14 + $ncp15 + $ncp16 + $ncp17 + $ncp18 + $ncp19;
-		$ncpD3 = $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33  == 0 ? 0 : $ncp20 + $ncp21 + $ncp22 + $ncp23 + $ncp24 + $ncp25 + $ncp26 + $ncp27 + $ncp28 + $ncp29 + $ncp30 + $ncp31 + $ncp32 + $ncp33;
 		$ncpD4 = $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40  == 0 ? 0 : $ncp34 + $ncp35 + $ncp36 + $ncp37 + $ncp38 + $ncp39 + $ncp40;
-		$ncpD5 = $ncp41 + $ncp42  == 0 ? 0 : $ncp41 + $ncp42;
-
-		// Calculate corporate risk
-		$ncpCorporate = ($ncpD1 + $ncpD2 + $ncpD3 + $ncpD4 + $ncpD5) / 5;
-
-		// Check risk levels for each dimension
-		$lvRiskD1 = $this->getRiskLevel($ncpD1);
-		$lvRiskD2 = $this->getRiskLevel($ncpD2);
-		$lvRiskD3 = $this->getRiskLevel($ncpD3);
 		$lvRiskD4 = $this->getRiskLevel($ncpD4);
-		$lvRiskD5 = $this->getRiskLevel($ncpD5);
-		$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
+
 
 		$data = array(
-			'ncpD1' => number_format($ncpD1, 2),
-			'ncpD2' => number_format($ncpD2, 2),
-			'ncpD3' => number_format($ncpD3, 2),
 			'ncpD4' => number_format($ncpD4, 2),
-			'ncpD5' => number_format($ncpD5, 2),
-			'ncpCorporate' => number_format($ncpCorporate, 2),
-			'lvRiskD1' => $lvRiskD1,
-			'lvRiskD2' => $lvRiskD2,
-			'lvRiskD3' => $lvRiskD3,
-			'lvRiskD4' => $lvRiskD4,
-			'lvRiskD5' => $lvRiskD5,
-			'lvRiskCorpo' => $lvRiskCorporasi
+			'lvRiskD4' => $lvRiskD4
 		);
 
 		echo json_encode($data);
 	}
+
+	public function calculateRiskE()
+	{
+
+		$ncp41 = $this->input->post('E_1_41') * 0.50;
+		$ncp42 = $this->input->post('E_2_42') * 0.50;
+
+		$ncpD5 = $ncp41 + $ncp42  == 0 ? 0 : $ncp41 + $ncp42;
+		$lvRiskD5 = $this->getRiskLevel($ncpD5);
+
+		$data = array(
+			'ncpD5' => number_format($ncpD5, 2),
+			'lvRiskD5' => $lvRiskD5,
+		);
+
+		echo json_encode($data);
+	}
+
+	// public function calculateRisk()
+	// {
+	// 	$ncpD1 = $this->input->post();
+	// 	$ncpD1 = $this->input->post();
+	// 	$ncpD1 = $this->input->post();
+	// 	$ncpD1 = $this->input->post();
+	// 	$ncpD1 = $this->input->post();
+
+
+	// 	$ncpCorporate = $ncp41 + $ncp42  == 0 ? 0 : $ncp41 + $ncp42;
+	// 	$lvRiskD5 = $this->getRiskLevel($ncpD5);
+
+	// 	$data = array(
+	// 		'ncpD5' => number_format($ncpD5, 2),
+	// 		'lvRiskD5' => $lvRiskD5,
+	// 	);
+
+	// 	echo json_encode($data);
+	// }
 
 	private function upload_files($path, $title, $files)
 	{
@@ -245,25 +300,82 @@ class Admin extends CI_Controller
 			$lvRiskD5 = $this->getRiskLevel($ncpD5);
 			$lvRiskCorporasi = $this->getRiskLevel($ncpCorporate);
 			//upload fun
-			$assessmentData = array(
-				'corporate_name' => $corporateName,
-				'user_name' => $name,
-				'ncpD1' => number_format($ncpD1, 2),
-				'ncpD2' => number_format($ncpD2, 2),
-				'ncpD3' => number_format($ncpD3, 2),
-				'ncpD4' => number_format($ncpD4, 2),
-				'ncpD5' => number_format($ncpD5, 2),
-				'ncpCorporate' => number_format($ncpCorporate, 2),
+
+			$paramValue = array(
+				'ncp1' => $ncp1,
+				'ncp2' => $ncp2,
+				'ncp3' => $ncp3,
+				'ncp4' => $ncp4,
+				'ncp5' => $ncp5,
+				'ncp6' => $ncp6,
+				'ncp7' => $ncp7,
+				'ncp8' => $ncp8,
+				'ncp9' => $ncp9,
+				'ncp10' => $ncp10,
+				'ncp11' => $ncp11,
+				'ncp12' => $ncp12,
+				'ncp13' => $ncp13,
+				'ncp14' => $ncp14,
+				'ncp15' => $ncp15,
+				'ncp16' => $ncp16,
+				'ncp17' => $ncp17,
+				'ncp18' => $ncp18,
+				'ncp19' => $ncp19,
+				'ncp20' => $ncp20,
+				'ncp21' => $ncp21,
+				'ncp22' => $ncp22,
+				'ncp23' => $ncp23,
+				'ncp24' => $ncp24,
+				'ncp25' => $ncp25,
+				'ncp26' => $ncp26,
+				'ncp27' => $ncp27,
+				'ncp28' => $ncp28,
+				'ncp29' => $ncp29,
+				'ncp30' => $ncp30,
+				'ncp31' => $ncp31,
+				'ncp32' => $ncp32,
+				'ncp33' => $ncp33,
+				'ncp34' => $ncp34,
+				'ncp35' => $ncp35,
+				'ncp36' => $ncp36,
+				'ncp37' => $ncp37,
+				'ncp38' => $ncp38,
+				'ncp39' => $ncp39,
+				'ncp40' => $ncp40,
+				'ncp41' => $ncp41,
+				'ncp42' => $ncp42
+
+			);
+
+			$capaian_dimensi = array(
+				'ncpD1' => $ncpD1,
+				'ncpD2' => $ncpD2,
+				'ncpD3' => $ncpD3,
+				'ncpD4' => $ncpD4,
+				'ncpD5' => $ncpD5,
+				'ncpCorporate' => $ncpCorporate,
+			);
+
+			$level_dimensi = array(
 				'lvRiskD1' => $lvRiskD1,
 				'lvRiskD2' => $lvRiskD2,
 				'lvRiskD3' => $lvRiskD3,
 				'lvRiskD4' => $lvRiskD4,
 				'lvRiskD5' => $lvRiskD5,
-				'lvRiskCorpo' => $lvRiskCorporasi,
-				'status_approval' => "Pending",
+				'lvRiskCorporasi' => $lvRiskCorporasi,
+			);
+
+
+			$assessmentData = array(
+				'corporate_name' => $corporateName,
+				'user_name' => $name,
 				'approval' => "",
+				'status_approval' => "Pending",
 				'created_at' => $date,
 				'code_laporan' => $code_laporan,
+				'capaian_dimensi' => json_encode($capaian_dimensi),
+				'level_dimensi' => json_encode($level_dimensi),
+				'params_value' => json_encode($paramValue),
 			);
 
 			$assessment_id = 0;
@@ -314,6 +426,7 @@ class Admin extends CI_Controller
 					$this->session->set_flashdata('$error', $error);
 				}
 			}
+			return $assessment_id;
 			redirect('dashboard');
 		}
 	}
