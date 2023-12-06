@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Des 2023 pada 02.23
+-- Waktu pembuatan: 05 Des 2023 pada 15.56
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 7.4.30
 
@@ -39,6 +39,15 @@ CREATE TABLE `tbl_assessment` (
   `level_dimensi` longtext DEFAULT NULL,
   `params_value` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_assessment`
+--
+
+INSERT INTO `tbl_assessment` (`assessment_id`, `corporate_name`, `user_name`, `approval`, `status_approval`, `created_at`, `code_laporan`, `capaian_dimensi`, `level_dimensi`, `params_value`) VALUES
+(666, 'TNT\'s Corp', 'Nurul', 'Shani Indira', 'Approved', '2023-09-03', '001/TNT/09', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
+(999, 'Apple\'s Corp', 'Nunung Jayawardana', 'Shani Indira', 'Pending', '2023-09-03', '002/RMI/2023', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
+(1000, 'Microsoft\'S Corp', 'Nunung Jayawardana', 'Nurul', 'Reject', '2023-09-03', '000/RMI/2023', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n');
 
 -- --------------------------------------------------------
 
@@ -88,6 +97,13 @@ CREATE TABLE `tbl_file_assessment` (
   `file_size` text DEFAULT NULL,
   `upload_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_file_assessment`
+--
+
+INSERT INTO `tbl_file_assessment` (`file_id`, `assessment_id`, `file_name`, `file_type`, `file_link`, `file_size`, `upload_at`) VALUES
+(1, 666, 'ForApprovedTnt', 'pdf', 'http://c:/ForApprovedTnt.pdf', '20', '2023-12-05 09:05:59');
 
 -- --------------------------------------------------------
 
@@ -562,7 +578,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_assessment`
 --
 ALTER TABLE `tbl_assessment`
-  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_file_assessment`

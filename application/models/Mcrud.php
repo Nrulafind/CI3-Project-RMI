@@ -176,6 +176,8 @@ class Mcrud extends CI_Model
 
 		return $dimensi_umum_E;
 	}
+
+
 	public function get_weight()
 	{
 		$weight_umum = $this->db->query("SELECT DISTINCT `parameter_id` FROM `tbl_parameter`;");
@@ -201,12 +203,14 @@ class Mcrud extends CI_Model
 
 	public function get_id_assess()
 	{
-		$id = $this->db->query("SELECT assessment_id FROM tbl_assessment");
-		return $id;
+		$id = $this->db->query("SELECT assessment_id FROM tbl_assessment WHERE assessment_id=$uri");
+		return $id->result_array();
 	}
+
+
 	public function get_assestment()
 	{
-		$asessment = $this->db->query("SELECT 
+		$ases = $this->db->query("SELECT 
 		tbl_assessment.assessment_id AS `assessment_id`,
 		tbl_assessment.corporate_name,
 		tbl_assessment.user_name,
@@ -223,9 +227,39 @@ class Mcrud extends CI_Model
 	 FROM tbl_assessment
 	 LEFT JOIN tbl_file_assessment ON tbl_assessment.assessment_id = tbl_file_assessment.assessment_id
 	 GROUP BY `assessment_id`
-	 ORDER BY `assessment_id`;");
-		return $asessment->result_array();
+	 ORDER BY `assessment_id`;")->result_array();
+		$asessment = [];
+		$a1 = [];
+		$a2 = [];
+		foreach ($ases as $key) {
+			$a1 = array(
+				'assessment_id' => $key['assessment_id'],
+				'corporate_name' => $key['corporate_name'],
+				'user_name' => $key['user_name'],
+				'approval' => $key['approval'],
+				'status_approval' => $key['status_approval'],
+				'created_at' => $key['created_at'],
+				'code_laporan' => $key['code_laporan'],
+				'file_ids' => $key['file_ids'],
+				'file_names' => $key['file_names'],
+				'file_links' => $key['file_links']
+			);
+		}
+		foreach ($ases as $yek) {
+			json_decode($yek['capaian_dimensi'], true);
+			json_decode($yek['level_dimensi'], true);
+			json_decode($yek['params_value'], true);
+
+			array_push($a2, $yek['capaian_dimensi']);
+			array_push($a2, $yek['level_dimensi']);
+			array_push($a2, $yek['params_value']);
+		}
+
+		$asessment = array_merge($a1, $a2);
+		return $asessment;
 	}
+
+
 	public function get_edit_assesment($id)
 	{
 		$edit_assess = $this->db->query("SELECT 

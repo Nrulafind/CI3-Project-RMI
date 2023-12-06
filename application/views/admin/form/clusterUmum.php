@@ -8,7 +8,7 @@
 					<tr class="col-auto">
 						<td>
 							<label for="form-label" class="form-label" hidden>Hidden input</label>
-							<input type="text" name="id" class="form-control" value="<?= $id; ?>" hidden>
+							<input type="text" name="id" id="id" class="form-control" value="0" hidden>
 						</td>
 					</tr>
 				</thead>
@@ -31,6 +31,14 @@
 						</td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6">
+							<button type="button" class="btn btn-primary" name="submit" onclick="save('myForm')">Submit</button>
+							<button type="reset" class="btn btn-danger">Reset</button>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</form>
 		<?php
@@ -962,82 +970,146 @@
 		$(document).ready(function() {
 
 			$('#myForm').on('reset', function(e) {
+				updatePredictions('myForm');
 				e.stopPropagation();
 			});
 			$('#myFormA').on('reset', function(e) {
 				e.stopPropagation();
-				updatePredictionsA('#myFormA');
+				updatePredictions('myFormA');
 			});
 			$('#myFormB').on('reset', function(e) {
 				e.stopPropagation();
-				updatePredictionsB('#myFormB');
+				updatePredictions('myFormB');
 			});
 			$('#myFormC').on('reset', function(e) {
 				e.stopPropagation();
-				updatePredictionsC('#myFormC');
+				updatePredictions('myFormC');
 			});
 			$('#myFormD').on('reset', function(e) {
 				e.stopPropagation();
-				updatePredictions('#myFormD');
+				updatePredictions('myFormD');
 			});
 			$('#myFormE').on('reset', function(e) {
 				e.stopPropagation();
-				updatePredictions('#myFormE');
+				updatePredictions('myFormE');
 			});
 		});
 
-		function save(formId) {
+
+
+		function save(formId, id) {
 			var formData = $('#' + formId).serializeArray();
-			if (typeof formData !== undefined) {
-				console.log(formData);
-				if (hiddeninput === '') {
-					// Send user input to the server via AJAX for saving to the database
-					$.ajax({
-						type: 'POST',
-						url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
-						data: formData,
-						success: function(formData) {
-							console.log(formData);
-							alert('Data Inserted successfully');
-							// You can handle success response if needed
-						},
-						error: function(xhr, status, error) {
-							console.error("AJAX Error: " + error);
-							console.log(xhr);
-						}
-					});
-				}
-				if (hiddeninput !== '') {
-					// Send user input to the server via AJAX for saving to the database
-					$.ajax({
-						type: 'PUT',
-						url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
-						data: formData,
-						success: function(data) {
-							console.log(formData);
-							alert('Data Inserted successfully');
-							// You can handle success response if needed
-						},
-						error: function(xhr, status, error) {
-							console.error("AJAX Error: " + error);
-							console.log(xhr);
-						}
-					});
-				}
+			var hiddeninput = $('#' + id);
 
-			} else {
-				console.log(data);
-
+			console.log(formData);
+			if (hiddeninput === '') {
 				// Send user input to the server via AJAX for saving to the database
 				$.ajax({
+					type: 'POST',
+					url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
+					data: formData,
+					success: function(formData) {
+						console.log(formData);
+						alert('Data Inserted successfully');
+						// You can handle success response if needed
+					},
 					error: function(xhr, status, error) {
-						console.log("Failed");
+						console.error("AJAX Error: " + error);
+						console.log(xhr);
+					}
+				});
+			} else if (hiddeninput !== '') {
+				// Send user input to the server via AJAX for saving to the database
+				$.ajax({
+					type: 'PUT',
+					url: '<?= base_url('Admin/saveUmum'); ?>', // Adjust the URL to your controller endpoint
+					data: formData,
+					success: function(data) {
+						console.log(formData);
+						alert('Data Inserted successfully');
+						// You can handle success response if needed
+					},
+					error: function(xhr, status, error) {
 						console.error("AJAX Error: " + error);
 						console.log(xhr);
 					}
 				});
 			}
 
+		}
+
+
+		function mypredictions(dimensi) {
+			console.log(dimensi);
+
+			var d1 = 0;
+			var d2 = 0;
+			var d3 = 0;
+			var d4 = 0;
+			var d5 = 0;
+
+
+			if (dimensi == '') {
+				var dimensi1 = $(dimensi)
+				console.log(dimensi1);
+				$.each(dimensi1, function(key, value) {
+					//console.log(key + value);
+
+					d1 = ('ncpD1', value)
+					console.log(d1);
+					return d1
+				});
+				var dimensi2 = dimensi
+				console.log(dimensi2);
+				$.each(dimensi2, function(key, value) {
+					//console.log(key + value);
+
+					d2 = ('ncpD2', value)
+					console.log(d2);
+					return d2
+				});
+				var dimensi3 = dimensi
+				console.log(dimensi3);
+				$.each(dimensi3, function(key, value) {
+					//console.log(key + value);
+
+					d3 = ('ncpD3', value)
+					console.log(d3);
+					return d3;
+				});
+				var dimensi4 = dimensi
+				console.log(dimensi4);
+				$.each(dimensi4, function(key, value) {
+					//console.log(key + value);
+
+					d4 = ('ncpD4', value)
+					console.log(d4);
+					return d4;
+				});
+				var dimensi5 = dimensi
+				console.log(dimensi5);
+				$.each(dimensi5, function(key, value) {
+					//console.log(key + value);
+
+					d5 = ('ncpD5', value)
+					console.log(d5);
+					return d5;
+				});
+			}
+			// if (dimensi === 'ncpD2') {
+
+			// }
+			// if (dimensi === 'ncpD3') {
+
+			// }
+			// if (dimensi === 'ncpD4') {
+
+			// }
+			// if (dimensi == 'ncpD5') {
+
+			// }
+			ncpCorpo = d1 + d2 + d3 + d4 + d5;
+			console.log(ncpCorpo);
 		}
 
 		function updatePredictions(formId) {
@@ -1057,11 +1129,15 @@
 					dataType: 'json',
 					success: function(data) {
 						console.log(data);
+
 						// You can handle success response if needed
 						$.each(data, function(key, value) {
 							// console.log(key + value);
 							$('#' + key).text(value);
+							d1 = $('ncpD1').val(value);
+							console.log(d1);
 						});
+						mypredictions(data);
 					},
 					error: function(xhr, status, error) {
 						console.log("gagal");

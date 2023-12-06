@@ -39,9 +39,16 @@
 		<tbody>
 			<?php
 			$no = 1;
-			foreach ($asessment as $hasil) { ?>
+			foreach ($asessment as $hasil) {
+				$ncpData = json_decode($hasil[0], true);
+				$lvRiskData = json_decode($hasil[1], true);
+				$ncpData2 = json_decode($hasil[2], true);
+
+				var_dump($hasil); ?>
+
 
 				<tr>
+
 					<th><?= $no++; ?></th>
 					<td><?= $hasil['corporate_name'] ?></td>
 					<td><?= $hasil['user_name'] ?></td>
