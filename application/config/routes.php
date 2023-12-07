@@ -59,7 +59,7 @@ $route['actLogin'] = 'Auth/actLogin';
 $route['logout'] = 'Auth/logout';
 //Super Admin / Vice President routes
 $route['dashboard'] = 'Admin/index'; //untuk dashboard nya
-$route['cluster_umum/(:num)'] = 'Admin/formUmum/$1'; //untuk routing ke form perhitungan cluster umum
+$route['cluster_umum'] = 'Admin/formUmum'; //untuk routing ke form perhitungan cluster umum
 $route['prosesUmum'] = 'Admin/saveUmum'; // routing proses form umum ke db
 //$route['proyeksi'] = 'Admin/calculateRisk'; // routing proses kalulasi tanpa reload
 $route['proyeksiA'] = 'Admin/calculateRiskA';

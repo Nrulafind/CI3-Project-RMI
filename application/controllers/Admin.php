@@ -36,20 +36,59 @@ class Admin extends CI_Controller
 
 	public function formUmum()
 	{
-		$uri = $this->uri->segment(3);
-		$data['dimensi_id'] = $this->Mcrud->dimensi();
-		$data['dimensi_umum_A'] = $this->Mcrud->get_dimensi_A();
-		$data['dimensi_umum_B'] = $this->Mcrud->get_dimensi_B();
-		$data['dimensi_umum_C'] = $this->Mcrud->get_dimensi_C();
-		$data['dimensi_umum_D'] = $this->Mcrud->get_dimensi_D();
-		$data['dimensi_umum_E'] = $this->Mcrud->get_dimensi_E();
+		$uri = $this->input->get("assessment_id", TRUE);
+		// $data['dimensi_id'] = $this->Mcrud->dimensi();
+		// $data['dimensi_umum_A'] = $this->Mcrud->get_dimensi_A();
+		// $data['dimensi_umum_B'] = $this->Mcrud->get_dimensi_B();
+		// $data['dimensi_umum_C'] = $this->Mcrud->get_dimensi_C();
+		// $data['dimensi_umum_D'] = $this->Mcrud->get_dimensi_D();
+		// $data['dimensi_umum_E'] = $this->Mcrud->get_dimensi_E();
+		if ($uri != null) {
+			$get = $this->Mcrud->getAssessment($uri);
+			$data['assessment'] = $get;
+		} else {
+			$data['assessment'] = [];
+		}
 
+		$dimensi = $this->Mcrud->get_data("tbl_dimensi");
+		$data['dimensi'] = $dimensi;
+		$subDimensi = $this->Mcrud->get_data("tbl_sub_dimensi");
+		$data['subDimensi'] = $subDimensi;
+		$parameter = $this->Mcrud->get_data("tbl_parameter");
+		$data['parameter'] = $parameter;
+		$assessmentDetail = $this->Mcrud->get_data("tbl_assessment_detail", ['assessment_id' => $uri]);
+		$data['assessmentDetail'] = $assessmentDetail;
+		$question = $this->Mcrud->get_data("tbl_question");
+		$data['question'] = $question;
+		// var_dump($assessmentDetail);
+		// die();
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('admin/form/clusterUmum', $data);
 		$this->load->view('template/footer');
 	}
+
+	public function setParameter()
+	{
+		$data = $this->input->post();
+		// if ($this->input->server('REQUEST_METHOD') == 'POST') {
+		// 	$this->Mcrud->post_data('tbl_assessment_detail', $data);
+		// } elseif ($this->input->server('REQUEST_METHOD') == 'PATCH') {
+		// 	$this->Mcrud->update_data('tbl_assessment_detail', $data, ['id' => $data['id']]);
+		// }
+		$cek = $this->Mcrud->get_data('tbl_assessment_detail', ['assessment_id' => $data['assessment_id'], 'parameter_id' => $data['parameter_id']]);
+		if (count($cek) == 0) {
+			$this->Mcrud->post_data('tbl_assessment_detail', $data);
+		} elseif (count($cek) == 1) {
+			$this->Mcrud->update_data('tbl_assessment_detail', $data, ['id' => $cek[0]->id]);
+		}
+		$join_count = $this->Mcrud->get_join_count();
+		$data['join_count'] = $join_count;
+
+		echo json_encode($data);
+	}
+
 	public function calculateRiskA()
 	{
 		$ncp1 = $this->input->post('A_1_1') * 0.33;
@@ -166,25 +205,25 @@ class Admin extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function calculateRisk()
-	{
-		$ncpD1 = $this->input->post('ncpD1');
-		$ncpD2 = $this->input->post('ncpD2');
-		$ncpD3 = $this->input->post('ncpD3');
-		$ncpD4 = $this->input->post('ncpD4');
-		$ncpD5 = $this->input->post('ncpD5');
+	// public function calculateRisk()
+	// {
+	// 	$ncpD1 = $this->input->post('ncpD1');
+	// 	$ncpD2 = $this->input->post('ncpD2');
+	// 	$ncpD3 = $this->input->post('ncpD3');
+	// 	$ncpD4 = $this->input->post('ncpD4');
+	// 	$ncpD5 = $this->input->post('ncpD5');
 
 
-		$ncpCorporate = $ncpD1 + $ncpD1  == 0 ? 0 : $ncp41 + $ncp42;
-		$lvRiskD5 = $this->getRiskLevel($ncpD5);
+	// 	$ncpCorporate = $ncpD1 + $ncpD1  == 0 ? 0 : $ncp41 + $ncp42;
+	// 	$lvRiskD5 = $this->getRiskLevel($ncpD5);
 
-		$data = array(
-			'' => number_format($ncpD5, 2),
-			'lvRiskD5' => $lvRiskD5,
-		);
+	// 	$data = array(
+	// 		'' => number_format($ncpD5, 2),
+	// 		'lvRiskD5' => $lvRiskD5,
+	// 	);
 
-		echo json_encode($data);
-	}
+	// 	echo json_encode($data);
+	// }
 
 	private function upload_files($path, $title, $files)
 	{
@@ -231,11 +270,10 @@ class Admin extends CI_Controller
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			//post untuk data input biasa
+			$obj = $this->input->post();
+			$assessment_id = $this->Mcrud->insertAssessmentData($obj);
 
-			$corporateName = $this->input->post('corporate_name');
-			$name = $this->input->post('user_name');
-			$date = $this->input->post('tanggal');
-			$code_laporan = $this->input->post('laporan');
+			redirect('cluster_umum?assessment_id=' . $assessment_id);
 
 			// Retrieve POST data for various dimensions and sub-dimensions
 			$ncp1 = $this->input->post('A_1_1') * 0.33;
@@ -422,7 +460,7 @@ class Admin extends CI_Controller
 			$assessment_id = 0;
 			// Insert assessment data for each file
 			// foreach ($file_ids as $file_id) {
-			$assessment_id = $this->Mcrud->insertAssessmentData($assessmentData);
+
 			//array_push($assessment_id, $assessment_i);
 			// }
 			// Loop through the uploaded files
@@ -465,21 +503,6 @@ class Admin extends CI_Controller
 					$error = ['error' => $this->upload->display_errors()];
 					//$this->load->view('/approval/form/clusterUmum', $error);
 					$this->session->set_flashdata('$error', $error);
-					$file_ids = [];
-
-					// Insert assessment data with the associated file IDs
-
-					foreach ($uploaded_files as $file) {
-						// Insert the file info into the database
-						$fileInfo = array(
-							'assessment_id' => $assessment_id,
-							'file_name' => $file['file_name'],
-							'file_type' => $file['file_type'],
-							'file_link' => $file['full_path'],
-						);
-						$file_id = $this->Mcrud->insertFile($fileInfo);
-						$file_ids[] = $file_id;
-					}
 				}
 			}
 			//	return $assessment_id;

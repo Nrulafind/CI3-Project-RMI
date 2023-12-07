@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `armi_v1`
+-- Database: `armi_v2`
 --
 
 -- --------------------------------------------------------
@@ -48,12 +48,40 @@ INSERT INTO `tbl_assessment` (`assessment_id`, `corporate_name`, `user_name`, `a
 (666, 'TNT\'s Corp', 'Nurul', 'Shani Indira', 'Approved', '2023-09-03', '001/TNT/09', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
 (999, 'Apple\'s Corp', 'Nunung Jayawardana', 'Shani Indira', 'Pending', '2023-09-03', '002/RMI/2023', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
 (1000, 'Microsoft\'S Corp', 'Nunung Jayawardana', 'Nurul', 'Reject', '2023-09-03', '000/RMI/2023', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
-(1001, 'Neuron', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1002, 'Nanahoshi', 'Nurul', NULL, NULL, '2023-12-06', '90/rmi/203', NULL, NULL, NULL),
-(1003, 'Flora', 'Nurul', NULL, NULL, '2023-12-05', '78978', NULL, NULL, NULL),
-(1004, 'Flora', 'Nurul', NULL, NULL, '2023-12-05', '9229', NULL, NULL, NULL),
-(1005, 'Flora', 'Nurul', NULL, NULL, '2023-12-13', '9339', NULL, NULL, NULL),
-(1006, 'Flora', 'Nurul', NULL, NULL, '2023-12-06', '6320', NULL, NULL, NULL);
+(1002, 'APLOG', 'Nurul', NULL, NULL, '2023-12-13', '001/RMI/2023', NULL, NULL, NULL),
+(1003, 'Tiran', 'Nurul', NULL, NULL, '2023-12-06', '90/MFJ', NULL, NULL, NULL),
+(1004, 'Oliver Corp\'s', 'Nurul', NULL, NULL, '2023-12-07', '425/023', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_assessment_detail`
+--
+
+CREATE TABLE `tbl_assessment_detail` (
+  `id` int(11) NOT NULL,
+  `assessment_id` int(11) NOT NULL,
+  `parameter_id` varchar(11) NOT NULL,
+  `phase_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_assessment_detail`
+--
+
+INSERT INTO `tbl_assessment_detail` (`id`, `assessment_id`, `parameter_id`, `phase_id`) VALUES
+(3, 1002, 'A.1.1', 2),
+(7, 1002, 'A.2.2', 5),
+(8, 1002, 'A.2.3', 3),
+(9, 1002, 'B.1.4', 4),
+(10, 1002, 'B.1.5', 5),
+(11, 0, 'A.1.1', 5),
+(12, 0, 'B.1.4', 4),
+(13, 1003, 'A.1.1', 4),
+(14, 1004, 'A.2.2', 5),
+(15, 1004, 'A.1.1', 5),
+(16, 1004, 'C.2.27', 4),
+(17, 1004, 'D.3.38', 3);
 
 -- --------------------------------------------------------
 
@@ -73,20 +101,10 @@ CREATE TABLE `tbl_dimensi` (
 
 INSERT INTO `tbl_dimensi` (`dimensi_id`, `dimensi_name`, `category_id`) VALUES
 ('A', 'Budaya dan Kapabilitas Risiko', 3),
-('A,', 'Budaya dan Kapabilitas Risiko', 2),
-('A.', 'Budaya dan Kapabilitas Risiko', 1),
 ('B', 'Organisasi \r\ndan Tata Kelola \r\nRisiko', 3),
-('B,', 'Organisasi dan Tata Kelola Risiko', 2),
-('B.', 'Organisasi dan Tata Kelola Risiko', 1),
 ('C', 'Kerangka \r\nRisiko dan \r\nKepatuhan', 3),
-('C,', 'Kerangka Risiko dan Kepatuhan', 2),
-('C.', 'Kerangka Risiko dan Kepatuhan', 1),
 ('D', 'Proses dan \r\nkontrol risiko', 3),
-('D,', 'Proses dan Kontrol Risiko', 2),
-('D.', 'Proses dan Kontrol Risiko', 1),
-('E', 'Model, data, \r\ndan teknologi \r\nrisiko', 3),
-('E,', 'Model, Data, dan Teknologi Risiko', 2),
-('E.', 'Model, Data, dan Teknologi Risiko', 1);
+('E', 'Model, data, \r\ndan teknologi \r\nrisiko', 3);
 
 -- --------------------------------------------------------
 
@@ -186,7 +204,6 @@ INSERT INTO `tbl_parameter` (`parameter_id`, `parameter_name`, `Weight`, `subdim
 ('D.2.35', 'Pengukuran Risiko', '0.14', 'D.2'),
 ('D.2.36', 'Kerangka proses pengukuran Risiko untuk Prioritisasi', '0.14', 'D.2'),
 ('D.2.37', 'Agregasian atas seluruh Risiko Utama', '0.14', 'D.2'),
-('D.2.42', 'Data Risiko', '0.50', 'E.2'),
 ('D.3.38', 'Aktivitas perlakuan terhadap Risiko Utama', '0.14', 'D.3'),
 ('D.3.39', 'Proses Identifikasi dan Pengelolaan eksposur Risiko yang berada diatas selera Risiko', '0.14', 'D.3'),
 ('D.4.40', 'Pelaporan Risiko Melaporkan secara Real-time', '0.14', 'D.4'),
@@ -522,6 +539,12 @@ ALTER TABLE `tbl_assessment`
   ADD PRIMARY KEY (`assessment_id`);
 
 --
+-- Indeks untuk tabel `tbl_assessment_detail`
+--
+ALTER TABLE `tbl_assessment_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tbl_dimensi`
 --
 ALTER TABLE `tbl_dimensi`
@@ -584,7 +607,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_assessment`
 --
 ALTER TABLE `tbl_assessment`
-  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1007;
+  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_assessment_detail`
+--
+ALTER TABLE `tbl_assessment_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_file_assessment`

@@ -210,7 +210,7 @@ class Mcrud extends CI_Model
 
 	public function get_assestment()
 	{
-		$ases = $this->db->query("SELECT 
+		$asessment = $this->db->query("SELECT 
 		tbl_assessment.assessment_id AS `assessment_id`,
 		tbl_assessment.corporate_name,
 		tbl_assessment.user_name,
@@ -228,35 +228,40 @@ class Mcrud extends CI_Model
 	 LEFT JOIN tbl_file_assessment ON tbl_assessment.assessment_id = tbl_file_assessment.assessment_id
 	 GROUP BY `assessment_id`
 	 ORDER BY `assessment_id`;")->result_array();
-		$asessment = [];
-		$a1 = [];
-		$a2 = [];
-		foreach ($ases as $key) {
-			$a1 = array(
-				'assessment_id' => $key['assessment_id'],
-				'corporate_name' => $key['corporate_name'],
-				'user_name' => $key['user_name'],
-				'approval' => $key['approval'],
-				'status_approval' => $key['status_approval'],
-				'created_at' => $key['created_at'],
-				'code_laporan' => $key['code_laporan'],
-				'file_ids' => $key['file_ids'],
-				'file_names' => $key['file_names'],
-				'file_links' => $key['file_links']
-			);
-		}
-		foreach ($ases as $yek) {
-			json_decode($yek['capaian_dimensi'], true);
-			json_decode($yek['level_dimensi'], true);
-			json_decode($yek['params_value'], true);
+		// $asessment = [];
+		// $a1 = [];
+		// $a2 = [];
+		// // foreach ($ases as $key) {
+		// // 	$a1 = array(
+		// // 		'assessment_id' => $key['assessment_id'],
+		// // 		'corporate_name' => $key['corporate_name'],
+		// // 		'user_name' => $key['user_name'],
+		// // 		'approval' => $key['approval'],
+		// // 		'status_approval' => $key['status_approval'],
+		// // 		'created_at' => $key['created_at'],
+		// // 		'code_laporan' => $key['code_laporan'],
+		// // 		'file_ids' => $key['file_ids'],
+		// // 		'file_names' => $key['file_names'],
+		// // 		'file_links' => $key['file_links']
+		// // 	);
+		// // }
+		// foreach ($ases as $yek => $val) {
+		// 	echo json_decode($ases[$yek]['capaian_dimensi'], true);
+		// 	// json_decode($yek['level_dimensi'], true);
+		// 	// json_decode($yek['params_value'], true);
 
-			array_push($a2, $yek['capaian_dimensi']);
-			array_push($a2, $yek['level_dimensi']);
-			array_push($a2, $yek['params_value']);
-		}
 
-		$asessment = array_merge($a1, $a2);
+
+		// 	// array_push($a2, $yek['capaian_dimensi']);
+		// 	// array_push($a2, $yek['level_dimensi']);
+		// 	// array_push($a2, $yek['params_value']);
+		// }
+		// //	var_dump(json_decode($yek['params_value'], true));
+
+
+		// //$asessment = array_merge($a1, $a2);
 		return $asessment;
+		// die();
 	}
 
 
@@ -282,6 +287,12 @@ class Mcrud extends CI_Model
 	 GROUP BY `assessment_id`
 	 ORDER BY `assessment_id`;");
 		return $edit_assess;
+	}
+	public function getAssessment($id)
+	{
+		//$this->db->where(['assessment_id' => $id]);
+		$data = $this->db->get_where('tbl_assessment', ['assessment_id' => $id]);
+		return $data->result()[0];
 	}
 
 	public function editAsessment($id, $data)
@@ -505,18 +516,35 @@ class Mcrud extends CI_Model
 	}
 	//akhir dari function untuk parameter
 
+	// crud
+	public function get_data($db, $param = [])
+	{
+		if ($param != []) {
+			$this->db->where($param);
+		}
+		$data = $this->db->get($db);
+		return $data->result();
+	}
 
+	public function post_data($db, $data)
+	{
+		$this->db->insert($db, $data);
+		return $this->db->insert_id();
+	}
 
+	public function update_data($db, $data, $param)
+	{
+		$this->db->where($param);
+		$this->db->update($db, $data);
+		return $param;
+	}
 
-
-
-	//ending Cluster Umum
-	//Cluster Asuransi Functions 
-
-
-	//ending Cluster Asuransi 
-	//Cluster Bank Functions
-
-
-	//Ending Cluster Bank
+	public function get_join_count()
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_assessment');
+		$this->db->join('tbl_assessment_detail', 'tbl_assessment.assessment_id = tbl_assessment_detail.assessment_id');
+		$this->db->join('tbl_phase', 'tbl_phase.id = tbl_assessment_detail.phase_id');
+		return $this->db->get()->result();
+	}
 }
