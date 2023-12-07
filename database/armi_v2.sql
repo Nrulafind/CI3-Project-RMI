@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Des 2023 pada 03.13
+-- Waktu pembuatan: 07 Des 2023 pada 13.45
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 7.4.30
 
@@ -35,6 +35,7 @@ CREATE TABLE `tbl_assessment` (
   `status_approval` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `code_laporan` varchar(255) DEFAULT NULL,
+  `skor` int(11) NOT NULL,
   `capaian_dimensi` longtext DEFAULT NULL,
   `level_dimensi` longtext DEFAULT NULL,
   `params_value` longtext DEFAULT NULL
@@ -44,13 +45,15 @@ CREATE TABLE `tbl_assessment` (
 -- Dumping data untuk tabel `tbl_assessment`
 --
 
-INSERT INTO `tbl_assessment` (`assessment_id`, `corporate_name`, `user_name`, `approval`, `status_approval`, `created_at`, `code_laporan`, `capaian_dimensi`, `level_dimensi`, `params_value`) VALUES
-(666, 'TNT\'s Corp', 'Nurul', 'Shani Indira', 'Approved', '2023-09-03', '001/TNT/09', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
-(999, 'Apple\'s Corp', 'Nunung Jayawardana', 'Shani Indira', 'Pending', '2023-09-03', '002/RMI/2023', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
-(1000, 'Microsoft\'S Corp', 'Nunung Jayawardana', 'Nurul', 'Reject', '2023-09-03', '000/RMI/2023', '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
-(1002, 'APLOG', 'Nurul', NULL, NULL, '2023-12-13', '001/RMI/2023', NULL, NULL, NULL),
-(1003, 'Tiran', 'Nurul', NULL, NULL, '2023-12-06', '90/MFJ', NULL, NULL, NULL),
-(1004, 'Oliver Corp\'s', 'Nurul', NULL, NULL, '2023-12-07', '425/023', NULL, NULL, NULL);
+INSERT INTO `tbl_assessment` (`assessment_id`, `corporate_name`, `user_name`, `approval`, `status_approval`, `created_at`, `code_laporan`, `skor`, `capaian_dimensi`, `level_dimensi`, `params_value`) VALUES
+(666, 'TNT\'s Corp', 'Nurul', 'Shani Indira', 'Approved', '2023-09-03', '001/TNT/09', 0, '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
+(999, 'Apple\'s Corp', 'Nunung Jayawardana', 'Shani Indira', 'Pending', '2023-09-03', '002/RMI/2023', 0, '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
+(1000, 'Microsoft\'S Corp', 'Nunung Jayawardana', 'Nurul', 'Reject', '2023-09-03', '000/RMI/2023', 0, '{\r\n  \"ncpD1\": 3.33,\r\n  \"ncpD2\": 3.25,\r\n  \"ncpD3\": 2.93,\r\n  \"ncpD4\": 3.57,\r\n  \"ncpD5\": 4,\r\n  \"ncpCorporate\": 3.42\r\n}\r\n', '{\r\n  \"lvRiskD1\": \"Good Practice Phase A\",\r\n  \"lvRiskD2\": \"Good Practice Phase A\",\r\n  \"lvRiskD3\": \"Good Practice Phase A\",\r\n  \"lvRiskD4\": \"Good Practice Phase AA\",\r\n  \"lvRiskD5\": \"Strong Practice Phase A\",\r\n  \"lvRiskCorporasi\": \"Good Practice Phase A\"\r\n}\r\n', '{\r\n  \"ncp1\": 4,\r\n  \"ncp2\": 3,\r\n  \"ncp3\": 3,\r\n  \"ncp4\": 5,\r\n  \"ncp5\": 4,\r\n  \"ncp6\": 2,\r\n  \"ncp7\":2,\r\n  \"ncp8\": 4,\r\n  \"ncp9\": 2,\r\n  \"ncp10\": 3,\r\n  \"ncp11\": 3,\r\n  \"ncp12\": 3,\r\n  \"ncp13\": 3,\r\n  \"ncp14\": 3,\r\n  \"ncp15\": 3,\r\n  \"ncp16\": 4,\r\n  \"ncp17\": 5,\r\n  \"ncp18\":3,\r\n  \"ncp19\": 3,\r\n  \"ncp20\": 4,\r\n  \"ncp21\": 2,\r\n  \"ncp22\": 4,\r\n  \"ncp23\": 3,\r\n  \"ncp24\": 3,\r\n  \"ncp25\": 3,\r\n  \"ncp26\": 3,\r\n  \"ncp27\": 3.,\r\n  \"ncp28\": 3,\r\n  \"ncp29\": 3,\r\n  \"ncp30\": 2,\r\n  \"ncp31\": 2,\r\n  \"ncp32\": 3,\r\n  \"ncp33\": 3,\r\n  \"ncp34\": 3,\r\n  \"ncp35\": 4,\r\n  \"ncp36\": 4,\r\n  \"ncp37\": 4,\r\n  \"ncp38\": 3,\r\n  \"ncp39\": 3,\r\n  \"ncp40\": 4,\r\n  \"ncp41\": 4,\r\n  \"ncp42\": 4\r\n}\r\n'),
+(1002, 'APLOG', 'Nurul', NULL, NULL, '2023-12-13', '001/RMI/2023', 0, NULL, NULL, NULL),
+(1003, 'Tiran', 'Nurul', NULL, NULL, '2023-12-06', '90/MFJ', 0, NULL, NULL, NULL),
+(1004, 'Oliver Corp\'s', 'Nurul', NULL, NULL, '2023-12-07', '425/023', 0, NULL, NULL, NULL),
+(1005, 'Geovani Corp', 'Nurul', NULL, NULL, '2023-12-14', '90/32/2023', 5, NULL, NULL, NULL),
+(1006, 'APLOG', 'Nurul', NULL, NULL, '2023-12-07', 'APL/12/20', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -75,13 +78,58 @@ INSERT INTO `tbl_assessment_detail` (`id`, `assessment_id`, `parameter_id`, `pha
 (8, 1002, 'A.2.3', 3),
 (9, 1002, 'B.1.4', 4),
 (10, 1002, 'B.1.5', 5),
-(11, 0, 'A.1.1', 5),
+(11, 0, 'A.1.1', 3),
 (12, 0, 'B.1.4', 4),
 (13, 1003, 'A.1.1', 4),
 (14, 1004, 'A.2.2', 5),
 (15, 1004, 'A.1.1', 5),
 (16, 1004, 'C.2.27', 4),
-(17, 1004, 'D.3.38', 3);
+(17, 1004, 'D.3.38', 3),
+(25, 1005, 'A.1.1', 5),
+(26, 1005, 'A.2.2', 5),
+(27, 1005, 'A.2.3', 5),
+(28, 1005, 'B.1.4', 5),
+(29, 1005, 'C.1.20', 5),
+(30, 1005, 'E.2.42', 5),
+(31, 1005, 'E.1.41', 5),
+(32, 1005, 'B.1.5', 5),
+(33, 1005, 'B.2.10', 1),
+(34, 1005, 'B.2.11', 2),
+(35, 1005, 'B.2.12', 1),
+(36, 1005, 'B.2.6', 1),
+(37, 1005, 'B.2.7', 5),
+(38, 1005, 'B.2.8', 5),
+(39, 1005, 'B.2.9', 5),
+(40, 1005, 'B.3.13', 1),
+(41, 1005, 'B.3.14', 5),
+(42, 1005, 'B.3.15', 5),
+(43, 1005, 'B.3.16', 5),
+(44, 1005, 'B.3.17', 5),
+(45, 1005, 'B.3.18', 5),
+(46, 1005, 'B.3.19', 5),
+(47, 1005, 'C.1.21', 5),
+(48, 1005, 'C.1.22', 5),
+(49, 1005, 'C.1.23', 5),
+(50, 1005, 'C.1.24', 5),
+(51, 1005, 'C.1.25', 5),
+(52, 1005, 'C.1.26', 5),
+(53, 1005, 'C.2.27', 5),
+(54, 1005, 'C.2.28', 5),
+(55, 1005, 'C.2.30', 5),
+(56, 1005, 'C.2.29', 5),
+(57, 1005, 'C.3.31', 5),
+(58, 1005, 'C.4.32', 5),
+(59, 1005, 'C.5.33', 5),
+(60, 1005, 'D.1.34', 5),
+(61, 1005, 'D.2.35', 5),
+(62, 1005, 'D.2.36', 5),
+(63, 1005, 'D.2.37', 5),
+(64, 1005, 'D.3.38', 5),
+(65, 1005, 'D.3.39', 5),
+(66, 1005, 'D.4.40', 5),
+(67, 1006, 'A.1.1', 1),
+(68, 1006, 'A.2.2', 5),
+(69, 1006, 'A.2.3', 5);
 
 -- --------------------------------------------------------
 
@@ -101,10 +149,10 @@ CREATE TABLE `tbl_dimensi` (
 
 INSERT INTO `tbl_dimensi` (`dimensi_id`, `dimensi_name`, `category_id`) VALUES
 ('A', 'Budaya dan Kapabilitas Risiko', 3),
-('B', 'Organisasi \r\ndan Tata Kelola \r\nRisiko', 3),
-('C', 'Kerangka \r\nRisiko dan \r\nKepatuhan', 3),
-('D', 'Proses dan \r\nkontrol risiko', 3),
-('E', 'Model, data, \r\ndan teknologi \r\nrisiko', 3);
+('B', 'Organisasi dan tata Kelola Risiko', 3),
+('C', 'Kerangka Risiko dan Kepatuhan', 3),
+('D', 'Proses dan kontrol risiko', 3),
+('E', 'Model, data, dan teknologi risiko', 3);
 
 -- --------------------------------------------------------
 
@@ -607,13 +655,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_assessment`
 --
 ALTER TABLE `tbl_assessment`
-  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
+  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1007;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_assessment_detail`
 --
 ALTER TABLE `tbl_assessment_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_file_assessment`

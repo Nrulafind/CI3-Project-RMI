@@ -1,14 +1,11 @@
+<style>
+	table td {
+		padding: 5px;
+		width: 25%;
+	}
+</style>
 <div class="container-fluid text-center">
-	<h1>Welcome to ARMI <?php echo $this->session->userdata('name');	?></h1>
-	<td>Skor:<div id="ncpD3">
-
-		</div>
-	</td>
-	<td>Tingkat:<div id="lvRiskD3">
-
-		</div>
-	</td>
-
+	<h1>Welcome to ARMI <?php echo $this->session->userdata('name'); ?></h1>
 	<div class="container align-content-start">
 		<input type="hidden" name="assessment_id" value="<?= $assessment->assessment_id ?? 0; ?>">
 		<form id="myForm" action="<?= base_url('Admin/saveUmum'); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
@@ -42,92 +39,126 @@
 				</tfoot>
 			</table>
 		</form>
-		<table class="">
-			<?php
-			foreach ($dimensi as $v) { ?>
-				<tr>
-					<td style="background-color: blue;" colspan="2"><?= $v->dimensi_id . ". " . $v->dimensi_name; ?></td>
-				</tr>
-				<?php foreach ($subDimensi as $v2) {
-					if ($v2->dimensi_id == $v->dimensi_id) { ?>
-						<tr>
-							<td style="background-color: blueviolet;" colspan="2"><?= $v2->subdimensi_name; ?></td>
-						</tr>
-						<?php foreach ($parameter as $v3) {
-							if ($v3->subdimensi_id == $v2->subdimensi_id) { ?>
-								<tr>
-									<td style="text-align: left;"><?= $v3->parameter_name; ?></td>
-									<td style="text-align: right;">
-										<select class="form-select" name="phase_<?= $v3->parameter_id ?>" onchange="setParameter('<?= $v3->parameter_id; ?>')" onchange="updatePredictions('#myForm'+'<?= $v->dimensi_id ?>')">
-											<option value="0" selected>None</option>
-											<option value="1"> 1. Fase Awal (Initial Phase)</option>
-											<option value="2"> 2. Fase Berkembang (Emerging State)</option>
-											<option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
-											<option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
-											<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
-										</select>
-									</td>
-								</tr>
-						<?php 	}
-						} ?>
-					<?php } ?>
-				<?php } ?>
-			<?php } ?>
+		<div class="card card-deck">
+			<span>Skor akhir assesment: <?= $assessment->skor; ?></span>
+			<span>(<?= $level; ?>)</span>
+		</div>
+		<hr>
+		<table class="table table-responsive" id="tbl_dimensi">
 
 		</table>
 		</tbody>
-		<tfoot>
-			<h1>Hasil Keseluruhan</h1>
-			<div class="card card-deck">
-				<tr>
-					<td colspan="5">Hasil Capaian Korporasi</td>
-					<td>Skor:<div id="ncpCorporate">
-
-						</div>
-					</td>
-					<td>Level: <div id="lvRiskCorpo">
-
-						</div>
-					</td>
-				</tr>
-			</div>
-		</tfoot>
 		<hr>
 
 	</div>
 	<script>
 		$(document).ready(function() {
-			<?php
-			foreach ($assessmentDetail as $v) { ?>
-				document.querySelector('[name="phase_<?= $v->parameter_id ?>"]').value = "<?= $v->phase_id ?>"
-			<?php } ?>
-
-			// $('#myForm').on('reset', function(e) {
-			// 	updatePredictions('myForm');
-			// 	e.stopPropagation();
-			// });
-			// $('#myFormA').on('reset', function(e) {
-			// 	e.stopPropagation();
-			// 	updatePredictions('myFormA');
-			// });
-			// $('#myFormB').on('reset', function(e) {
-			// 	e.stopPropagation();
-			// 	updatePredictions('myFormB');
-			// });
-			// $('#myFormC').on('reset', function(e) {
-			// 	e.stopPropagation();
-			// 	updatePredictions('myFormC');
-			// });
-			// $('#myFormD').on('reset', function(e) {
-			// 	e.stopPropagation();
-			// 	updatePredictions('myFormD');
-			// });
-			// $('#myFormE').on('reset', function(e) {
-			// 	e.stopPropagation();
-			// 	updatePredictions('myFormE');
-			// });
+			renderTable();
 		});
 
+		async function renderTable() {
+			var req = await fetch(`admin/get_kertasKerja?assessment_id=${$("[name=assessment_id]").val()}`);
+			try {
+				var data = await req.json();
+				var dimensi = data.dimensi;
+				var subDimensi = data.subDimensi;
+				var parameter = data.parameter;
+				var assessmentDetail = data.assessmentDetail;
+				// var question = data.question;
+				// var phase = data.phase;
+
+				var el = document.getElementById('tbl_dimensi');
+				dimensi.forEach(d => {
+					var count_param = 0;
+					var sum_param = 0;
+					el.insertAdjacentHTML('beforeend', `
+					<tr>
+						<td style="background-color: blue; color: white; text-align: left;" colspan="2">${d.dimensi_id + '. '+d.dimensi_name}</td>
+						<td style="background-color: blue; color: white; text-align: right;">Skor: <span id="dimensi_${d.dimensi_id}"></span></td>
+					</tr>
+					`);
+					subDimensi.forEach(sd => {
+						if (sd.dimensi_id == d.dimensi_id) {
+							el.insertAdjacentHTML('beforeend', `
+							<tr>
+								<td style="background-color: blueviolet; color:white; text-align: left;" colspan="3">${sd.subdimensi_id + '. '+sd.subdimensi_name}</td>
+							</tr>
+							`);
+							parameter.forEach(p => {
+								// question.forEach(q => {
+								// 	phase.forEach(ph => {
+
+
+								if (p.subdimensi_id == sd.subdimensi_id) {
+									count_param++;
+									assessmentDetail.forEach(ad => {
+										if (ad.parameter_id == p.parameter_id) {
+											sum_param = sum_param + parseInt(ad.phase_id);
+										}
+									});
+
+
+									el.insertAdjacentHTML('beforeend', `
+									<tr>
+										<td style="text-align: left;">${p.parameter_name}</td>
+										<td style="text-align: center;">
+											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phaseModal_">
+												Kriteria 
+											</button>
+										</td>
+										
+										<td style="text-align: right;">
+											<select class="form-select" name="phase_${p.parameter_id}" onchange="setParameter('${p.parameter_id}')">
+												<option value="0">None</option>
+												<option value="1"> 1. Fase Awal (Initial Phase)</option>
+												<option value="2"> 2. Fase Berkembang (Emerging State)</option>
+												<option value="3"> 3. Fase Praktik Yang Baik (Good Practice Phase)</option>
+												<option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
+												<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
+											</select>
+											<input class="form-control mt-2" type="file" name="file_${p.parameter_id}" multiple>
+										</td>
+									</tr>
+											
+										`);
+									//}
+								}
+							});
+
+
+						}
+					});
+					var skor_dimensi = sum_param / count_param;
+					document.getElementById(`dimensi_${d.dimensi_id}`).innerHTML = skor_dimensi;
+				});
+
+				assessmentDetail.forEach(f => {
+					console.log(f.phase_id);
+					document.querySelector(`[name="phase_${f.parameter_id}"]`).value = f.phase_id;
+				})
+			} catch (e) {
+				alert(e);
+			}
+
+			// $.ajax({
+			// 	type: 'GET',
+			// 	url: `<?= base_url("Admin/get_kertasKerja?assessment_id="); ?>${document.querySelector('[name=assessment_id]').value}`, // Adjust the URL to your controller endpoint
+			// 	dataType: 'json',
+			// 	success: function(data) {
+			// 		var dimensi = data.dimensi;
+			// 		var subDimensi = data.subDimensi;
+			// 		var parameter = data.parameter;
+			// 		var assessmentDetail = data.assessmentDetail;
+			// 	},
+			// 	error: function(xhr, status, error) {
+			// 		console.log("gagal");
+			// 		console.error("AJAX Error: " + error);
+			// 		console.log(xhr);
+			// 	}
+			// });
+
+
+		}
 
 
 		// function save(formId, id) {
@@ -210,7 +241,8 @@
 				},
 				dataType: 'json',
 				success: function(data) {
-					console.log(data);
+					document.getElementById('tbl_dimensi').innerHTML = "";
+					renderTable();
 				},
 				error: function(xhr, status, error) {
 					console.log("gagal");
@@ -220,150 +252,150 @@
 			});
 		}
 
-		function updatePredictions(formId) {
-			// Serialize form data
-			console.log(formId);
-			var data = $('#' + formId).serialize();
-			mypredictions(data);
+		// function updatePredictions(formId) {
+		// 	// Serialize form data
+		// 	console.log(formId);
+		// 	var data = $('#' + formId).serialize();
+		// 	mypredictions(data);
 
-			if (formId == 'myFormA') {
-				//var data = $('#' + formId).serialize();
-				console.log("jajajaj");
-				console.log(data);
+		// 	if (formId == 'myFormA') {
+		// 		//var data = $('#' + formId).serialize();
+		// 		console.log("jajajaj");
+		// 		console.log(data);
 
-				// Send user input to the server via AJAX for saving to the database
-				$.ajax({
-					type: 'POST',
-					url: '<?= base_url("Admin/calculateRiskA"); ?>', // Adjust the URL to your controller endpoint
-					data: data,
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
+		// 		// Send user input to the server via AJAX for saving to the database
+		// 		$.ajax({
+		// 			type: 'POST',
+		// 			url: '<?= base_url("Admin/calculateRiskA"); ?>', // Adjust the URL to your controller endpoint
+		// 			data: data,
+		// 			dataType: 'json',
+		// 			success: function(data) {
+		// 				console.log(data);
 
-						// You can handle success response if needed
-						$.each(data, function(key, value) {
-							// console.log(key + value);
-							$('#' + key).text(value);
-						});
+		// 				// You can handle success response if needed
+		// 				$.each(data, function(key, value) {
+		// 					// console.log(key + value);
+		// 					$('#' + key).text(value);
+		// 				});
 
-					},
-					error: function(xhr, status, error) {
-						console.log("gagal");
-						console.error("AJAX Error: " + error);
-						console.log(xhr);
-					}
-				});
-			}
-			if (formId == 'myFormB') {
-				//	var data = $('#' + formId).serialize();
-				console.log(data);
-				console.log("jBjBjBj");
+		// 			},
+		// 			error: function(xhr, status, error) {
+		// 				console.log("gagal");
+		// 				console.error("AJAX Error: " + error);
+		// 				console.log(xhr);
+		// 			}
+		// 		});
+		// 	}
+		// 	if (formId == 'myFormB') {
+		// 		//	var data = $('#' + formId).serialize();
+		// 		console.log(data);
+		// 		console.log("jBjBjBj");
 
-				// Send user input to the server via AJAX for saving to the database
-				$.ajax({
-					type: 'POST',
-					url: '<?= base_url("Admin/calculateRiskB"); ?>', // Adjust the URL to your controller endpoint
-					data: data,
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
-						// You can handle success response if needed
-						$.each(data, function(key, value) {
-							$('#' + key).text(value);
-						});
-						//		mypredictions(data);
-					},
-					error: function(xhr, status, error) {
-						console.error("AJAX Error: " + error);
-						console.log(xhr);
-					}
-				});
-			}
-			if (formId == 'myFormC') {
-				//	var data = $('#' + formId).serialize();
-				console.log(data);
+		// 		// Send user input to the server via AJAX for saving to the database
+		// 		$.ajax({
+		// 			type: 'POST',
+		// 			url: '<?= base_url("Admin/calculateRiskB"); ?>', // Adjust the URL to your controller endpoint
+		// 			data: data,
+		// 			dataType: 'json',
+		// 			success: function(data) {
+		// 				console.log(data);
+		// 				// You can handle success response if needed
+		// 				$.each(data, function(key, value) {
+		// 					$('#' + key).text(value);
+		// 				});
+		// 				//		mypredictions(data);
+		// 			},
+		// 			error: function(xhr, status, error) {
+		// 				console.error("AJAX Error: " + error);
+		// 				console.log(xhr);
+		// 			}
+		// 		});
+		// 	}
+		// 	if (formId == 'myFormC') {
+		// 		//	var data = $('#' + formId).serialize();
+		// 		console.log(data);
 
-				console.log("jCjCjCj");
+		// 		console.log("jCjCjCj");
 
-				// Send user input to the server via AJAX for saving to the database
-				$.ajax({
-					type: 'POST',
-					url: '<?= base_url("Admin/calculateRiskC"); ?>', // Adjust the URL to your controller endpoint
-					data: data,
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
-						// You can handle success response if needed
-						$.each(data, function(key, value) {
-							$('#' + key).text(value);
-						});
-						//		mypredictions(data);
-					},
-					error: function(xhr, status, error) {
-						console.error("AJAX Error: " + error);
-						console.log(xhr);
-					}
-				});
-			}
-			if (formId == 'myFormD') {
-				//	var data = $('#' + formId).serialize();
-				console.log("jDjDjDj");
+		// 		// Send user input to the server via AJAX for saving to the database
+		// 		$.ajax({
+		// 			type: 'POST',
+		// 			url: '<?= base_url("Admin/calculateRiskC"); ?>', // Adjust the URL to your controller endpoint
+		// 			data: data,
+		// 			dataType: 'json',
+		// 			success: function(data) {
+		// 				console.log(data);
+		// 				// You can handle success response if needed
+		// 				$.each(data, function(key, value) {
+		// 					$('#' + key).text(value);
+		// 				});
+		// 				//		mypredictions(data);
+		// 			},
+		// 			error: function(xhr, status, error) {
+		// 				console.error("AJAX Error: " + error);
+		// 				console.log(xhr);
+		// 			}
+		// 		});
+		// 	}
+		// 	if (formId == 'myFormD') {
+		// 		//	var data = $('#' + formId).serialize();
+		// 		console.log("jDjDjDj");
 
-				// Send user input to the server via AJAX for saving to the database
-				$.ajax({
-					type: 'POST',
-					url: '<?= base_url("Admin/calculateRiskD"); ?>', // Adjust the URL to your controller endpoint
-					data: data,
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
-						// You can handle success response if needed
-						$.each(data, function(key, value) {
-							$('#' + key).text(value);
-						});
-						//			mypredictions(data);
-					},
-					error: function(xhr, status, error) {
-						console.error("AJAX Error: " + error);
-						console.log(xhr);
-					}
-				});
-			}
-			if (formId == 'myFormE') {
-				//	var data = $('#' + formId).serialize();
-				console.log("jEjEjEj");
+		// 		// Send user input to the server via AJAX for saving to the database
+		// 		$.ajax({
+		// 			type: 'POST',
+		// 			url: '<?= base_url("Admin/calculateRiskD"); ?>', // Adjust the URL to your controller endpoint
+		// 			data: data,
+		// 			dataType: 'json',
+		// 			success: function(data) {
+		// 				console.log(data);
+		// 				// You can handle success response if needed
+		// 				$.each(data, function(key, value) {
+		// 					$('#' + key).text(value);
+		// 				});
+		// 				//			mypredictions(data);
+		// 			},
+		// 			error: function(xhr, status, error) {
+		// 				console.error("AJAX Error: " + error);
+		// 				console.log(xhr);
+		// 			}
+		// 		});
+		// 	}
+		// 	if (formId == 'myFormE') {
+		// 		//	var data = $('#' + formId).serialize();
+		// 		console.log("jEjEjEj");
 
-				// Send user input to the server via AJAX for saving to the database
-				$.ajax({
-					type: 'POST',
-					url: '<?= base_url("Admin/calculateRiskE"); ?>', // Adjust the URL to your controller endpoint
-					data: data,
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
-						// You can handle success response if needed
-						$.each(data, function(key, value) {
-							$('#' + key).text(value);
-						});
-						//		mypredictions(data);
-					},
-					error: function(xhr, status, error) {
-						console.error("AJAX Error: " + error);
-						console.log(xhr);
-					}
-				});
-			} else {
-				var data = $('#' + formId).serialize();
-				console.log(data);
+		// 		// Send user input to the server via AJAX for saving to the database
+		// 		$.ajax({
+		// 			type: 'POST',
+		// 			url: '<?= base_url("Admin/calculateRiskE"); ?>', // Adjust the URL to your controller endpoint
+		// 			data: data,
+		// 			dataType: 'json',
+		// 			success: function(data) {
+		// 				console.log(data);
+		// 				// You can handle success response if needed
+		// 				$.each(data, function(key, value) {
+		// 					$('#' + key).text(value);
+		// 				});
+		// 				//		mypredictions(data);
+		// 			},
+		// 			error: function(xhr, status, error) {
+		// 				console.error("AJAX Error: " + error);
+		// 				console.log(xhr);
+		// 			}
+		// 		});
+		// 	} else {
+		// 		var data = $('#' + formId).serialize();
+		// 		console.log(data);
 
-				// Send user input to the server via AJAX for saving to the database
-				$.ajax({
-					error: function(xhr, status, error) {
-						console.log("Failed");
-						console.error("AJAX Error: " + error);
-						console.log(xhr);
-					}
-				});
-			}
-		}
+		// 		// Send user input to the server via AJAX for saving to the database
+		// 		$.ajax({
+		// 			error: function(xhr, status, error) {
+		// 				console.log("Failed");
+		// 				console.error("AJAX Error: " + error);
+		// 				console.log(xhr);
+		// 			}
+		// 		});
+		// 	}
+		// }
 	</script>

@@ -37,31 +37,13 @@ class Admin extends CI_Controller
 	public function formUmum()
 	{
 		$uri = $this->input->get("assessment_id", TRUE);
-		// $data['dimensi_id'] = $this->Mcrud->dimensi();
-		// $data['dimensi_umum_A'] = $this->Mcrud->get_dimensi_A();
-		// $data['dimensi_umum_B'] = $this->Mcrud->get_dimensi_B();
-		// $data['dimensi_umum_C'] = $this->Mcrud->get_dimensi_C();
-		// $data['dimensi_umum_D'] = $this->Mcrud->get_dimensi_D();
-		// $data['dimensi_umum_E'] = $this->Mcrud->get_dimensi_E();
 		if ($uri != null) {
 			$get = $this->Mcrud->getAssessment($uri);
+			$data['level'] = $this->getRiskLevel($get->skor);
 			$data['assessment'] = $get;
 		} else {
 			$data['assessment'] = [];
 		}
-
-		$dimensi = $this->Mcrud->get_data("tbl_dimensi");
-		$data['dimensi'] = $dimensi;
-		$subDimensi = $this->Mcrud->get_data("tbl_sub_dimensi");
-		$data['subDimensi'] = $subDimensi;
-		$parameter = $this->Mcrud->get_data("tbl_parameter");
-		$data['parameter'] = $parameter;
-		$assessmentDetail = $this->Mcrud->get_data("tbl_assessment_detail", ['assessment_id' => $uri]);
-		$data['assessmentDetail'] = $assessmentDetail;
-		$question = $this->Mcrud->get_data("tbl_question");
-		$data['question'] = $question;
-		// var_dump($assessmentDetail);
-		// die();
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -69,24 +51,60 @@ class Admin extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
+	public function get_kertasKerja()
+	{
+		//if ($this->input->server('REQUEST_METHOD') == 'GET') {
+		$uri = $this->input->get("assessment_id");
+
+
+		$dimensi = $this->Mcrud->get_data("tbl_dimensi");
+		$data['dimensi'] = ($dimensi);
+		$subDimensi = $this->Mcrud->get_data("tbl_sub_dimensi");
+		$data['subDimensi'] = ($subDimensi);
+		$parameter = $this->Mcrud->get_data("tbl_parameter");
+		$data['parameter'] = ($parameter);
+		$question = $this->Mcrud->get_data("tbl_question");
+		$data['question'] = ($question);
+		$phase = $this->Mcrud->get_data("tbl_phase");
+		$data['phase'] = ($phase);
+		$assessmentDetail = $this->Mcrud->get_data("tbl_assessment_detail", ['assessment_id' => $uri]);
+		$data['assessmentDetail'] = ($assessmentDetail);
+
+		echo json_encode($data);
+		//}`
+	}
+
 	public function setParameter()
 	{
 		$data = $this->input->post();
-		// if ($this->input->server('REQUEST_METHOD') == 'POST') {
-		// 	$this->Mcrud->post_data('tbl_assessment_detail', $data);
-		// } elseif ($this->input->server('REQUEST_METHOD') == 'PATCH') {
-		// 	$this->Mcrud->update_data('tbl_assessment_detail', $data, ['id' => $data['id']]);
-		// }
 		$cek = $this->Mcrud->get_data('tbl_assessment_detail', ['assessment_id' => $data['assessment_id'], 'parameter_id' => $data['parameter_id']]);
 		if (count($cek) == 0) {
 			$this->Mcrud->post_data('tbl_assessment_detail', $data);
 		} elseif (count($cek) == 1) {
 			$this->Mcrud->update_data('tbl_assessment_detail', $data, ['id' => $cek[0]->id]);
 		}
-		$join_count = $this->Mcrud->get_join_count();
-		$data['join_count'] = $join_count;
+
+		$kk = $this->setSkor($data['assessment_id']);
+		// $kk = json_decode($kk);
+		// var_dump($kk);
+		// die();
 
 		echo json_encode($data);
+	}
+
+	public function setSkor($assessment_id)
+	{
+		$parameter = $this->Mcrud->get_data("tbl_parameter");
+		$assessmentDetail = $this->Mcrud->get_data("tbl_assessment_detail", ['assessment_id' => $assessment_id]);
+		$sum_phase = 0;
+		$count_detail = 0;
+
+		foreach ($assessmentDetail as $v) {
+			$count_detail++;
+			$sum_phase = $sum_phase + intval($v->phase_id);
+		}
+		$skor = $sum_phase / count($parameter);
+		$this->Mcrud->update_data('tbl_assessment', ['skor' => $skor], ['assessment_id' => $assessment_id]);
 	}
 
 	public function calculateRiskA()
@@ -205,26 +223,6 @@ class Admin extends CI_Controller
 		echo json_encode($data);
 	}
 
-	// public function calculateRisk()
-	// {
-	// 	$ncpD1 = $this->input->post('ncpD1');
-	// 	$ncpD2 = $this->input->post('ncpD2');
-	// 	$ncpD3 = $this->input->post('ncpD3');
-	// 	$ncpD4 = $this->input->post('ncpD4');
-	// 	$ncpD5 = $this->input->post('ncpD5');
-
-
-	// 	$ncpCorporate = $ncpD1 + $ncpD1  == 0 ? 0 : $ncp41 + $ncp42;
-	// 	$lvRiskD5 = $this->getRiskLevel($ncpD5);
-
-	// 	$data = array(
-	// 		'' => number_format($ncpD5, 2),
-	// 		'lvRiskD5' => $lvRiskD5,
-	// 	);
-
-	// 	echo json_encode($data);
-	// }
-
 	private function upload_files($path, $title, $files)
 	{
 		$config = array(
@@ -263,7 +261,6 @@ class Admin extends CI_Controller
 		}
 		return $uploaded_files;
 	}
-
 
 
 	public function saveUmum()
