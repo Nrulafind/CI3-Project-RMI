@@ -75,11 +75,22 @@
 				var subDimensi = data.subDimensi;
 				var parameter = data.parameter;
 				var assessmentDetail = data.assessmentDetail;
+				var question = data.question;
+				var qs = [];
+				question.forEach(x=>{
+					if( !(x.parameter_id in qs) ){
+						qs[x.parameter_id] = [];
+						qs[x.parameter_id].push(x.question);
+					}else{
+						qs[x.parameter_id].push(x.question);
+					}
+				});
 
 				document.getElementById('skor').textContent = data.assessment.skor;
 				document.getElementById('level').textContent = '('+data.assessment.level+')';
 
 				var el = document.getElementById('tbl_dimensi');
+				var pp = 0;
 				dimensi.forEach(d => {
 					var count_param = 0;
 					var sum_param = 0;
@@ -99,20 +110,32 @@
 							parameter.forEach(p => {
 								if (p.subdimensi_id == sd.subdimensi_id) {
 									count_param++;
+									pp++;
 									assessmentDetail.forEach(ad => {
 										if (ad.parameter_id == p.parameter_id) {
 											sum_param = sum_param + parseInt(ad.phase_id);
 										}
 									});
-
 									el.insertAdjacentHTML('beforeend', `
 										<tr>
 											<td style="text-align: left;">${p.parameter_name}</td>
 											<td style="text-align: center;">
-												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phaseModal_">
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#param_modal_${p.parameter_id.substring(0,1)+pp}">
 													Kriteria 
 												</button>
 											</td>
+
+											<div class="modal fade" id="param_modal_${p.parameter_id.substring(0,1)+pp}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h1 class="modal-title fs-5">${p.parameter_name}</h1>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body" id="body_modal_${p.parameter_id.substring(0,1)+pp}"></div>
+													</div>
+												</div>
+											</div>
 											
 											<td style="text-align: right;">
 												<select class="form-select" name="phase_${p.parameter_id}" onchange="setParameter('${p.parameter_id}')">
@@ -127,6 +150,12 @@
 											</td>
 										</tr>
 									`);
+									qs[p.parameter_id].forEach(x=>{
+										document.getElementById(`body_modal_${p.parameter_id.substring(0,1)+pp}`).insertAdjacentHTML('beforeend',`
+											<span>${x}</span><br>
+											<hr>
+										`);
+									})
 								}
 							});
 						}
