@@ -12,7 +12,7 @@
 				}
 
 				#accordionSidebar {
-					background-color: lightskyblue !important;
+					background-color: #EF6C00 !important;
 				}
 			</style>
 			<div id="wrapper">
@@ -23,7 +23,7 @@
 						<div class="sidebar-brand-icon">
 							<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 						</div>
-						<div class="sidebar-brand-text mx-3">ARMI - APLOG</div>
+						<div class="sidebar-brand-text mx-3">ARMI </div>
 					</a>
 
 					<!-- Divider -->
@@ -40,7 +40,7 @@
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="<?= base_url("cluster_umum") ?>">
 							<i class="fas fa-fw fa-solid fa-calculator"></i>
-							<span>RMI Assessment</span>
+							<span>Create Assessment</span>
 						</a>
 					</li>
 
@@ -48,7 +48,7 @@
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="<?= base_url("asessment_eval") ?>">
 							<i class="fas fa-fw fa-file-archive"></i>
-							<span>Asessment Evaluation </span>
+							<span>List Asessment</span>
 						</a>
 					</li>
 
@@ -157,7 +157,7 @@
 								}
 
 								#accordionSidebar {
-									background-color: lightskyblue !important;
+									background-color: #EF6C00 !important;
 								}
 							</style>
 
@@ -185,17 +185,17 @@
 									<!-- Nav Item - Pages Collapse Menu -->
 									<!-- Nav Item - Pages Collapse Menu -->
 									<li class="nav-item">
-										<a class="nav-link collapsed" href="<?= base_url("cluster_umum_") ?>">
+										<a class="nav-link collapsed" href="<?= base_url("cluster_umum") ?>">
 											<i class="fas fa-fw fa-solid fa-calculator"></i>
-											<span>RMI Assessment</span>
+											<span>Create Assessment</span>
 										</a>
 									</li>
 
 									<!-- Nav Item - Utilities Collapse Menu -->
 									<li class="nav-item">
-										<a class="nav-link collapsed" href="<?= base_url("asessment_eval_") ?>">
+										<a class="nav-link collapsed" href="<?= base_url("asessment_eval") ?>">
 											<i class=" fas fa-fw fa-file-archive"></i>
-											<span>Asessment Evaluation</span>
+											<span>List Assessment</span>
 										</a>
 									</li>
 
@@ -287,7 +287,7 @@
 									<?php } elseif ($this->session->userdata('access') == "Officer") { ?>
 										<style>
 											#accordionSidebar {
-												background-color: lightskyblue !important;
+												background-color: #EF6C00 !important;
 											}
 										</style>
 
@@ -302,7 +302,7 @@
 												}
 
 												#accordionSidebar {
-													background-color: lightskyblue !important;
+													background-color: #EF6C00 !important;
 												}
 											</style>
 
@@ -314,7 +314,7 @@
 														<div class="sidebar-brand-icon">
 															<img class="img-profile rounded-circle" style=" width:2cm; height:1.5cm;" src="<?= base_url('assets/img/OIP.JPG');  ?>"></img>
 														</div>
-														<div class="sidebar-brand-text mx-3">ARMI - APLOG</div>
+														<div class="sidebar-brand-text mx-3">ARMI</div>
 													</a>
 
 													<!-- Divider -->
@@ -329,17 +329,17 @@
 
 													<!-- Nav Item - Pages Collapse Menu -->
 													<li class="nav-item">
-														<a class="nav-link collapsed" href="<?= base_url("cluster_umum__") ?>">
+														<a class="nav-link collapsed" href="<?= base_url("cluster_umum") ?>">
 															<i class="fas fa-fw fa-solid fa-calculator"></i>
-															<span>RMI Assessment</span>
+															<span>Create Assessment</span>
 														</a>
 													</li>
 
 													<!-- Nav Item - Utilities Collapse Menu -->
 													<li class="nav-item">
-														<a class="nav-link collapsed" href="<?= base_url("asessment_eval__") ?>">
+														<a class="nav-link collapsed" href="<?= base_url("asessment_eval") ?>">
 															<i class=" fas fa-fw fa-file-archive"></i>
-															<span>Asessment Evaluation</span>
+															<span>List Assessment</span>
 														</a>
 													</li>
 

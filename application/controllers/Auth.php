@@ -34,24 +34,17 @@ class Auth extends CI_Controller
 				if ($x['user_status'] == '1') {
 					$this->session->set_userdata('logged', TRUE);
 					$this->session->set_userdata('user', $email);
-					$id = $x['user_id'];
+					$this->session->set_userdata('id', $x['user_id']);
+					$this->session->set_userdata('name', $x['user_name']);
+					$this->session->set_userdata('akses', $x['user_akses']);
 					if ($x['user_akses'] == '1') { //Super Admin
-						$name = $x['user_name'];
 						$this->session->set_userdata('access', 'Vice President');
-						$this->session->set_userdata('id', $id);
-						$this->session->set_userdata('name', $name);
 						redirect('dashboard');
 					} else if ($x['user_akses'] == '2') { //Approval
-						$name = $x['user_name'];
 						$this->session->set_userdata('access', 'Manager');
-						$this->session->set_userdata('id', $id);
-						$this->session->set_userdata('name', $name);
 						redirect('dashboard_approval');
 					} else if ($x['user_akses'] == '3') { //
-						$name = $x['user_name'];
 						$this->session->set_userdata('access', 'Officer');
-						$this->session->set_userdata('id', $id);
-						$this->session->set_userdata('name', $name);
 						redirect('dashboard_officer');
 					}
 				} else {

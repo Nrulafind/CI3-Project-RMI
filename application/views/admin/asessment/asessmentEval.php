@@ -1,123 +1,78 @@
-<div class="container text-center">
-	<h1>Assessment Evaluation By <?= $this->session->userdata('name'); ?> </h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<div class="container text-left">
+	<h2>List Assessment </h2>
 </div>
 
 <div class="container">
-	<table class="table table-hover table-responsive">
-		<thead>
+	<table id="myTable" class="table hover" style="font-size: 10px; margin-top: 5px;">
+		<thead style="background-color: #78909C; color: #ffffff !important;">
 			<tr>
-				<th scope="col" rowspan="2" class="align-middle">No</th>
-				<th scope="col" rowspan="2" class="align-middle">Nama PT</th>
-				<th scope="col" rowspan="2" class="align-middle">Nama Asessor</th>
-				<th scope="col" rowspan="2" class="align-middle">Status Approval</th>
-				<th scope="col" colspan="2">Capaian Dimensi 1</th>
-				<th scope="col" colspan="2">Capaian Dimensi 2</th>
-				<th scope="col" colspan="2">Capaian Dimensi 3</th>
-				<th scope="col" colspan="2">Capaian Dimensi 4</th>
-				<th scope="col" colspan="2">Capaian Dimensi 5</th>
-				<th scope="col" colspan="2">Capaian Dimensi Korporasi</th>
-				<th scope="col" rowspan="2" class="align-middle">File</th>
-				<th scope="col" colspan="2">Action</th>
-			</tr>
-			<tr>
-				<th scope="col" rowspan="1">Skor</th>
-				<th scope="col" rowspan="1">Tingkat</th>
-				<th scope="col" rowspan="1">Skor</th>
-				<th scope="col" rowspan="1">Tingkat</th>
-				<th scope="col" rowspan="1">Skor</th>
-				<th scope="col" rowspan="1">Tingkat</th>
-				<th scope="col" rowspan="1">Skor</th>
-				<th scope="col" rowspan="1">Tingkat</th>
-				<th scope="col" rowspan="1">Skor</th>
-				<th scope="col" rowspan="1">Tingkat</th>
-				<th scope="col" rowspan="1">Skor</th>
-				<th scope="col" rowspan="1">Tingkat</th>
-				<th scope="col" rowspan="1">Edit</th>
-				<th scope="col" rowspan="1">Delete</th>
+				<th>Id</th>
+				<th>Tanggal</th>
+				<th>Status</th>
+				<th>Perusahaan</th>
+				<th>Kode Laporan</th>
+				<th>Skor</th>
+				<th>Dibuat Oleh</th>
 			</tr>
 		</thead>
-		<tbody>
-			<?php
-			$no = 1;
-			foreach ($asessment as $hasil) {
-				$ncpData = json_decode($hasil[0], true);
-				$lvRiskData = json_decode($hasil[1], true);
-				$ncpData2 = json_decode($hasil[2], true);
-
-				var_dump($hasil); ?>
-
-
-				<tr>
-
-					<th><?= $no++; ?></th>
-					<td><?= $hasil['corporate_name'] ?></td>
-					<td><?= $hasil['user_name'] ?></td>
-					<?php if ($hasil['status_approval'] == "Approved") { ?>
-						<td><span class="badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill"><?= $hasil['status_approval'] ?></span></td>
-					<?php } elseif ($hasil['status_approval'] == "Reject") { ?>
-						<td><span class="badge bg-danger-subtle border border-success-subtle text-success-emphasis rounded-pill"><?= $hasil['status_approval'] ?></span></td>
-					<?php } elseif ($hasil['status_approval'] == "Pending") { ?>
-						<td><span class="badge bg-warning-subtle border border-success-subtle text-success-emphasis rounded-pill"><?= $hasil['status_approval'] ?></span></td>
-					<?php } else { ?>
-						<td><span class="badge bg-secondary-subtle border border-success-subtle text-success-emphasis rounded-pill"><?= $hasil['status_approval'] ?></span></td>
-					<?php } ?>
-					<td><?= $hasil['ncpD1']; ?></td>
-					<td><?= $hasil['lvRiskD1']; ?></td>
-					<td><?= $hasil['ncpD2']; ?></td>
-					<td><?= $hasil['lvRiskD2']; ?></td>
-					<td><?= $hasil['ncpD3']; ?></td>
-					<td><?= $hasil['lvRiskD3']; ?></td>
-					<td><?= $hasil['ncpD4']; ?></td>
-					<td><?= $hasil['lvRiskD4']; ?></td>
-					<td><?= $hasil['ncpD5']; ?></td>
-					<td><?= $hasil['lvRiskD5']; ?></td>
-					<td><?= $hasil['ncpCorporate']; ?></td>
-					<td><?= $hasil['lvRiskCorpo']; ?></td>
-					<td>
-						<!-- create button -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_<?= $hasil['assessment_id'] ?>">
-							File
-						</button>
-						<!-- // Create the modal -->
-						<div class="modal fade" id="Modal_<?= $hasil['assessment_id'] ?>" tabindex="-1" aria-labelledby="ModalLabel_<?= $hasil['assessment_id'] ?>" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="ModalLabel_<?= $hasil['assessment_id'] ?>"> <?= $hasil['file_ids'] ?></h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<table class="table table-responsive">
-											<tr>
-												<td>
-													<?=
-													$hasil['file_links']; ?>
-												</td>
-											</tr>
-										</table>
-										<!-- // Display the question in the modal body -->
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</td>
-					<td>
-						<div class="btn btn-outline-warning">
-							<a class="edit-assessment" href="<?= base_url('edit_asessment') ?>/<?= $hasil['assessment_id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
-						</div>
-					</td>
-					<td>
-
-						<div class="btn btn-outline-danger">
-							<a class="delete-assessment" href="<?= base_url('delete_assesment') ?>/<?= $hasil['assessment_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
-						</div>
-					</td>
-				</tr>
-			<?php } ?>
-		</tbody>
 	</table>
 </div>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" media="all" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
+
+<script>
+	var data = <?php echo json_encode($assessment); ?>;
+  $(document).ready( function () {
+    var table = $('#myTable').DataTable({
+      data: data,
+      columns : [
+				{"data":"assessment_id"},
+        {"data":"created_at"},
+        {"data":"status"},
+        {"data":"corporate_name"},
+        {"data":"code_laporan"},
+        {"data":"skor"},
+        {"data":"user_name"},
+      ],
+      order: [[0,'desc']],
+      dom: '<"container-fluid"<"row"<"col"B><"col"f>>>rtip',
+			columnDefs: [
+				{
+					render: (data, type, row) => {
+						switch (parseInt(data)) {
+							case 1: return '<span style="color: grey;"><b>Draft</b></span>'; break;
+							case 2: return '<span style="color: purple;"><b>Request for Approval</b></span>'; break;
+							case 3: return '<span style="color: green;"><b>Approved</b></span>'; break;
+							case 4: return `<span style="color: red;"><b>Rejected</b></span>`; break;
+							default: return data; break;
+						}
+					},targets: 2
+				}
+			]
+    });
+		$('#myTable tbody').on('click','tr', function () {
+			let d = table.row( this ).data();
+			opens(d);
+		});
+  });
+
+	function opens(x){
+		if(typeof(x)!=="undefined"){
+			window.open(`cluster_umum?assessment_id=${x["assessment_id"]}`, '_blank');
+		}else{
+			window.open(`cluster_umum`, '_blank');
+		}
+	}
+</script>
