@@ -8,7 +8,7 @@
 	<h1>Assessment Form</h1>
 	<div class="container align-content-start">
 		<input type="hidden" name="assessment_id" value="<?= $assessment->assessment_id ?? 0; ?>">
-		<form id="myForm" action="<?= base_url('Admin/saveUmum?assessment_id=').$assessment->assessment_id ?? 0; ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+		<form id="myForm" action="<?= base_url('Admin/saveUmum?assessment_id=') . $assessment->assessment_id ?? 0; ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 			<table class="card col table table-hover table-responsive">
 				<tbody class="card-body">
 					<tr class="row">
@@ -33,16 +33,16 @@
 					<tr style="width: 100%;">
 						<td colspan="4" style="text-align: left;">
 							<?php
-								if(@$assessment->status != 3){
-									?><button type="submit" class="btn btn-primary mr-2">Submit</button><?php
-									if($this->session->userdata('akses') < 3){
-										?><button type="button" class="btn btn-success" onclick="approve()">Approve</button>
-										<button type="button" class="btn btn-danger" onclick="reject()">Reject</button><?php
-									}else{
-										?><button type="button" class="btn btn-warning" onclick="request_approve()">Request approval</button><?php
-									}
-								}
-							?>
+							if (@$assessment->status != 3) {
+							?><button type="submit" class="btn btn-primary mr-2">Submit</button><?php
+																								if ($this->session->userdata('akses') < 3) {
+																								?><button type="button" class="btn btn-success" onclick="approve()">Approve</button>
+									<button type="button" class="btn btn-danger" onclick="reject()">Reject</button><?php
+																												} else {
+																													?><button type="button" class="btn btn-warning" onclick="request_approve()">Request approval</button><?php
+																																																						}
+																																																					}
+																																																							?>
 						</td>
 					</tr>
 				</tfoot>
@@ -62,7 +62,7 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			if(document.querySelector('[name=assessment_id]').value > 0){
+			if (document.querySelector('[name=assessment_id]').value > 0) {
 				renderTable();
 			}
 		});
@@ -77,17 +77,17 @@
 				var assessmentDetail = data.assessmentDetail;
 				var question = data.question;
 				var qs = [];
-				question.forEach(x=>{
-					if( !(x.parameter_id in qs) ){
+				question.forEach(x => {
+					if (!(x.parameter_id in qs)) {
 						qs[x.parameter_id] = [];
 						qs[x.parameter_id].push(x.question);
-					}else{
+					} else {
 						qs[x.parameter_id].push(x.question);
 					}
 				});
 
 				document.getElementById('skor').textContent = data.assessment.skor;
-				document.getElementById('level').textContent = '('+data.assessment.level+')';
+				document.getElementById('level').textContent = '(' + data.assessment.level + ')';
 
 				var el = document.getElementById('tbl_dimensi');
 				var pp = 0;
@@ -97,7 +97,7 @@
 					el.insertAdjacentHTML('beforeend', `
 						<tr>
 							<td style="background-color: blue; color: white; text-align: left;" colspan="2">${d.dimensi_id + '. '+d.dimensi_name}</td>
-							<td style="background-color: blue; color: white; text-align: right;">Skor: <span id="dimensi_${d.dimensi_id}"></span></td>
+							<td style="background-color: blue; color: white; text-align: right;">Skor: <span id="dimensi_${d.dimensi_id}"></span> <br> Level: <span id="dimensi_${d.dimensi_id.level}"></span</td>
 						</tr>
 					`);
 					subDimensi.forEach(sd => {
@@ -126,7 +126,7 @@
 											</td>
 
 											<div class="modal fade" id="param_modal_${p.parameter_id.substring(0,1)+pp}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												<div class="modal-dialog">
+												<div class="modal-dialog modal-lg">
 													<div class="modal-content">
 														<div class="modal-header">
 															<h1 class="modal-title fs-5">${p.parameter_name}</h1>
@@ -146,12 +146,17 @@
 													<option value="4"> 4. Fase Praktik yang Lebih Baik (Strong Practice Phase)</option>
 													<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
 												</select>
-												<input class="form-control mt-2" type="file" name="file_${p.parameter_id}" multiple>
+												<form id="myFile-<?= $assessment->assessment_id ?? 0; ?>" action="<?= base_url('Admin/saveFile?assessment_id=') . ($assessment->assessment_id ?? 0); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+													<input class="form-control mt-2" type="file" name="uploaded_file_${p.parameter_id}">
+													<button type="submit" id="uplbtn<?= $assessment->assessment_id ?? 0; ?>" class="btn btn-primary">
+														Upload
+													</button>
+												</form>
 											</td>
 										</tr>
 									`);
-									qs[p.parameter_id].forEach(x=>{
-										document.getElementById(`body_modal_${p.parameter_id.substring(0,1)+pp}`).insertAdjacentHTML('beforeend',`
+									qs[p.parameter_id].forEach(x => {
+										document.getElementById(`body_modal_${p.parameter_id.substring(0,1)+pp}`).insertAdjacentHTML('beforeend', `
 											<span>${x}</span><br>
 											<hr>
 										`);
@@ -171,6 +176,22 @@
 				alert(e);
 			}
 		}
+
+		function upltarget(id) {
+			console.log(id);
+			var fileInput = document.getElementById("upltarget" + id);
+			var uploadButton = document.getElementById("uplbtn" + id);
+
+			if (fileInput.files.length > 0) {
+				uploadButton.removeAttribute('hidden');
+			} else {
+				uploadButton.setAttribute('hidden', 'true');
+			}
+		}
+
+		// function uplfile(params) {
+
+		// }
 
 		function setParameter(parameter_id) {
 			$.ajax({
@@ -194,12 +215,14 @@
 			});
 		}
 
-		async function request_approve(){
-			if(confirm('Apakah anda yakin?')){
+		async function request_approve() {
+			if (confirm('Apakah anda yakin?')) {
 				var req = await fetch(`admin/request_approve?assessment_id=${$("[name=assessment_id]").val()}`);
 				try {
 					var data = await req.json();
-					if(data){alert('Permintaan approval berhasil dikirim')}
+					if (data) {
+						alert('Permintaan approval berhasil dikirim')
+					}
 				} catch (error) {
 					console.log(req);
 					console.log(error);
@@ -207,12 +230,14 @@
 			}
 		}
 
-		async function approve(){
-			if(confirm('Apakah anda yakin?')){
+		async function approve() {
+			if (confirm('Apakah anda yakin?')) {
 				var req = await fetch(`admin/approve?assessment_id=${$("[name=assessment_id]").val()}`);
 				try {
 					var data = await req.json();
-					if(data){alert('Berhasil melakukan approval')}
+					if (data) {
+						alert('Berhasil melakukan approval')
+					}
 				} catch (error) {
 					console.log(req);
 					console.log(error);
@@ -220,19 +245,21 @@
 			}
 		}
 
-		async function reject(){
-			if(confirm('Apakah anda yakin?')){
+		async function reject() {
+			if (confirm('Apakah anda yakin?')) {
 				var reason = prompt('Masukkan alasan kenapa assessment di reject');
-				if(reason){
+				if (reason) {
 					$.ajax({
 						type: 'POST',
-						url: '<?= base_url("admin/reject?assessment_id="); ?>'+$("[name=assessment_id]").val(),
+						url: '<?= base_url("admin/reject?assessment_id="); ?>' + $("[name=assessment_id]").val(),
 						data: {
 							rejectReason: reason
 						},
 						dataType: 'json',
 						success: function(data) {
-							if(data){alert('Assessment telah di reject')}
+							if (data) {
+								alert('Assessment telah di reject')
+							}
 						},
 						error: function(xhr, status, error) {
 							console.error("AJAX Error: " + error);
@@ -241,5 +268,4 @@
 				}
 			}
 		}
-
 	</script>

@@ -6,7 +6,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller
 {
 
-
 	function __construct()
 	{
 		parent::__construct();
@@ -21,9 +20,9 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
-		// $data['result'] = $this->Mcrud->get_all_data();
+		$data['result'] = $this->Mcrud->get_dashboard();
 		// $data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
-		$data = [];
+		//$data = [];
 
 		//$data = array($result);
 		$this->load->view('template/header');
@@ -41,7 +40,7 @@ class Admin extends CI_Controller
 			$data['assessment'] = $get;
 		} else {
 			$data['assessment'] = (object)[
-				'assessment_id'=>0
+				'assessment_id' => 0
 			];
 		}
 
@@ -56,15 +55,42 @@ class Admin extends CI_Controller
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$obj = $this->input->post();
 			$get = $this->input->get();
-			if(array_key_exists('assessment_id',$get)){
-				if($get['assessment_id'] == 0){
+			if (array_key_exists('assessment_id', $get)) {
+				if ($get['assessment_id'] == 0) {
 					$assessment_id = $this->Mcrud->insertAssessmentData($obj);
-				}else{
-					$r = $this->Mcrud->update_data('tbl_assessment', $obj, ['assessment_id'=>$get['assessment_id']]);
+				} else {
+					$r = $this->Mcrud->update_data('tbl_assessment', $obj, ['assessment_id' => $get['assessment_id']]);
 					$assessment_id = $get['assessment_id'];
 				}
 			}
 			redirect('cluster_umum?assessment_id=' . $assessment_id);
+		}
+	}
+
+	public function saveFile()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			$get = $this->input->get();
+			$title = $get['assessment_id'];
+
+			$link_yo = FCPATH . 'assets/uploads/evidenceUmum/';
+			$path = $link_yo;
+
+			// Periksa apakah file ada dan berhasil diunggah
+			if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
+				$file = $_FILES['uploaded_file']['name'];
+
+				$uploaded_files = $this->upload_files($path, $title, $file);
+
+				// Handle hasil upload_files di sini sesuai kebutuhan
+				if ($uploaded_files) {
+					redirect('cluster_umum?assessment_id=' . $title);
+				} else {
+					echo "Gagal mengunggah file.";
+				}
+			} else {
+				echo "Gagal mengunggah file atau file tidak ada.";
+			}
 		}
 	}
 
@@ -73,7 +99,7 @@ class Admin extends CI_Controller
 		//if ($this->input->server('REQUEST_METHOD') == 'GET') {
 		$uri = $this->input->get("assessment_id");
 
-		
+
 		$assessment = $this->Mcrud->get_data("tbl_assessment", ['assessment_id' => $uri]);
 		$assess = $assessment[0];
 		$assess->level = $this->getRiskLevel($assess->skor);
@@ -120,75 +146,69 @@ class Admin extends CI_Controller
 			$sum_phase = $sum_phase + intval($v->phase_id);
 		}
 		$skor = $sum_phase / count($parameter);
+
 		$this->Mcrud->update_data('tbl_assessment', ['skor' => $skor], ['assessment_id' => $assessment_id]);
 	}
 
-	public function request_approve(){
-		if( $this->input->server('REQUEST_METHOD') == 'GET' ){
+	public function request_approve()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'GET') {
 			$assessment_id = $this->input->get("assessment_id");
 			$obj = [
-				'status'=> 2,
+				'status' => 2,
 				'rejectReason' => null
 			];
-			$upd = $this->Mcrud->update_data('tbl_assessment', $obj, ['assessment_id'=>$assessment_id]);
+			$upd = $this->Mcrud->update_data('tbl_assessment', $obj, ['assessment_id' => $assessment_id]);
 			echo json_encode($upd);
 		}
 	}
 
-	public function approve(){
-		if( $this->input->server('REQUEST_METHOD') == 'GET' ){
+	public function approve()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'GET') {
 			$assessment_id = $this->input->get("assessment_id");
-			$upd = $this->Mcrud->update_data('tbl_assessment', ['status'=>3], ['assessment_id'=>$assessment_id]);
+			$upd = $this->Mcrud->update_data('tbl_assessment', ['status' => 3], ['assessment_id' => $assessment_id]);
 			echo json_encode($upd);
 		}
 	}
 
-	public function reject(){
-		if( $this->input->server('REQUEST_METHOD') == 'POST' ){
+	public function reject()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$assessment_id = $this->input->get("assessment_id");
 			$data = $this->input->post();
-			$upd = $this->Mcrud->update_data('tbl_assessment', ['status'=>4, 'rejectReason'=>$data['rejectReason']], ['assessment_id'=>$assessment_id]);
+			$upd = $this->Mcrud->update_data('tbl_assessment', ['status' => 4, 'rejectReason' => $data['rejectReason']], ['assessment_id' => $assessment_id]);
 			echo json_encode($upd);
 		}
 	}
 
 	private function upload_files($path, $title, $files)
 	{
+
+		$param = $this->Mcrud->get_data_array('tbl_parameter');
+		foreach ($ as $) {
+			# code...
+		}
+		$file_name = 'file_' . $title . "_" . str_replace(".", "_", $parameter_id) . "_" . $assessment_id;
+
 		$config = array(
 			'upload_path'   => $path,
 			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
 			'overwrite'     => 1,
+			'file_name'     => $file_name
 		);
 
 		$this->load->library('upload', $config);
 
-		$uploaded_files = array();
-
-		// Loop through the uploaded files
-		if (isset($files)) {
-			foreach ($files['name'] as $key => $file_name) {
-				$_FILES['userfile']['name']     = $files['name'][$key];
-				$_FILES['userfile']['type']     = $files['type'][$key];
-				$_FILES['userfile']['tmp_name'] = $files['tmp_name'][$key];
-				$_FILES['userfile']['error']    = $files['error'][$key];
-				$_FILES['userfile']['size']     = $files['size'][$key];
-
-				$fileName = $title . '_' . $file_name;
-
-				$config['file_name'] = $fileName;
-
-				$this->upload->initialize($config);
-
-				if ($this->upload->do_upload('userfile')) {
-					$uploaded_files[] = $this->upload->data();
-				} else {
-					return false; // Return false if any file upload fails
-				}
-			}
+		if (!$this->upload->do_upload('uploaded_file')) {
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+			return false;
 		} else {
-			$uploaded_files = [];
+			$data = array('upload_data' => $this->upload->data());
+			var_dump($data);
+			return true;
 		}
-		return $uploaded_files;
 	}
 
 	private function getRiskLevel($value)
@@ -218,7 +238,8 @@ class Admin extends CI_Controller
 		}
 	}
 
-	public function asessmentEval(){
+	public function asessmentEval()
+	{
 		$data['assessment'] = $this->Mcrud->get_data('tbl_assessment');
 
 		$this->load->view('template/header');

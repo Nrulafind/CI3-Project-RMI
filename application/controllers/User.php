@@ -15,10 +15,10 @@ class User extends CI_Controller
 
 	public function index()
 	{
-		// $data['result'] = $this->Mcrud->get_all_data();
+		$data['result'] = $this->Mcrud->get_dashboard();
 		// $data['dimensi_umum'] = $this->Mcrud->get_dimensi_umum();
 		//	$data = $this->Mcrud->get_all_data('tbl_perhitungan')->result_array();
-		$data = [];
+		//$data = [];
 
 		//$data = array($result);
 		$this->load->view('template/header');

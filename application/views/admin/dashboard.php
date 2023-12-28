@@ -21,8 +21,7 @@
 									Risk Corporation : <?php echo $card['corporate_name']; ?>
 								</div>
 								<div class="h5 mb-0 font-weight-bold text-gray-800">
-
-									<?php echo $card['lvRiskCorpo']; ?>
+									<?php $card['skor']; ?>
 								</div>
 							</div>
 							<div class="col-auto">
@@ -83,7 +82,7 @@
 							</tr>
 							<tr>
 								<th>Nilai Total RMI</th>
-								<th><?= $cv['ncpCorporate'] ?></th>
+								<th><?= $cv['skor'] ?></th>
 							</tr>
 						</table>
 					<?php } ?>
@@ -99,23 +98,23 @@
 							<tbody>
 								<tr>
 									<td>Budaya dan Kapabilitas Risiko</td>
-									<td><?= $t['ncpD1'] ?></td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>Organisasi dan Tata Kelola Risiko</td>
-									<td><?= $t['ncpD2'] ?></td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>Kerangka Risiko dan Kepatuhan</td>
-									<td><?= $t['ncpD3'] ?></td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>Proses dan Kontrol Risiko</td>
-									<td><?= $t['ncpD4'] ?></td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>Model, Data, dan Tata Kelola Risiko</td>
-									<td><?= $t['ncpD5'] ?></td>
+									<td></td>
 								</tr>
 							</tbody>
 						</table>
@@ -153,12 +152,12 @@
 						<?php
 						$cap = '';
 						foreach ($result as $c) {
-							$capaian1 =  $c['ncpD1'];
-							$capaian2 = $c['ncpD2'];
-							$capaian3 = $c['ncpD3'];
-							$capaian4 = $c['ncpD4'];
-							$capaian5 = $c['ncpD5'];
-							$cap .= "$capaian1" . "," . "$capaian2" . "," . "$capaian3" . "," . "$capaian4" . "," . "$capaian5" . ",";
+							// $capaian1 =  $c['ncpD1'];
+							// $capaian2 = $c['ncpD2'];
+							// $capaian3 = $c['ncpD3'];
+							// $capaian4 = $c['ncpD4'];
+							// $capaian5 = $c['ncpD5'];
+							// $cap .= "$capaian1" . "," . "$capaian2" . "," . "$capaian3" . "," . "$capaian4" . "," . "$capaian5" . ",";
 						};
 						?>
 						<script>
@@ -179,7 +178,7 @@
 										borderWidth: 1
 									}, {
 										label: 'Actual value',
-										data: [<?php echo $cap; ?>],
+										data: ,
 										backgroundColor: [
 
 											'rgba(75, 192, 192, 0.2)',
@@ -279,19 +278,19 @@
 									<tr>
 										<th><?= $no++ ?></th>
 										<td><?= $rmi['corporate_name'] ?></td>
-										<th><?= $rmi['user_name'] ?></th>
-										<th><?= number_format($rmi['ncpD1'], 2) ?></th>
-										<th><?= $rmi['lvRiskD1'] ?></th>
-										<th><?= number_format($rmi['ncpD2'], 2) ?></th>
-										<th><?= $rmi['lvRiskD2'] ?></th>
-										<th><?= number_format($rmi['ncpD3'], 2) ?></th>
-										<th><?= $rmi['lvRiskD3'] ?></th>
-										<th><?= number_format($rmi['ncpD4'], 2) ?></th>
-										<th><?= $rmi['lvRiskD4'] ?></th>
-										<th><?= number_format($rmi['ncpD5'], 2) ?></th>
-										<th><?= $rmi['lvRiskD5'] ?></th>
-										<th><?= number_format($rmi['ncpCorporate'], 2) ?></th>
-										<th><?= $rmi['lvRiskCorpo'] ?></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th><?= $rmi['skor'] ?></th>
+										<th></th>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>

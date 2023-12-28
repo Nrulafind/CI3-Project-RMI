@@ -5,36 +5,58 @@ use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Mcrud extends CI_Model{
+class Mcrud extends CI_Model
+{
 
-	function __construct(){
+	function __construct()
+	{
 	}
 
-	public function get_data($db, $param = []){
+	public function get_data($db, $param = [])
+	{
 		if ($param != []) {
 			$this->db->where($param);
 		}
 		$data = $this->db->get($db);
 		return $data->result();
 	}
+	public function get_data_array($db, $param = [])
+	{
+		if ($param != []) {
+			$this->db->where($param);
+		}
+		$data = $this->db->get($db);
+		return $data->result_array();
+	}
 
-	public function post_data($db, $data){
+	public function post_data($db, $data)
+	{
 		$this->db->insert($db, $data);
 		return $this->db->insert_id();
 	}
 
-	public function update_data($db, $data, $param){
+	public function update_data($db, $data, $param)
+	{
 		$this->db->where($param);
 		$upd = $this->db->update($db, $data);
 		return $upd;
 	}
 
-	public function dimensi(){
+	public function dimensi()
+	{
 		$dimensi_id = $this->db->query("SELECT DISTINCT dimensi_id FROM `tbl_dimensi` WHERE category_id = 3;");
 		return $dimensi_id->result_array();
 	}
 
-	public function get_dimensi_umum(){
+
+	public function get_dashboard()
+	{
+		$result = $this->db->query("SELECT * FROM tbl_assessment WHERE assessment_id=1006;");
+		return $result->result_array();
+	}
+
+	public function get_dimensi_umum()
+	{
 		$dimensi_umum = $this->db->query("SELECT DISTINCT 
 			`tbl_dimensi`.*, 
 			`tbl_sub_dimensi`.*, 
@@ -53,131 +75,6 @@ class Mcrud extends CI_Model{
 			`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
 		WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id`;")->result_array();
 		return $dimensi_umum;
-	}
-
-	public function get_dimensi_A(){
-		$dimensi_umum_A = $this->db->query("SELECT DISTINCT 
-			`tbl_dimensi`.*, 
-			`tbl_sub_dimensi`.*, 
-			`tbl_question`.*, 
-			`tbl_parameter`.*, 
-			`tbl_phase`.*
-		FROM 
-			`tbl_dimensi` 
-		LEFT JOIN 
-			`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
-		LEFT JOIN 
-			`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-		LEFT JOIN 
-			`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-		LEFT JOIN 
-			`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
-		WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'A';")->result_array();
-
-		return $dimensi_umum_A;
-	}
-
-	public function get_dimensi_B()
-	{
-
-		$dimensi_umum_B = $this->db->query("SELECT DISTINCT 
-		`tbl_dimensi`.*, 
-		`tbl_sub_dimensi`.*, 
-		`tbl_question`.*, 
-		`tbl_parameter`.*, 
-		`tbl_phase`.*
-	FROM 
-		`tbl_dimensi` 
-	LEFT JOIN 
-		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
-	LEFT JOIN 
-		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
-	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'B';")->result_array();
-
-		return $dimensi_umum_B;
-	}
-
-	public function get_dimensi_C()
-	{
-
-		$dimensi_umum_C = $this->db->query("SELECT DISTINCT 
-		`tbl_dimensi`.*, 
-		`tbl_sub_dimensi`.*, 
-		`tbl_question`.*, 
-		`tbl_parameter`.*, 
-		`tbl_phase`.*
-	FROM 
-		`tbl_dimensi` 
-	LEFT JOIN 
-		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
-	LEFT JOIN 
-		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
-	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'C';")->result_array();
-
-		return $dimensi_umum_C;
-	}
-
-	public function get_dimensi_D()
-	{
-
-		$dimensi_umum_D = $this->db->query("SELECT DISTINCT 
-		`tbl_dimensi`.*, 
-		`tbl_sub_dimensi`.*, 
-		`tbl_question`.*, 
-		`tbl_parameter`.*, 
-		`tbl_phase`.*
-	FROM 
-		`tbl_dimensi` 
-	LEFT JOIN 
-		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
-	LEFT JOIN 
-		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
-	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'D';")->result_array();
-
-		return $dimensi_umum_D;
-	}
-
-	public function get_dimensi_E()
-	{
-
-		$dimensi_umum_E = $this->db->query("SELECT DISTINCT 
-		`tbl_dimensi`.*, 
-		`tbl_sub_dimensi`.*, 
-		`tbl_question`.*, 
-		`tbl_parameter`.*, 
-		`tbl_phase`.*
-	FROM 
-		`tbl_dimensi` 
-	LEFT JOIN 
-		`tbl_sub_dimensi` ON `tbl_sub_dimensi`.`dimensi_id` = `tbl_dimensi`.`dimensi_id` 
-	LEFT JOIN 
-		`tbl_question` ON `tbl_question`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_parameter` ON `tbl_parameter`.`subdimensi_id` = `tbl_sub_dimensi`.`subdimensi_id` 
-	LEFT JOIN 
-		`tbl_phase` ON `tbl_question`.`phase_id` = `tbl_phase`.`phase_id`
-	WHERE  `tbl_parameter`.`parameter_id` = `tbl_question`.`parameter_id` AND `tbl_dimensi`.`dimensi_id` = 'E';")->result_array();
-
-		return $dimensi_umum_E;
-	}
-
-
-	public function get_weight()
-	{
-		$weight_umum = $this->db->query("SELECT DISTINCT `parameter_id` FROM `tbl_parameter`;");
-		return $weight_umum->result_array();
 	}
 
 	public function insertAssessmentData($assessmentData)
@@ -202,7 +99,6 @@ class Mcrud extends CI_Model{
 		$id = $this->db->query("SELECT assessment_id FROM tbl_assessment WHERE assessment_id=$uri");
 		return $id->result_array();
 	}
-
 
 	public function get_assestment()
 	{
