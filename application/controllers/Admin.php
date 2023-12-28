@@ -186,10 +186,10 @@ class Admin extends CI_Controller
 	{
 
 		$param = $this->Mcrud->get_data_array('tbl_parameter');
-		foreach ($ as $) {
-			# code...
+		foreach ($param as $p) {
+			$p;
 		}
-		$file_name = 'file_' . $title . "_" . str_replace(".", "_", $parameter_id) . "_" . $assessment_id;
+		$file_name = 'file_' . $title . "_" . str_replace(".", "_", $p) . "_" . $title;
 
 		$config = array(
 			'upload_path'   => $path,
