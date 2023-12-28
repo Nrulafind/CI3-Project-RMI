@@ -147,6 +147,7 @@
 													<option value="5"> 5. Fase Praktik Terbaik (Best Practice Phase)</option>
 												</select>
 												<form id="myFile-<?= $assessment->assessment_id ?? 0; ?>" action="<?= base_url('Admin/saveFile?assessment_id=') . ($assessment->assessment_id ?? 0); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
+													<input readonly class="form-control mt-2" type="text" name="file_name" value="file_<?= $assessment->assessment_id; ?>_${p.parameter_id.replaceAll(".", "_")}">	
 													<input class="form-control mt-2" type="file" name="uploaded_file">
 													<button type="submit" id="uplbtn<?= $assessment->assessment_id ?? 0; ?>" class="btn btn-primary">
 														Upload

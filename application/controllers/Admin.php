@@ -72,15 +72,18 @@ class Admin extends CI_Controller
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$get = $this->input->get();
 			$title = $get['assessment_id'];
+			$file_name = $this->input->post('file_name');
+
 
 			$link_yo = FCPATH . 'assets/uploads/evidenceUmum/';
 			$path = $link_yo;
+			var_dump($path);
 
 			// Periksa apakah file ada dan berhasil diunggah
 			if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
 				$file = $_FILES['uploaded_file']['name'];
 
-				$uploaded_files = $this->upload_files($path, $title, $file);
+				$uploaded_files = $this->upload_files($path, $file_name);
 
 				// Handle hasil upload_files di sini sesuai kebutuhan
 				if ($uploaded_files) {
@@ -182,20 +185,23 @@ class Admin extends CI_Controller
 		}
 	}
 
-	private function upload_files($path, $title, $files)
+	private function upload_files($path, $files)
 	{
 
-		$param = $this->Mcrud->get_data_array('tbl_parameter');
-		foreach ($param as $p) {
-			$p;
-		}
-		$file_name = 'file_' . $title . "_" . str_replace(".", "_", $p) . "_" . $title;
+		//$param = $this->Mcrud->get_data_array('tbl_parameter');
+		// foreach ($param as $p) {
+		// 	$p['parameter_id'];
+		// 	//$ps = implode(" ", $p['parameter_id']);
+		// 	//var_dump($ps);
+		// }
 
+
+		var_dump($files);
 		$config = array(
 			'upload_path'   => $path,
 			'allowed_types' => 'gif|jpg|png|pdf|docx|xlsx',
 			'overwrite'     => 1,
-			'file_name'     => $file_name
+			'file_name'     => $files
 		);
 
 		$this->load->library('upload', $config);
