@@ -138,7 +138,7 @@
 											</div>
 											
 											<td style="text-align: right;">
-												<select class="form-select" name="phase_${p.parameter_id}" onchange="setParameter('${p.parameter_id}')">
+												<select class="form-select row gy-2 gx-3 mb-3"" name="phase_${p.parameter_id}" onchange="setParameter('${p.parameter_id}')">
 													<option value="0">None</option>
 													<option value="1"> 1. Fase Awal (Initial Phase)</option>
 													<option value="2"> 2. Fase Berkembang (Emerging State)</option>
@@ -149,6 +149,8 @@
 												<form id="myFile-<?= $assessment->assessment_id ?? 0; ?>" action="<?= base_url('Admin/saveFile?assessment_id=') . ($assessment->assessment_id ?? 0); ?>" method="post" enctype="multipart/form-data" class="row gy-2 gx-3 mb-3">
 													<input readonly class="form-control mt-2" type="text" name="file_name" value="file_<?= $assessment->assessment_id; ?>_${p.parameter_id.replaceAll(".", "_")}">	
 													<input class="form-control mt-2" type="file" name="uploaded_file">
+													<?php $file_path = FCPATH . 'assets/uploads/evidenceUmum/file_' . $assessment->assessment_id; ?>
+													<a href="<?php readfile($file_path . '_'?> ${p . parameter_id . replaceAll(".", "_")}); ?>"></a>
 													<button type="submit" id="uplbtn<?= $assessment->assessment_id ?? 0; ?>" class="btn btn-primary">
 														Upload
 													</button>

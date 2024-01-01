@@ -84,9 +84,15 @@ class Admin extends CI_Controller
 				$file = $_FILES['uploaded_file']['name'];
 
 				$uploaded_files = $this->upload_files($path, $file_name);
-
+				$file_assessment = array(
+					'assessment_id' => $title,
+					'file_name' => $file_name,
+					'file_type' => $file,
+					'file_link' => $path + $file_name
+				);
 				// Handle hasil upload_files di sini sesuai kebutuhan
 				if ($uploaded_files) {
+					$this->Mcrud->insertFile($file_assessment);
 					redirect('cluster_umum?assessment_id=' . $title);
 				} else {
 					echo "Gagal mengunggah file.";
