@@ -150,7 +150,7 @@
 													<input readonly class="form-control mt-2" type="text" name="file_name" value="file_<?= $assessment->assessment_id; ?>_${p.parameter_id.replaceAll(".", "_")}">	
 													<input class="form-control mt-2" type="file" name="uploaded_file">
 													<?php $file_path = FCPATH . 'assets/uploads/evidenceUmum/file_' . $assessment->assessment_id; ?>
-													<a href="<?php readfile($file_path . '_'?> ${p . parameter_id . replaceAll(".", "_")}); ?>"></a>
+													<a href="<?php readfile($file_path) . '_' ?> ${p . parameter_id . replaceAll(".", "_")}); ?>"></a>
 													<button type="submit" id="uplbtn<?= $assessment->assessment_id ?? 0; ?>" class="btn btn-primary">
 														Upload
 													</button>
